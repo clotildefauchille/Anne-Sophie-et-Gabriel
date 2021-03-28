@@ -1,0 +1,40 @@
+@use 'src/styles/_vars.scss' as v;
+
+
+.construction {
+
+  &__video{
+    min-width: 100%;
+    min-height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: auto; 
+    height: auto; 
+    z-index: -100;
+}
+  
+}
+
+h1{
+  font-family: v.$fontHeading;
+  font-size: 3.5rem;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+@media screen and (max-device-width: 800px) {
+  body{
+    background-color: v.$primaryColor;
+  }
+h1{
+  font-size: 2.4rem;
+  padding-bottom: 1rem;
+}
+.construction__video {
+  width:50%; 
+  height:50%;
+}
+}

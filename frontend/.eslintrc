@@ -5,10 +5,7 @@
     "browser": true
   },
   "rules": {
-    "rules": {
-      "prettier/prettier": "error"
-    },
-    "brace-style": ["error", "stroustrup"],
+   "brace-style": ["error", "stroustrup"],
     "no-param-reassign": [
       "error",
       {
