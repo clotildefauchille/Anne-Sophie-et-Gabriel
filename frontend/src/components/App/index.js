@@ -3,7 +3,6 @@ import React from 'react';
 
 // == Import
 import Wait from 'src/components/Wait';
-import Footer from 'src/components/Footer';
 
 import './styles.css';
 
