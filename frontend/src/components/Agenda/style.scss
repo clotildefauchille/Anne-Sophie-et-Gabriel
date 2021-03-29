@@ -1,0 +1,97 @@
+@use 'src/styles/_vars.scss' as v;
+
+.agenda {
+  overflow: scroll;
+  &__title {
+    font-size: 2.4rem;
+    padding: 3rem;
+  }
+  &__container {
+    display: flex;
+    justify-content: space-around;
+  }
+  &__day-title {
+    font-size: 1.8rem; 
+    text-align: center;
+    text-decoration: underline;
+    padding-bottom: 2.3rem;
+  }
+&__container-multiple-event {
+  display: flex;
+  flex-direction: column;
+  float: left;
+}
+
+ &__container-event {
+   display: flex;
+  //  border: solid 1px red;
+   position: relative;
+   float: left;
+ }
+ 
+  &__event-icon {
+    padding-right: 1rem; 
+    position: absolute;
+    top:0rem;
+  }
+  
+  &__container-event-text {
+    display: flex;
+    flex-direction:column;
+    padding-left: 3rem;
+  }
+  &__event-title {
+    font-size: 1.1rem;
+     text-decoration: underline;
+     padding-bottom: 1.7rem;
+    
+  }
+  &__event-paraph {
+    font-size: 1.1rem;
+    text-decoration: none;
+    padding-bottom: 1.7rem;
+
+    // &:before {
+    //   content:'';
+    //   position: absolute;
+    //   background: url('src/assets/svg/separation.svg');
+    //   width: 50px;
+    //   height: 50px;
+    // }
+  }
+  &__img {
+    width     : 30%px;
+    max-width : 90%;
+    margin-top: -8rem;
+    // height    : auto;
+  }
+}
+
+@media screen and (max-device-width: 800px) {
+  
+  h1 {
+    font-size: 2.2rem;
+    padding-bottom: 0.8rem;
+  }
+  .agenda {
+   &__title {
+    font-size: 2rem;
+    padding: 1rem;
+  }
+  &__container {
+    flex-direction: column;  
+  }
+  &__event-icon { 
+    padding-left: 1rem; 
+  }
+  
+  &__img {
+    width     : 20%px;
+    max-width : 75%;
+    margin: auto;
+    margin-top: -1.7rem;
+    padding-bottom: 1rem;
+    // height    : auto;
+  }
+}
+}

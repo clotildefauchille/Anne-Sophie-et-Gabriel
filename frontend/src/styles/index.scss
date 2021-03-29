@@ -1,15 +1,13 @@
 @use 'reset';
 @use 'vars' as v;
 
-body {
-  font-family: sans-serif;
+.app {
+  font-family: 'Roboto', sans-serif;
+  background-color: v.$primaryColor;
 }
 
-h1 {
+h1, h2, h3 {
   font-family: v.$fontHeading;
 }
 
- body {
-  font-family: 'Roboto', sans-serif;
- }
 
