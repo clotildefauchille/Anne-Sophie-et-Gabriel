@@ -1,10 +1,9 @@
 @use 'src/styles/_vars.scss' as v;
 
 .agenda {
-  overflow: scroll;
   &__title {
     font-size: 2.4rem;
-    padding: 3rem;
+    padding: 1.8rem;
   }
   &__container {
     display: flex;
@@ -26,7 +25,7 @@
    display: flex;
   //  border: solid 1px red;
    position: relative;
-   float: left;
+  //  float: left;
  }
  
   &__event-icon {
@@ -59,15 +58,49 @@
     //   height: 50px;
     // }
   }
+  &__adress {
+    font-style: italic;
+    font-weight: 300;
+  }
+  &__container-img{
+    position: relative;
+    // border: 1px solid black;
+    width: 39%;
+  }
+  &__star {
+    position: absolute;
+    left: 3rem;
+    top: 2rem;
+  }
+  &__star2 {
+    position: absolute;
+    left: 1rem;
+    top: 0rem;
+  }
+  &__star3 {
+    position: absolute;
+    right: 2rem;
+    top: 0rem;
+  }
+  &__star4 {
+    position: absolute;
+    left: 3rem;
+    bottom: 6rem;
+  }
+  &__stars {
+    position: absolute;
+    right:-1.5rem;
+    bottom: 3rem;
+
+  }
   &__img {
-    width     : 30%px;
-    max-width : 90%;
-    margin-top: -8rem;
-    // height    : auto;
+    display: block;
+    margin: auto;
+    margin-top: -4.5rem;
   }
 }
 
-@media screen and (max-device-width: 800px) {
+@media only screen and (max-width : 768px) {
   
   h1 {
     font-size: 2.2rem;
@@ -84,14 +117,21 @@
   &__event-icon { 
     padding-left: 1rem; 
   }
+   &__stars {
+   display: none;
+  }
+  &__star4 {
+   position: absolute;
+    left: 1rem;
+    bottom: 3rem;
+  }
   
   &__img {
-    width     : 20%px;
-    max-width : 75%;
+    display: block;
     margin: auto;
-    margin-top: -1.7rem;
-    padding-bottom: 1rem;
-    // height    : auto;
+    display: block;
+    margin: auto;
+    margin-top: -2rem;
   }
 }
 }

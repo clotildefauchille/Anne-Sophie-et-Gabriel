@@ -19,8 +19,9 @@ const Wait = () => {
         muted
         className="construction__video"
       >
-        <source src={video} type="video/mp4"></source>
+        <source src={video} type="video/mp4" />
       </video>
+      <p className="construction__credit">Photos: <a href="http://www.estelle-louise.com">www.estelle-louise.com</a></p>
     </div>
   );
 };

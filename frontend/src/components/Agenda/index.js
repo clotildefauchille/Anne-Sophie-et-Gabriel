@@ -8,25 +8,30 @@ import bell from 'src/assets/svg/bell.svg';
 import brunch from 'src/assets/svg/brunch.svg';
 import cityHall from 'src/assets/svg/cityHall.svg';
 import diner from 'src/assets/svg/diner.svg';
+import star from 'src/assets/svg/star.svg';
+import stars from 'src/assets/svg/stars.svg';
 
 import './style.scss';
 
 const Agenda = () => (
   <div className="page">
-    <Header />
     <div className="agenda">
       <h2 className="agenda__title">Agenda</h2>
       <div className="agenda__container">
-        
         <div className="agenda__container-multiple-event">
           <h3 className="agenda__day-title">Samedi 11</h3>
           <div className="agenda__container-event">
             <img className="agenda__event-icon" alt="cityHall" src={cityHall} />
             <div className="agenda__container-event-text">
-              <h4 className="agenda__event-title">Voeux à la Mairie, 14h00</h4>
+              <h4 className="agenda__event-title">Voeux à la Mairie à 14h00</h4>
               <p className="agenda__event-paraph">
-                Rendez-vous à mairie de Thionville <br /> 2 Cours du Château,{' '}
-                <br /> 57100 Thionville, France
+                Rendez-vous à mairie de Thionville <br />{' '}
+                <a
+                  className="agenda__adress"
+                  href="https://goo.gl/maps/Ajmav14GCYdAVX5b7"
+                >
+                  2 Cours du Château, <br /> 57100 Thionville, France
+                </a>
               </p>
             </div>
           </div>
@@ -35,11 +40,16 @@ const Agenda = () => (
             <img className="agenda__event-icon" alt="bell" src={bell} />
             <div className="agenda__container-event-text">
               <h4 className="agenda__event-title">
-                Cérémonie religieuse, 15h00
+                Cérémonie religieuse à 15h00
               </h4>
               <p className="agenda__event-paraph">
-                Rendez-vous à l'église Saint-Maximim <br /> 3 Place de l’Eglise{' '}
-                <br /> 57100 Thionville, France
+                Rendez-vous à l'église Saint-Maximim <br />{' '}
+                <a
+                  className="agenda__adress"
+                  href="https://goo.gl/maps/B8sCZf3yKLEFzj8r8"
+                >
+                  3 Place de l’Eglise <br /> 57100 Thionville, France{' '}
+                </a>
               </p>
             </div>
           </div>
@@ -48,33 +58,48 @@ const Agenda = () => (
             {/* <img src={separation} /> */}
             <img className="agenda__event-icon" alt="coktail" src={coktail} />
             <div className="agenda__container-event-text">
-              <h4 className="agenda__event-title">Vin d'honneur, 17H00</h4>
+              <h4 className="agenda__event-title">Vin d'honneur à 17H00</h4>
               <p className="agenda__event-paraph">
-                Rendez-vous à l’abbaye des Prémontrés <br /> 9 rue Saint Martin{' '}
-                <br /> 54700 Pont-à-Moussone, France
+                Rendez-vous à l’abbaye des Prémontrés <br />{' '}
+                <a
+                  className="agenda__adress"
+                  href="https://goo.gl/maps/qDfQhdk6DhFuMH2d9"
+                >
+                  9 rue Saint Martin <br /> 54700 Pont-à-Moussone, France{' '}
+                </a>
               </p>
             </div>
           </div>
         </div>
 
-      
+        <div className="agenda__container-img">
+          <img src={star} alt="star" className="agenda__star" />
+          <img src={star} alt="star" className="agenda__star4" />
+          <img src={star} alt="star" className="agenda__star3" />
+          <img src={star} alt="star" className="agenda__star2" />
+          <img src={stars} alt="stars" className="agenda__stars" />
           <img
             className="agenda__img"
             src={img}
             alt="anne_sophie & gab picture"
           />
-      
+        </div>
 
         <div className="agenda__container-multiple-event">
-
           <h3 className="agenda__day-title">Samedi Soir</h3>
           <div className="agenda__container-event">
             <img className="agenda__event-icon" alt="diner" src={diner} />
             <div className="agenda__container-event-text">
-              <h4 className="agenda__event-title">Dîner, 20H00</h4>
+              <h4 className="agenda__event-title">Dîner à 20H00</h4>
               <p className="agenda__event-paraph">
-                Soirée à l’abbaye des Prémontrés <br /> 9 rue Saint Martin{' '}
-                <br /> 54700 Pont-à-Moussone, France
+                Soirée à l’abbaye des Prémontrés <br />{' '}
+                <a
+                  className="agenda__adress"
+                  href="https://goo.gl/maps/qDfQhdk6DhFuMH2d9"
+                >
+                  {' '}
+                  9 rue Saint Martin <br /> 54700 Pont-à-Moussone, France{' '}
+                </a>
               </p>
             </div>
           </div>
@@ -84,18 +109,21 @@ const Agenda = () => (
           <div className="agenda__container-event">
             <img className="agenda__event-icon" alt="brunch" src={brunch} />
             <div className="agenda__container-event-text">
-              <h4 className="agenda__event-title">Brunch, 11H00</h4>
+              <h4 className="agenda__event-title">Brunch à 11H00</h4>
               <p className="agenda__event-paraph">
-                Brunch à l’abbaye des Prémontrés <br /> 9 rue Saint Martin{' '}
-                <br /> 54700 Pont-à-Moussone, France
+                Brunch à l’abbaye des Prémontrés <br />{' '}
+                <a
+                  className="agenda__adress"
+                  href="https://goo.gl/maps/qDfQhdk6DhFuMH2d9"
+                >
+                  9 rue Saint Martin <br /> 54700 Pont-à-Mousson, France{' '}
+                </a>
               </p>
             </div>
           </div>
-          
         </div>
       </div>
     </div>
-    <Footer />
   </div>
 );
 

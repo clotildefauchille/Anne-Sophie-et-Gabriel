@@ -4,10 +4,17 @@
 .app {
   font-family: 'Roboto', sans-serif;
   background-color: v.$primaryColor;
+  line-height: 24px;
 }
 
 h1, h2, h3 {
   font-family: v.$fontHeading;
 }
 
-
+@font-face {
+        font-family: 'Roboto', sans-serif;
+        src: url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,500&display=swap');
+        font-weight: bold;
+        font-style: italic;
+}
+// @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,500&display=swap');
