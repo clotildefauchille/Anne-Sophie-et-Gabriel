@@ -27,6 +27,8 @@ const Agenda = () => (
               <p className="agenda__event-paraph">
                 Rendez-vous à mairie de Thionville <br />{' '}
                 <a
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="agenda__adress"
                   href="https://goo.gl/maps/Ajmav14GCYdAVX5b7"
                 >
@@ -45,6 +47,8 @@ const Agenda = () => (
               <p className="agenda__event-paraph">
                 Rendez-vous à l'église Saint-Maximim <br />{' '}
                 <a
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="agenda__adress"
                   href="https://goo.gl/maps/B8sCZf3yKLEFzj8r8"
                 >
@@ -62,6 +66,8 @@ const Agenda = () => (
               <p className="agenda__event-paraph">
                 Rendez-vous à l’abbaye des Prémontrés <br />{' '}
                 <a
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="agenda__adress"
                   href="https://goo.gl/maps/qDfQhdk6DhFuMH2d9"
                 >
@@ -94,6 +100,8 @@ const Agenda = () => (
               <p className="agenda__event-paraph">
                 Soirée à l’abbaye des Prémontrés <br />{' '}
                 <a
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="agenda__adress"
                   href="https://goo.gl/maps/qDfQhdk6DhFuMH2d9"
                 >
@@ -113,6 +121,8 @@ const Agenda = () => (
               <p className="agenda__event-paraph">
                 Brunch à l’abbaye des Prémontrés <br />{' '}
                 <a
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="agenda__adress"
                   href="https://goo.gl/maps/qDfQhdk6DhFuMH2d9"
                 >

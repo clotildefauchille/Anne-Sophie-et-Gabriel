@@ -1,42 +1,29 @@
 @use 'src/styles/_vars.scss' as v;
 
-// .selected {
-//   background-color: red;
-//  max-width: 1px;
-//  max-height: 1px;
-//      content: '';
-// // position: absolute;
-//     //   bottom: 0;
-//     //   background-color:green;
-//     background-image: url('src/assets/svg/activeMenu.svg');
-//     // background-size: contain;
-//     background-repeat: no-repeat;
-    
-   
-// }
 
 .header {
-  display: flex;
+  
+    &__navbar {
+    display: flex;
     flex-direction: row;
-    padding: 1.8rem;
-  &__navbar {
-     position: relative;
+    padding: 3rem;
+    }
+    &__navbar-element {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 25rem;
+    // height: 50px;
+    //  position:relative;
   }
-  &__icon {
-    padding-left:4rem;
-    // position:relative;
-    // &:hover {
-    //   content: '';
-      
-    //   bottom: 0;
-    //   background-color:green;
-    //   background-image: url('src/assets/svg/activeMenu.svg');
-    //   // background-size: contain;
-    //   background-repeat: no-repeat;
-        // } 
-  }
-  &__selected {
-//   background-color: red;
+&__selected {
+    display: flex;
+    flex-direction: column;
+    // width: 100px;
+    height: 50px;
+     position:relative;
+    // display: flex;
+    // flex-direction: column;
 //  display: block;
 //  width:6rem;
 //  padding-left: -2rem;
@@ -45,11 +32,21 @@
 // // position: absolute;
 // //       top: 0;
 // //     //   background-color:green;
-//     background-image: url('src/assets/svg/activeMenu.svg');
-//     // background-size: contain;
-//     background-repeat: no-repeat;
-     
+       
 }
+  
+  &__icon {
+    width:3rem;
+    height:3rem;
+    padding-bottom: 0.5rem;
+  
+  }
+  &__highlight {
+    position: absolute;
+    bottom: 0;
+  
+  }
+  
 
   &__title {
   font-size: 3.2rem;
