@@ -22,14 +22,8 @@ const App = () => (
       <Route path="/" exact>
         <Agenda />
       </Route>
-      <Route path="/confirmation" exact>
-        <LoginButton />
-        <LogoutButton />
-        <Profile />
-      </Route>
     </Switch>
     <Footer />
-    
   </div>
 );
 
