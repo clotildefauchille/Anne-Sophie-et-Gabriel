@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 // == Import
 import Wait from 'src/components/Wait';
-import Agenda from 'src/components/Agenda';
+import Agenda from 'src/containers/Agenda';
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import LoginButton from 'src/components/LoginButton';
