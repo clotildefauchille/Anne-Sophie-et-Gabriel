@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import React, { useEffect } from 'react';
 import './style.scss';
 import agendaNav from 'src/assets/svg/agendaNav.svg';
@@ -5,32 +6,12 @@ import gift from 'src/assets/svg/gift.svg';
 import bed from 'src/assets/svg/bed.svg';
 import confirmation from 'src/assets/svg/confirmation.svg';
 import { NavLink } from 'react-router-dom';
-import ActiveMenu from 'src/components/ActiveMenu';
+// import ActiveMenu from 'src/components/ActiveMenu';
 import activeMenu from 'src/assets/svg/activeMenu.svg';
 import LogoutButton from 'src/components/LogoutButton';
-import { useAuth0 } from '@auth0/auth0-react';
+// import { useAuth0 } from '@auth0/auth0-react';
 
 const Header = () => {
-  const { getAccessTokenSilently } = useAuth0();
-  useEffect(() => {
-    const getToken = async () => {
-      const token = await getAccessTokenSilently();
-      // call localhost:3000/permissions api with token
-      const getPermissions = await fetch("http://localhost:3000/permissions", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const res = await getPermissions.json();
-      console.log("res getPermission", res)
-      
-    };
-    getToken();
-
-
-    
-  }, []);
-  // console.log('user', user);
   return (
     <div className="header">
       <div className="header__navbar">

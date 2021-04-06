@@ -4,9 +4,13 @@ import { render } from 'react-dom';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Auth0Provider } from '@auth0/auth0-react';
 import Connexion from 'src/components/Connexion';
+import { Provider } from 'react-redux';
+import store from 'src/store';
+
 // == Import : local
 // Composants
 import App from 'src/components/App';
+import Permissions from 'src/containers/permissions';
 
 // == Render
 // 1. Élément React racine (celui qui contient l'ensemble de l'app)
@@ -20,11 +24,15 @@ const rootReactElement = (
     scope="read:current_user update:current_user_metadata read:users "
     cacheLocation="localstorage"
   >
-    <Connexion>
-      <Router>
-        <App />
-      </Router>
-    </Connexion>
+    <Provider store={store}>
+      <Connexion>
+        <Permissions>
+          <Router>
+            <App />
+          </Router>
+        </Permissions>
+      </Connexion>
+    </Provider>
   </Auth0Provider>
 );
 // 2. La cible du DOM (là où la structure doit prendre vie dans le DOM)

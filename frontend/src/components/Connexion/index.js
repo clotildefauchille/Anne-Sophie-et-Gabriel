@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const SaveUserAndPermissions = ({user, children}) => {
-  console.log("user", user);
+  // console.log("user", user);
   useEffect(() => {
     // TODO: dispatch user to redux reducer
     // TODO: dispatch user-permissions

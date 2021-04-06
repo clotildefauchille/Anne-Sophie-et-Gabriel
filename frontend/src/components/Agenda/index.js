@@ -1,3 +1,4 @@
+/* eslint-disable arrow-body-style */
 import React, {useState, useEffect} from 'react';
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
@@ -10,35 +11,10 @@ import cityHall from 'src/assets/svg/cityHall.svg';
 import diner from 'src/assets/svg/diner.svg';
 import star from 'src/assets/svg/star.svg';
 import stars from 'src/assets/svg/stars.svg';
-import { useAuth0 } from '@auth0/auth0-react';
 
 import './style.scss';
 
 const Agenda = () => {
-  const {getAccessTokenSilently } = useAuth0();
-  const [userRoles, setUserRoles] = useState(null);
-  useEffect(() => {
-    const getUserRoles = async () => {
-      try {
-        const token = await getAccessTokenSilently();
-        const userRolesByIdUrl = `http://localhost:3000/v2/users`;
-
-        const rolesResponse = await fetch(userRolesByIdUrl, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        const res = await rolesResponse.json();
-        console.log('user_roles', res);
-        setUserRoles(res);
-      } catch (e) {
-        console.log(e.message);
-      }
-    };
-
-    getUserRoles();
-  }, []);
-
   return (
     <div className="page">
       <div className="agenda">
