@@ -4,7 +4,7 @@ import './style.scss';
 const Rsvp = () => (
   <div className="rsvp">
     <h2 className="rsvp__title">RSVP</h2>
-    <div className="rsvp__container">
+    <div className="rsvp__container-big">
       <div className="rsvp__container-presence">
         <p>
           Je confirme ma présence si les conditions sanitaires le permettent :
@@ -63,7 +63,7 @@ const Rsvp = () => (
           id="firstname"
           name="firstname"
           required
-          placeholder="prénom"
+          placeholder="Prénom"
         />
         <input
           className="rsvp__lastname"
@@ -71,7 +71,7 @@ const Rsvp = () => (
           id="lastname"
           name="lastname"
           required
-          placeholder="nom"
+          placeholder="Nom"
         />
       </div>
 
@@ -108,12 +108,12 @@ const Rsvp = () => (
       </div>
       <div className="rsvp__name-container">
         <input
-          className="rsvp__firstname-plus-one"
+          className="rsvp__firstname"
           type="text"
           id="firstname"
           name="firstname"
           required
-          placeholder="prénom"
+          placeholder="Prénom"
         />
       </div>
 
@@ -121,11 +121,13 @@ const Rsvp = () => (
         <p>
           Et avec{' '}
           <input
+          className="rsvp__child"
             type="number"
             id="tentacles"
             name="tentacles"
             min="0"
             max="10"
+            placeholder="0"
           />{' '}
           enfant(s)
         </p>
