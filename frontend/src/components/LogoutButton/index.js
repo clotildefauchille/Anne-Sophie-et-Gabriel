@@ -6,9 +6,9 @@ const LogoutButton = () => {
 
   return (
     <div className="header__logout">
-      <div>Bonjour {user.name}!</div>
+      <span>Bonjour {user.name}!</span>
       <div className="header__modal">
-        <button onClick={() => logout({ returnTo: window.location.origin })}>
+        <button className='header__modal-button' onClick={() => logout({ returnTo: window.location.origin })}>
           Déconnexion
         </button>
       </div>

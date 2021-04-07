@@ -10,7 +10,7 @@ import Footer from 'src/components/Footer';
 import LoginButton from 'src/components/LoginButton';
 import LogoutButton from 'src/components/LogoutButton';
 import Profile from 'src/components/Profile';
-
+import Rsvp from 'src/components/Rsvp';
 import './styles.css';
 
 // == Composant∏
@@ -21,6 +21,9 @@ const App = () => (
     <Switch>
       <Route path="/" exact>
         <Agenda />
+      </Route>
+      <Route path="/confirmation" exact>
+        <Rsvp />
       </Route>
     </Switch>
     <Footer />

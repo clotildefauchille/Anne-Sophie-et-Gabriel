@@ -4,10 +4,8 @@ const app = express();
 var cors = require('cors');
 
 
-
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
-
 
 const { auth } = require('express-openid-connect');
 
@@ -37,20 +35,6 @@ app.get("/permissions", jwtCheck, (req, res) => {
 })
 
 // app.use(jwtCheck);
-
-
-// app.get("/v2/users", (req, res) => {
-//     try {
-//       console.log("user", user)
-//       // const permissions = req.user.permissions;
-//       // res.send(permissions);
-//     } catch (error) {
-//       console.log(error);
-//       res.statusCode = 500;
-//       res.send({ error });
-//     }
-//   }
-// );
 
 
   app.get('/authorized', function (req, res) {
