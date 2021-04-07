@@ -1,13 +1,15 @@
 @use 'src/styles/_vars.scss' as v;
 
 .rsvp {
-
+  &__container-big-big{
+    display: flex;
+  }
   &__title {
     font-size: 2rem;
-    padding: 1.8rem;
+    padding: 3.2rem;
   }
   &__container-big {
-  margin-left: 2rem;
+  margin-left: 2rem;  
   }
   &__container-presence{
     display: flex;
@@ -153,4 +155,25 @@
 /* Show the checkmark when checked */
 .container input:checked ~ .checkmark:after {
   display: block;
+}
+.img{
+  margin-top:-1rem;
+  margin-left:6rem;
+  width: 34%;
+  border-radius: 3rem;
+}
+
+@media only screen and (max-width : 768px) {
+  .rsvp{
+    &__title{
+      font-size: 1.7rem;
+      padding: 2rem;
+    }
+    p {
+      min-width:40vh;;
+    }
+  }
+  .img{
+    display:none;
+  }
 }

@@ -1,9 +1,11 @@
 import React from 'react';
+import img from 'src/assets/img/rsvp.jpg';
 import './style.scss';
 
 const Rsvp = () => (
   <div className="rsvp">
     <h2 className="rsvp__title">RSVP</h2>
+    <div className="rsvp__container-big-big">
     <div className="rsvp__container-big">
       <div className="rsvp__container-presence">
         <p>
@@ -132,6 +134,8 @@ const Rsvp = () => (
           enfant(s)
         </p>
       </div>
+    </div>
+      <img className="img" src={img} alt="A&G" />
     </div>
   </div>
 );
