@@ -58,9 +58,12 @@
     //   height: 50px;
     // }
   }
-  &__adress {
+  &__address {
     font-style: italic;
     font-weight: 300;
+    &:hover{
+      filter: v.$filter;
+    }
   }
   &__container-img{
     position: relative;

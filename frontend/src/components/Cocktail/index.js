@@ -13,7 +13,7 @@ const Cocktail = () => (
         <a
           target="_blank"
           rel="noopener noreferrer"
-          className="agenda__adress"
+          className="agenda__address"
           href="https://goo.gl/maps/qDfQhdk6DhFuMH2d9"
         >
           9 rue Saint Martin <br /> 54700 Pont-à-Moussone, France{' '}

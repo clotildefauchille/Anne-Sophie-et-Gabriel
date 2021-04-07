@@ -11,7 +11,7 @@ const Mairie = () => (
         <a
           target="_blank"
           rel="noopener noreferrer"
-          className="agenda__adress"
+          className="agenda__address"
           href="https://goo.gl/maps/Ajmav14GCYdAVX5b7"
         >
           2 Cours du Château, <br /> 57100 Thionville, France

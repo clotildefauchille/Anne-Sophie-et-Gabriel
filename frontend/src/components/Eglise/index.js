@@ -13,7 +13,7 @@ const Eglise = () => (
         <a
           target="_blank"
           rel="noopener noreferrer"
-          className="agenda__adress"
+          className="agenda__address"
           href="https://goo.gl/maps/B8sCZf3yKLEFzj8r8"
         >
           3 Place de l’Eglise <br /> 57100 Thionville, France{' '}
