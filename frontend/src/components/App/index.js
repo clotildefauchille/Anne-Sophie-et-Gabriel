@@ -10,7 +10,7 @@ import Footer from 'src/components/Footer';
 import LoginButton from 'src/components/LoginButton';
 import LogoutButton from 'src/components/LogoutButton';
 import Profile from 'src/components/Profile';
-import Rsvp from 'src/components/Rsvp';
+import Rsvp from 'src/containers/Rsvp';
 import './styles.css';
 
 // == Composant∏

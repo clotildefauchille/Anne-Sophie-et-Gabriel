@@ -1,41 +1,57 @@
 import React from 'react';
 import img from 'src/assets/img/rsvp.jpg';
 import './style.scss';
+import PropTypes from 'prop-types';
 
-const Rsvp = () => (
-  <div className="rsvp">
-    <h2 className="rsvp__title">RSVP</h2>
-    <div className="rsvp__container-big-big">
-    <div className="rsvp__container-big">
-      <div className="rsvp__container-presence">
-        <p>
-          Je confirme ma présence si les conditions sanitaires le permettent :
-        </p>
-        <label className="container" for="oui">
-          Oui
-          <input
-            className="checkbox"
-            type="radio"
-            id="presence"
-            name="presence"
-            value="oui"
-            checked
-          />
-          <span className="checkmark"></span>
-        </label>
-        <label className="container" for="Non">
-          Non
-          <input
-            className="checkbox"
-            type="radio"
-            id="presence"
-            name="presence"
-            value="non"
-            
-          />
-          <span className="checkmark"></span>
-        </label>
-        {/* <input
+const Rsvp = ({ onChangeAccompanied, onChangePresence, onChangeName, firstname, lastname, firstnamePartner, childrenNumber }) => {
+  const handleOnChangePresence = (e) => {
+    // console.log('handleOnChange', e.target.value);
+    onChangePresence(e.target.value);
+  };
+  const handleOnChangeName = (e) => {
+    // console.log('handleOnChangeName', e.target.value, e.target.name);
+    onChangeName(e.target.value, e.target.name);
+  };
+  const handleOnChangeAccompanied = (e) => {
+    onChangeAccompanied(e.target.value);
+  };
+  return (
+    <div className="rsvp">
+      <form>
+        <h2 className="rsvp__title">RSVP</h2>
+        <div className="rsvp__container-big-big">
+          <div className="rsvp__container-big">
+            <div className="rsvp__container-presence">
+              <p>
+                Je confirme ma présence si les conditions sanitaires le
+                permettent :
+              </p>
+              <label className="container" htmlFor="oui">
+                Oui
+                <input
+                  className="checkbox"
+                  type="radio"
+                  id="presence"
+                  name="presence"
+                  value="true"
+                  onChange={handleOnChangePresence}
+                  defaultChecked
+                />
+                <span className="checkmark"></span>
+              </label>
+              <label className="container" htmlFor="Non">
+                Non
+                <input
+                  className="checkbox"
+                  type="radio"
+                  id="presence"
+                  name="presence"
+                  value="false"
+                  onChange={handleOnChangePresence}
+                />
+                <span className="checkmark"></span>
+              </label>
+              {/* <input
           className="rsvp__radio-button"
           type="radio"
           id="oui"
@@ -56,88 +72,109 @@ const Rsvp = () => (
         <label className="rsvp__label" for="non">
           Non
         </label> */}
-      </div>
+            </div>
 
-      <div className="rsvp__name-container">
-        <input
-          className="rsvp__firstname"
-          type="text"
-          id="firstname"
-          name="firstname"
-          required
-          placeholder="Prénom"
-        />
-        <input
-          className="rsvp__lastname"
-          type="text"
-          id="lastname"
-          name="lastname"
-          required
-          placeholder="Nom"
-        />
-      </div>
+            <div className="rsvp__name-container">
+              <input
+                className="rsvp__firstname"
+                type="text"
+                id="firstname"
+                name="firstname"
+                required
+                value={firstname}
+                placeholder="Prénom"
+                onChange={handleOnChangeName}
+              />
+              <input
+                className="rsvp__lastname"
+                type="text"
+                id="lastname"
+                name="lastname"
+                value={lastname}
+                required
+                placeholder="Nom"
+                onChange={handleOnChangeName}
+              />
+            </div>
 
-      <div className="rsvp__container-presence">
-        <p>Si oui, je viens avec mon +1: </p>
+            <div className="rsvp__container-presence">
+              <p>Si oui, je viens avec mon +1: </p>
 
-        <label className="container" for="oui">
-          Oui
-          <input
-            className="checkbox"
-            type="radio"
-            id="plusOne"
-            name="plusOne"
-            value="oui"
-            checked
-          />
-          <span className="checkmark"></span>
-        </label>
-        <label className="container" for="Non">
-          Non
-          <input
-            className="checkbox"
-            type="radio"
-            id="plusOne"
-            name="plusOne"
-            value="non"
-            // checked
-          />
-          <span className="checkmark"></span>
-        </label>
+              <label className="container" htmlFor="oui">
+                Oui
+                <input
+                  className="checkbox"
+                  type="radio"
+                  id="plusOne"
+                  name="plusOne"
+                  value="true"
+                  defaultChecked
+                  onChange={handleOnChangeAccompanied}
+                />
+                <span className="checkmark"></span>
+              </label>
+              <label className="container" htmlFor="Non">
+                Non
+                <input
+                  className="checkbox"
+                  type="radio"
+                  id="plusOne"
+                  name="plusOne"
+                  value="false"
+                  onChange={handleOnChangeAccompanied}
 
-        {/* <input className="rsvp__radio-button" type="radio" id="plusOne" name="plusOne" value="non" />
+                />
+                <span className="checkmark"></span>
+              </label>
+
+              {/* <input className="rsvp__radio-button" type="radio" id="plusOne" name="plusOne" value="non" />
         <label className="rsvp__label" for="non">Non</label> */}
-      </div>
-      <div className="rsvp__name-container">
-        <input
-          className="rsvp__firstname"
-          type="text"
-          id="firstname"
-          name="firstname"
-          required
-          placeholder="Prénom"
-        />
-      </div>
+            </div>
+            <div className="rsvp__name-container">
+              <input
+                className="rsvp__firstname"
+                type="text"
+                id="firstnamePartner"
+                name="firstnamePartner"
+                value={firstnamePartner}
+                required
+                placeholder="Prénom"
+                onChange={handleOnChangeName}
+              />
+            </div>
 
-      <div className="rsvp__container-children">
-        <p>
-          Et avec{' '}
-          <input
-          className="rsvp__child"
-            type="number"
-            id="tentacles"
-            name="tentacles"
-            min="0"
-            max="10"
-            placeholder="0"
-          />{' '}
-          enfant(s)
-        </p>
-      </div>
+            <div className="rsvp__container-children">
+              <p>
+                Et avec{' '}
+                <input
+                  className="rsvp__child"
+                  type="number"
+                  id="childrenNumber"
+                  name="childrenNumber"
+                  min="0"
+                  max="10"
+                  placeholder="0"
+                  value={childrenNumber}
+                  onChange={handleOnChangeName}
+                />{' '}
+                enfant(s)
+              </p>
+            </div>
+            <button className="rsvp__submit-btn">J'envoie ma réponse</button>
+          </div>
+          <img className="img" src={img} alt="A&G" />
+        </div>
+      </form>
     </div>
-      <img className="img" src={img} alt="A&G" />
-    </div>
-  </div>
-);
+  );
+};
 
+Rsvp.propTypes = {
+  onChangePresence: PropTypes.func.isRequired,
+  onChangeName: PropTypes.func.isRequired,
+  onChangeAccompanied: PropTypes.func.isRequired,
+  firstname: PropTypes.string.isRequired,
+  lastname: PropTypes.string.isRequired,
+  childrenNumber: PropTypes.string.isRequired,
+};
 export default Rsvp;

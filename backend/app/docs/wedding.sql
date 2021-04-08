@@ -7,7 +7,7 @@ CREATE TABLE "guest" (
     "sub" TEXT NOT NULL DEFAULT '',
     "present" BOOLEAN DEFAULT 'false',
     "accompanied" BOOLEAN DEFAULT 'false',
-    "name_partner" TEXT NOT NULL DEFAULT '',
+    "firstname_partner" TEXT NOT NULL DEFAULT '',
     "children_number" INTEGER DEFAULT 0,
     "babysiter" BOOLEAN DEFAULT 'false',
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),

@@ -90,8 +90,22 @@
       font-size:0.9rem; 
     }
   }
+  &__container-children{
+    padding-bottom: 2rem;
+  }
   &__lastname{
     margin-left: 1rem;
+  }
+  &__submit-btn{
+    border: none;
+    padding: 0.6rem;
+  background-color:  #ccc;
+  color: white;
+  border-radius: 0.3rem;
+  &:hover{
+  background-color: v.$secondaryColor;
+  color: white;
+  }
   }
 }
 
