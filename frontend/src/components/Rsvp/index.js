@@ -1,9 +1,18 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import img from 'src/assets/img/rsvp.jpg';
 import './style.scss';
 import PropTypes from 'prop-types';
 
-const Rsvp = ({ onChangeAccompanied, onChangePresence, onChangeName, firstname, lastname, firstnamePartner, childrenNumber }) => {
+const Rsvp = ({
+  onChangeAccompanied,
+  onChangePresence,
+  onChangeName,
+  firstname,
+  lastname,
+  firstnamePartner,
+  childrenNumber,
+  onSubmitRsvp,
+}) => {
   const handleOnChangePresence = (e) => {
     // console.log('handleOnChange', e.target.value);
     onChangePresence(e.target.value);
@@ -15,9 +24,13 @@ const Rsvp = ({ onChangeAccompanied, onChangePresence, onChangeName, firstname, 
   const handleOnChangeAccompanied = (e) => {
     onChangeAccompanied(e.target.value);
   };
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    onSubmitRsvp();
+  };
   return (
     <div className="rsvp">
-      <form>
+      <form onSubmit={handleOnSubmit}>
         <h2 className="rsvp__title">RSVP</h2>
         <div className="rsvp__container-big-big">
           <div className="rsvp__container-big">
@@ -37,7 +50,7 @@ const Rsvp = ({ onChangeAccompanied, onChangePresence, onChangeName, firstname, 
                   onChange={handleOnChangePresence}
                   defaultChecked
                 />
-                <span className="checkmark"></span>
+                <span className="checkmark" />
               </label>
               <label className="container" htmlFor="Non">
                 Non
@@ -49,7 +62,7 @@ const Rsvp = ({ onChangeAccompanied, onChangePresence, onChangeName, firstname, 
                   value="false"
                   onChange={handleOnChangePresence}
                 />
-                <span className="checkmark"></span>
+                <span className="checkmark" />
               </label>
               {/* <input
           className="rsvp__radio-button"
@@ -122,12 +135,12 @@ const Rsvp = ({ onChangeAccompanied, onChangePresence, onChangeName, firstname, 
                   name="plusOne"
                   value="false"
                   onChange={handleOnChangeAccompanied}
-
                 />
-                <span className="checkmark"></span>
+                <span className="checkmark" />
               </label>
 
-              {/* <input className="rsvp__radio-button" type="radio" id="plusOne" name="plusOne" value="non" />
+              {/* <input className="rsvp__radio-button" 
+              type="radio" id="plusOne" name="plusOne" value="non" />
         <label className="rsvp__label" for="non">Non</label> */}
             </div>
             <div className="rsvp__name-container">
@@ -160,7 +173,7 @@ const Rsvp = ({ onChangeAccompanied, onChangePresence, onChangeName, firstname, 
                 enfant(s)
               </p>
             </div>
-            <button className="rsvp__submit-btn">J'envoie ma réponse</button>
+            <button type="submit" className="rsvp__submit-btn">J'envoie ma réponse</button>
           </div>
           <img className="img" src={img} alt="A&G" />
         </div>
@@ -174,7 +187,9 @@ Rsvp.propTypes = {
   onChangeName: PropTypes.func.isRequired,
   onChangeAccompanied: PropTypes.func.isRequired,
   firstname: PropTypes.string.isRequired,
+  firstnamePartner: PropTypes.string.isRequired,
   lastname: PropTypes.string.isRequired,
   childrenNumber: PropTypes.string.isRequired,
+  onSubmitRsvp: PropTypes.func.isRequired,
 };
 export default Rsvp;

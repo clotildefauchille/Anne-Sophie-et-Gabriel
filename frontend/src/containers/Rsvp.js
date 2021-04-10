@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import Rsvp from 'src/components/Rsvp';
-import { changeInputValuePresence, changeInputValueName, changeInputValueAccompanied } from 'src/actions/rsvp';
+import { changeInputValuePresence, changeInputValueName, changeInputValueAccompanied, onSubmitRsvp } from 'src/actions/rsvp';
 
 const mapStateToProps = (state) => ({
   firstname: state.rsvp.firstname,
@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onChangeAccompanied: (value) => {
     dispatch(changeInputValueAccompanied(value));
+  },
+  onSubmitRsvp: () => {
+    dispatch(onSubmitRsvp());
   },
 });
 

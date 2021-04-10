@@ -2,7 +2,7 @@ const express = require('express');
 const PORT = process.env.PORT || 5000;
 const app = express();
 var cors = require('cors');
-
+const newGuestAnswerController = require("./controllers/newGuestAnswerController");
 
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
@@ -30,16 +30,21 @@ var jwtCheck = jwt({
   algorithms: ['RS256']
 });
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.get("/permissions", jwtCheck, (req, res) => {
-  res.send({permissions: req.user.permissions})
-})
+  res.send({permissions: req.user.permissions, userId: req.user.sub})
+});
 
 // app.use(jwtCheck);
 
 
-  app.get('/authorized', function (req, res) {
+app.get('/authorized', function (req, res) {
   res.send('Secured Resource');
 });
+
+app.post('/api/userAnswer', newGuestAnswerController.newGuestAnswer);
 
   const start = () => {
     app.listen(PORT, () => {

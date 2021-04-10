@@ -2,15 +2,16 @@ import { SET_PERMISSIONS } from 'src/actions/permissions';
 
 const initialState = {
   type: [''],
+  userId: '',
 };
 
 const permissions = (state = initialState, action = {}) => {
   switch (action.type) {
     case SET_PERMISSIONS:
-      // console.log(action.permissions);
       return {
         ...state,
         type: action.permissions,
+        userId: action.userId,
       };
     default:
       return state;

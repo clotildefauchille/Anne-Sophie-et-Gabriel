@@ -6,7 +6,8 @@ export const fetchPermission = (token) => ({
   token,
 });
 
-export const setPermissions = (permissions) => ({
+export const setPermissions = (permissions, userId) => ({
   type: SET_PERMISSIONS,
   permissions,
+  userId,
 });
