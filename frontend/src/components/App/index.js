@@ -11,7 +11,7 @@ import LoginButton from 'src/components/LoginButton';
 import LogoutButton from 'src/components/LogoutButton';
 import Profile from 'src/components/Profile';
 import Rsvp from 'src/containers/Rsvp';
-import Mapbox from 'src/components/Mapbox';
+import Map from 'src/components/Map';
 import './styles.css';
 
 // == Composant∏
@@ -27,7 +27,7 @@ const App = () => (
         <Rsvp />
       </Route>
       <Route path="/infos" exact>
-        <Mapbox />
+        <Map />
       </Route>
     </Switch>
     <Footer />
