@@ -29,5 +29,4 @@ const Connexion = ({ children }) => {
   );
 };
 
-
 export default Connexion;

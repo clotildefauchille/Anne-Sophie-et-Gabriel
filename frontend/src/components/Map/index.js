@@ -1,22 +1,17 @@
 import * as React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ReactMapGL, {
   Popup,
   NavigationControl,
   FullscreenControl,
   ScaleControl,
-  GeolocateControl } from 'react-map-gl';
+} from 'react-map-gl';
 // import 'mapbox-gl/dist/mapbox-gl.css';
 import Pins from 'src/components/Pins';
 import CityInfo from 'src/components/CityInfo';
+import PropTypes from 'prop-types';
 
-import CITIES from 'src/data/cities.json';
-
-const geolocateStyle = {
-  top: 0,
-  right: 0,
-  padding: '10px',
-};
+// import CITIES from 'src/data/cities.json';
 
 const fullscreenControlStyle = {
   bottom: 36,
@@ -36,7 +31,7 @@ const scaleControlStyle = {
   padding: '10px',
 };
 
-const Map = () => {
+const Map = ({ fetchPlaceInfos, placeDetails }) => {
   const [viewport, setViewport] = useState({
     // width: 800,
     // height: 400,
@@ -52,19 +47,21 @@ const Map = () => {
   // });
   const [popupInfo, setPopupInfo] = useState(null);
 
+  useEffect(() => {
+    fetchPlaceInfos();
+  }, []);
+
   return (
     <>
       <ReactMapGL
         {...viewport}
         onViewportChange={(nextViewport) => setViewport(nextViewport)}
-        mapboxApiAccessToken={
-          'pk.eyJ1IjoiY2xvdGlsZGVmYXVjaGlsbGUiLCJhIjoiY2ttbHNpM3JtMWR5ODJwazU3dmd4ZGt4bCJ9.HORGlrqRn7pZUd9ZWYdy6g'
-        }
+        mapboxApiAccessToken="pk.eyJ1IjoiY2xvdGlsZGVmYXVjaGlsbGUiLCJhIjoiY2ttbHNpM3JtMWR5ODJwazU3dmd4ZGt4bCJ9.HORGlrqRn7pZUd9ZWYdy6g"
         width="100vw"
         height="60vh"
         mapStyle="mapbox://styles/mapbox/streets-v11"
       >
-        <Pins data={CITIES} onClick={setPopupInfo} />
+        <Pins data={placeDetails} onClick={setPopupInfo} />
         {popupInfo && (
           <Popup
             tipSize={5}
@@ -85,6 +82,11 @@ const Map = () => {
       </ReactMapGL>
     </>
   );
+};
+
+Map.propTypes = {
+  fetchPlaceInfos: PropTypes.func.isRequired,
+  placeDetails: PropTypes.array.isRequired,
 };
 
 export default Map;

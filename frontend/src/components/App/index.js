@@ -11,10 +11,10 @@ import Footer from 'src/components/Footer';
 // import LogoutButton from 'src/components/LogoutButton';
 // import Profile from 'src/components/Profile';
 import Rsvp from 'src/containers/Rsvp';
-import Map from 'src/components/Map';
+import Map from 'src/containers/Map';
 import './styles.css';
 
-// == Composant∏
+// == Composant
 const App = () => (
   <div className="app">
     {/* <Wait /> */}

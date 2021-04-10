@@ -12,7 +12,12 @@ const Rsvp = ({
   firstnamePartner,
   childrenNumber,
   onSubmitRsvp,
+  fetchLastAnswer,
 }) => {
+  useEffect(() => {
+    fetchLastAnswer;
+  }, []);
+
   const handleOnChangePresence = (e) => {
     // console.log('handleOnChange', e.target.value);
     onChangePresence(e.target.value);

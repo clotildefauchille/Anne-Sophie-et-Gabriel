@@ -3,6 +3,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 var cors = require('cors');
 const newGuestAnswerController = require("./controllers/newGuestAnswerController");
+const practicalInfosController = require("./controllers/practicalInfosController");
 
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
@@ -36,6 +37,8 @@ app.use(express.urlencoded({ extended: true }));
 app.get("/permissions", jwtCheck, (req, res) => {
   res.send({permissions: req.user.permissions, userId: req.user.sub})
 });
+
+app.get("/api/infos", practicalInfosController.getPracticalInfos)
 
 // app.use(jwtCheck);
 
