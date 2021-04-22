@@ -21,7 +21,7 @@ const rootReactElement = (
     clientId="2wL2jalDIk9OwQ3n6c5Pno4ZrAqLIXiC"
     redirectUri={window.location.origin}
     audience="https://api.annesophiegabriel.fr"
-    scope="read:current_user update:current_user_metadata read:users "
+    scope="read:current_user update:current_user_metadata read:users create:users "
     cacheLocation="localstorage"
   >
     <Provider store={store}>

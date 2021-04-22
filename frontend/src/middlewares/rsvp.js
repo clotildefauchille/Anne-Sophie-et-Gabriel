@@ -16,7 +16,7 @@ const rsvp = (store) => (next) => (action) => {
       } = store.getState().rsvp;
       const { userId } = store.getState().permissions;
       // console.log("userId, presence", userId, presence);
-      
+
       axios.post(
         'http://localhost:3000/api/userAnswer',
         {

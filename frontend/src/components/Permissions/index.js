@@ -9,6 +9,7 @@ const Permissions = ({ children, fetchPermission }) => {
       try {
         const token = await getAccessTokenSilently();
         fetchPermission(token);
+        console.log(token);
       }
       catch (err) {
         console.error(err);
@@ -22,7 +23,7 @@ const Permissions = ({ children, fetchPermission }) => {
 
 Permissions.propTypes = {
   fetchPermission: PropTypes.func.isRequired,
-  permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  // permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default Permissions;
