@@ -12,6 +12,7 @@ import Footer from 'src/components/Footer';
 // import Profile from 'src/components/Profile';
 import Rsvp from 'src/containers/Rsvp';
 import Map from 'src/containers/Map';
+import Questions from 'src/components/Questions';
 import './styles.css';
 
 // == Composant
@@ -28,6 +29,9 @@ const App = () => (
       </Route>
       <Route path="/infos" exact>
         <Map />
+      </Route>
+      <Route path="/questions" exact>
+        <Questions />
       </Route>
     </Switch>
     <Footer />

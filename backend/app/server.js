@@ -52,6 +52,9 @@ app.post('/api/userAnswer', newGuestAnswerController.newGuestAnswer);
 
 app.get('/api/guestAnswer/:id', newGuestAnswerController.getGuestAnswer);
 
+//to send to google api sheet 
+app.get('/api/allUserAnswer', newGuestAnswerController.getAllGuestAnswer);
+
 app.post('/api/users', newUserController.createNewUser);
 
 const start = () => {

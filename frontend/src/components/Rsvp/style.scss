@@ -103,11 +103,11 @@
   &__submit-btn{
     border: none;
     padding: 0.6rem;
-  background-color:  #ccc;
+  background-color: v.$secondaryColor;
   color: white;
   border-radius: 0.3rem;
   &:hover{
-  background-color: v.$secondaryColor;
+  background-color: #ccc;
   color: white;
   }
   }

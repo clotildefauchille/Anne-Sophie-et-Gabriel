@@ -1,0 +1,26 @@
+.questions {
+  &__container-header{
+   display: flex;
+   justify-content: space-between;
+  }
+  &__title {
+    font-size: 2.4rem;
+    padding-left: 1.8rem;
+  }
+  &__illustration {
+    margin-top: -4rem;
+    margin-right: 11rem;
+  }
+  &__paragraph {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  &__question{
+    padding-top: 1.5rem;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+  &__strong{
+    font-weight: bold;
+  }
+}

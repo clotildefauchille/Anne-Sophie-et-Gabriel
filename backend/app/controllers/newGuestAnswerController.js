@@ -70,7 +70,11 @@ const newGuestAnswerController = {
     // res.send('hello getanswer')
     res.json(guestAnswer.dataValues);
 },
-
+getAllGuestAnswer: async(req, res) => {
+const allAnswers=await Guest.findAll();
+res.json(allAnswers);
+console.log('allAnswers', allAnswers[0].dataValues)
+},
 };
 
 module.exports = newGuestAnswerController;

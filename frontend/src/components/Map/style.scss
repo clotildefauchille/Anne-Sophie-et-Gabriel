@@ -1,0 +1,33 @@
+.infos {
+  &__title {
+    font-size: 2.4rem;
+    padding: 1.8rem;
+  }
+  &__container{
+    display: flex;
+  }
+  &__pratical{
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  &__h4{
+    padding-bottom: 1rem;
+    font-style: italic;
+  }
+  &__city{
+    font-weight: bold;
+    text-decoration: underline;
+  }
+  &__city-thionville{
+    font-weight: bold;
+    text-decoration: underline;
+    margin-top: 1rem;
+  }
+  &__accomodation{
+    font-weight: bold;
+  }
+  &__map{
+    margin-right: 2rem;
+  }
+
+}
