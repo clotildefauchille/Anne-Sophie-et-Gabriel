@@ -50,6 +50,8 @@ app.get('/authorized', function (req, res) {
 
 app.post('/api/userAnswer', newGuestAnswerController.newGuestAnswer);
 
+app.get('/api/guestAnswer/:id', newGuestAnswerController.getGuestAnswer);
+
 app.post('/api/users', newUserController.createNewUser);
 
 const start = () => {

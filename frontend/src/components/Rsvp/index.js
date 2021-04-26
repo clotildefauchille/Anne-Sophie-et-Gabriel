@@ -13,9 +13,10 @@ const Rsvp = ({
   childrenNumber,
   onSubmitRsvp,
   fetchLastAnswer,
+  message,
 }) => {
   useEffect(() => {
-    fetchLastAnswer;
+    fetchLastAnswer();
   }, []);
 
   const handleOnChangePresence = (e) => {
@@ -37,6 +38,7 @@ const Rsvp = ({
     <div className="rsvp">
       <form onSubmit={handleOnSubmit}>
         <h2 className="rsvp__title">RSVP</h2>
+        <div className="rsvp__message">{message}</div>
         <div className="rsvp__container-big-big">
           <div className="rsvp__container-big">
             <div className="rsvp__container-presence">
@@ -53,6 +55,7 @@ const Rsvp = ({
                   name="presence"
                   value="true"
                   onChange={handleOnChangePresence}
+                  // defaultValue="false"
                   defaultChecked
                 />
                 <span className="checkmark" />
@@ -66,6 +69,7 @@ const Rsvp = ({
                   name="presence"
                   value="false"
                   onChange={handleOnChangePresence}
+                  // defaultValue="true"
                 />
                 <span className="checkmark" />
               </label>
@@ -100,8 +104,9 @@ const Rsvp = ({
                 name="firstname"
                 required
                 value={firstname}
-                placeholder="Prénom"
+                placeholder='Prénom'
                 onChange={handleOnChangeName}
+                // defaultValue={firstname}
               />
               <input
                 className="rsvp__lastname"
@@ -112,6 +117,7 @@ const Rsvp = ({
                 required
                 placeholder="Nom"
                 onChange={handleOnChangeName}
+                // defaultValue="true"
               />
             </div>
 
@@ -128,6 +134,7 @@ const Rsvp = ({
                   value="true"
                   defaultChecked
                   onChange={handleOnChangeAccompanied}
+                  // defaultValue="true"
                 />
                 <span className="checkmark"></span>
               </label>
@@ -140,6 +147,7 @@ const Rsvp = ({
                   name="plusOne"
                   value="false"
                   onChange={handleOnChangeAccompanied}
+                  // defaultValue="true"
                 />
                 <span className="checkmark" />
               </label>
@@ -158,6 +166,7 @@ const Rsvp = ({
                 required
                 placeholder="Prénom"
                 onChange={handleOnChangeName}
+                // defaultValue="true"
               />
             </div>
 
@@ -196,5 +205,6 @@ Rsvp.propTypes = {
   lastname: PropTypes.string.isRequired,
   childrenNumber: PropTypes.string.isRequired,
   onSubmitRsvp: PropTypes.func.isRequired,
+  fetchLastAnswer: PropTypes.func.isRequired,
 };
 export default Rsvp;

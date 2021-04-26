@@ -1,4 +1,10 @@
-import { CHANGE_INPUT_VALUE_PRESENCE, CHANGE_INPUT_VALUE_NAME, CHANGE_INPUT_VALUE_ACCOMPANIED } from 'src/actions/rsvp';
+import {
+  CHANGE_INPUT_VALUE_PRESENCE,
+  CHANGE_INPUT_VALUE_NAME,
+  CHANGE_INPUT_VALUE_ACCOMPANIED,
+  SAVE_GUEST_ANSWER,
+  SEND_MESSAGE,
+} from 'src/actions/rsvp';
 
 const initialState = {
   presence: 'true',
@@ -7,6 +13,7 @@ const initialState = {
   lastname: '',
   firstnamePartner: '',
   childrenNumber: '',
+  message: '',
 };
 
 const rsvp = (state = initialState, action = {}) => {
@@ -27,7 +34,21 @@ const rsvp = (state = initialState, action = {}) => {
       return {
         ...state,
         [action.name]: action.value,
-
+      };
+    case SAVE_GUEST_ANSWER:
+      return {
+        ...state,
+        presence: action.data.present,
+        accompanied: action.data.accompanied,
+        firstname: action.data.firstname,
+        lastname: action.data.lastname,
+        firstnamePartner: action.data.firstname_partner,
+        childrenNumber: action.data.children_number,
+      };
+    case SEND_MESSAGE:
+      return {
+        ...state,
+        message: action.message,
       };
     default:
       return state;
