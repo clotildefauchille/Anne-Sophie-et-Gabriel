@@ -12,6 +12,7 @@ Guest.init(
     accompanied: Sequelize.BOOLEAN,
     firstname_partner: Sequelize.STRING,
     children_number: Sequelize.INTEGER,
+    allergy: Sequelize.STRING,
   },
   {
     sequelize,

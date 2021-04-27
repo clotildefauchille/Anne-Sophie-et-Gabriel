@@ -8,6 +8,7 @@ const mapStateToProps = (state) => ({
   firstnamePartner: state.rsvp.firstnamePartner,
   childrenNumber: state.rsvp.childrenNumber,
   message: state.rsvp.message,
+  allergy: state.rsvp.allergy,
 });
 
 const mapDispatchToProps = (dispatch) => ({

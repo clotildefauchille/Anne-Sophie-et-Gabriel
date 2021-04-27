@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import img from 'src/assets/img/rsvp.jpg';
 import './style.scss';
 import PropTypes from 'prop-types';
@@ -13,6 +13,7 @@ const Rsvp = ({
   childrenNumber,
   onSubmitRsvp,
   fetchLastAnswer,
+  allergy,
   message,
 }) => {
   useEffect(() => {
@@ -104,7 +105,7 @@ const Rsvp = ({
                 name="firstname"
                 required
                 value={firstname}
-                placeholder='Prénom'
+                placeholder="Prénom"
                 onChange={handleOnChangeName}
                 // defaultValue={firstname}
               />
@@ -186,8 +187,21 @@ const Rsvp = ({
                 />{' '}
                 enfant(s)
               </p>
+              <p>
+                Regimes particuliers:
+                <input
+                  className="rsvp__child"
+                  type="text"
+                  name="allergy"
+                  placeholder="allergies ou végétalisme"
+                  value={allergy}
+                  onChange={handleOnChangeName}
+                />{' '}
+              </p>
             </div>
-            <button type="submit" className="rsvp__submit-btn">J'envoie ma réponse</button>
+            <button type="submit" className="rsvp__submit-btn">
+              J'envoie ma réponse
+            </button>
           </div>
           <img className="img" src={img} alt="A&G" />
         </div>
@@ -206,5 +220,7 @@ Rsvp.propTypes = {
   childrenNumber: PropTypes.string.isRequired,
   onSubmitRsvp: PropTypes.func.isRequired,
   fetchLastAnswer: PropTypes.func.isRequired,
+  message: PropTypes.string.isRequired,
+  allergy: PropTypes.string.isRequired,
 };
 export default Rsvp;

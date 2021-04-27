@@ -14,6 +14,7 @@ const initialState = {
   firstnamePartner: '',
   childrenNumber: '',
   message: '',
+  allergy: '',
 };
 
 const rsvp = (state = initialState, action = {}) => {

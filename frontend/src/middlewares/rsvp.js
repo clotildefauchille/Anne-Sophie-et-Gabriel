@@ -20,6 +20,7 @@ const rsvp = (store) => (next) => (action) => {
         lastname,
         firstnamePartner,
         childrenNumber,
+        allergy,
       } = store.getState().rsvp;
       // console.log("userId, presence", userId, presence);
 
@@ -34,6 +35,7 @@ const rsvp = (store) => (next) => (action) => {
             lastname,
             firstnamePartner,
             childrenNumber,
+            allergy,
           },
           // {
           //   headers: {

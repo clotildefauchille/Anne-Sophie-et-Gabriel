@@ -13,6 +13,7 @@ const newGuestAnswerController = {
       firstname,
       lastname,
       firstnamePartner,
+      allergy,
     } = req.body;
     console.log('------->userId', userId);
 
@@ -34,6 +35,7 @@ const newGuestAnswerController = {
         accompanied: accompanied,
         firstname_partner: firstnamePartner,
         children_number: childrenNumber,
+        allergy: allergy,
       });
       console.log('newGuestResponse', newGuestResponse);
     } else {
@@ -78,3 +80,6 @@ console.log('allAnswers', allAnswers[0].dataValues)
 };
 
 module.exports = newGuestAnswerController;
+
+
+// [{ "id": 1, "sub": "google-oauth2|101666571097616652218", "firstname": "clotilde", "lastname": "fauchille", "present": true, "accompanied": true, "firstname_partner": "rodolphe", "children_number": 2, "allergy": "non" }]
