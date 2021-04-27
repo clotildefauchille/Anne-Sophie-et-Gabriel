@@ -89,8 +89,11 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
           Les Hôtels dans le centre ville à proximité de la Mairie et de
           l’Eglise :
           <br />
-          <strong className="infos__accomodation">Le Kyriad Hôtel </strong>
-          dispose de XX chambres à 70€
+          <strong className="infos__accomodation">Le Kyriad Hôtel Prestige </strong>
+          dispose de XX chambres à 90€
+          <br />
+          <strong className="infos__accomodation">L'hôtel Enzo Kyriad </strong>
+          dispose de XX chambres à 60€
           <br />
           <strong className="infos__accomodation">Le Mercure </strong>dispose de
           XX chambres à 70€

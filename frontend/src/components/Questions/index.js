@@ -9,20 +9,24 @@ const Questions = () => (
       <img className="questions__illustration" src={travel} alt="travelling" />
     </div>
 
-    <p className="questions__paragraph">
+    <div className="questions__paragraph">
       <div className="questions__question">
         Quels moyens de transport puis - je utiliser pour me rendre au mariage ?
       </div>
       <br />
       La mairie et l’église de Thionville se situent en plein centre à quelques
-      mètres l'une de l'autre. L'abbaye est également dans l'hypercentre de Pont
-      - à - Mousson. En train: la ligne TGV du Grand - Est vous permettra
-      d'arriver directement à Thionville depuis Paris. Il est aussi possible de
-      rejoindre Pont - à - Mousson de Thionville via la ligne Metrolor.Chaque
-      lieu se situe à 5 minutes à pied de la gare. En voiture: Il existe de
-      nombreux parkings à proximité de chaque lieu.Pour se rendre à l'Abbaye, il
-      faudra compter 40 minutes en voiture depuis le centre-ville de Thionville.
-      N’hésitez pas à vous coordonner entre invités pour covoiturer ! <br />
+      mètres l'une de l'autre. L'abbaye est également dans l'hypercentre de
+      Pont-à-Mousson.
+      <br /> <strong className="questions__strong">En train:</strong> la ligne TGV du Grand - Est vous
+      permettra d'arriver directement à Thionville depuis Paris. Il est aussi
+      possible de rejoindre Pont - à - Mousson de Thionville via la ligne
+      Metrolor. Chaque lieu se situe à 5 minutes à pied de la gare.
+      <br />
+      <strong className="questions__strong">En voiture:</strong> Il existe de nombreux parkings à proximité de
+      chaque lieu. Pour se rendre à l'Abbaye,{' '}
+      <strong className="questions__strong">il faudra compter 40 minutes</strong> en voiture depuis le
+      centre-ville de Thionville. N’hésitez pas à vous coordonner entre invités
+      pour covoiturer ! <br />
       <div className="questions__question">
         Comment optimiser mon trajet si je viens de loin ?
       </div>
@@ -59,7 +63,7 @@ const Questions = () => (
       Allemagne(à une heure de Thionville), elle fait partie des plus vieilles
       villes allemandes, datant de l'ère romaine avec son théâtre romain et la
       Porta Nigra.
-    </p>
+    </div>
   </>
 );
 
