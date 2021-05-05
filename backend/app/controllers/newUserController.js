@@ -250,18 +250,27 @@ const newUserController = {
 
       const ranges = req.body;
       console.log('ranges', ranges);
-      
+
       ranges.map((oneRange) => {
         console.log('rangeUseful', oneRange.range, oneRange.email);
-        Answer.update({ google_sheet_range: oneRange.range },
-        {
-          where: {
-            email: oneRange.email,
-          },
-        },
-          );
-       });
-     
+        Answer.create(
+          { google_sheet_range: oneRange.range,
+            sub: '',
+            firstname: '',
+            lastname: '',
+            present: false,
+            accompanied: false,
+            firstname_partner: '',
+            children_number: 0,
+            allergy: '',
+            email: oneRange.email, },
+          // {
+          //   where: {
+          //     email: oneRange.email,
+          //   },
+          // },
+        );
+      });
 
       try {
         //creation d'un user dans la BDD de Auth0Provider

@@ -33,30 +33,31 @@ const newGuestAnswerController = {
     } = req.body;
     console.log('------->userId', userId);
 
-    const answer = await Answer.findOne({
-      where: {
-        sub: userId,
-      },
-    });
+    // const answer = await Answer.findOne({
+    //   where: {
+    //     sub: userId,
+    //   },
+    // });
     console.log('------->userId', userId);
 
     // console.log('----------->', userId)
-    if (!answer) {
-      console.log('existe pas');
-      const newGuestResponse = await Answer.create({
-        sub: userId,
-        firstname: firstname,
-        lastname: lastname,
-        present: presence,
-        accompanied: accompanied,
-        firstname_partner: firstnamePartner,
-        children_number: childrenNumber,
-        allergy: allergy,
-        email: email,
-      });
-      console.log('newGuestResponse', newGuestResponse);
-    } else {
-      console.log('existe deja');
+    // if (!answer) {
+    //   console.log('existe pas');
+    //   const newGuestResponse = await Answer.create({
+    //     sub: userId,
+    //     firstname: firstname,
+    //     lastname: lastname,
+    //     present: presence,
+    //     accompanied: accompanied,
+    //     firstname_partner: firstnamePartner,
+    //     children_number: childrenNumber,
+    //     allergy: allergy,
+    //     email: email,
+    //   });
+    //   console.log('newGuestResponse', newGuestResponse);
+    // } else {
+    console.log('existe deja');
+   
       const updateGuestResponse = await Answer.update(
         {
           sub: userId,
@@ -66,31 +67,31 @@ const newGuestAnswerController = {
           accompanied: accompanied,
           firstname_partner: firstnamePartner,
           children_number: childrenNumber,
+          allergy: allergy,
+          email: email,
         },
         {
           where: {
-            sub: userId,
+            email: email,
           },
         },
       );
-      console.log('response already gave');
+      // console.log('response already gave');
       console.log('updateGuestResponse', updateGuestResponse);
-    }
+      // }
 
-    res.send('hello');
+      res.send('hello');
+    
   },
   getGuestAnswer: async (req, res) => {
-    
     const userId = req.params.id;
-    
-      const guestAnswer = await Answer.findOne({
-        where: {
-          sub: userId,
-        },
-      });
-      res.json(guestAnswer ? guestAnswer : {});
 
-    
+    const guestAnswer = await Answer.findOne({
+      where: {
+        sub: userId,
+      },
+    });
+    res.json(guestAnswer ? guestAnswer : {});
 
     // console.log('-------->guestAnswer', guestAnswer.dataValues)
     // res.send('hello getanswer')
@@ -109,24 +110,24 @@ const newGuestAnswerController = {
     try {
       // const getRangesUsers = await axios.request(getRangeUserOptions);
       // console.log('-------->getAllUsers', getRangesUsers.data);
-      // const allRangesUsers = getRangesUsers.data.map((user) => 
+      // const allRangesUsers = getRangesUsers.data.map((user) =>
       //    user.user_metadata );
-      
+
       // console.log('allRangesUsers', allRangesUsers);
-    const allAnswers = await Answer.findAll();
-    const allAnswerUsefull = allAnswers.map((allAnswer) => {
-      return {
-        present: allAnswer.dataValues.present,
-        accompanied: allAnswer.dataValues.accompanied,
-        firstname_partner: allAnswer.dataValues.firstname_partner,
-        children_number: allAnswer.dataValues.children_number,
-        allergy: allAnswer.dataValues.allergy,
-        google_sheet_range: allAnswer.dataValues.google_sheet_range,
-      };
-    });
-    console.log('allAnswerUsefull', allAnswerUsefull);
-    // console.log('allAnswers', allAnswers);
-    res.json(allAnswerUsefull);
+      const allAnswers = await Answer.findAll();
+      const allAnswerUsefull = allAnswers.map((allAnswer) => {
+        return {
+          present: allAnswer.dataValues.present,
+          accompanied: allAnswer.dataValues.accompanied,
+          firstname_partner: allAnswer.dataValues.firstname_partner,
+          children_number: allAnswer.dataValues.children_number,
+          allergy: allAnswer.dataValues.allergy,
+          google_sheet_range: allAnswer.dataValues.google_sheet_range,
+        };
+      });
+      console.log('allAnswerUsefull', allAnswerUsefull);
+      // console.log('allAnswers', allAnswers);
+      res.json(allAnswerUsefull);
     } catch (err) {
       console.log('err');
     }
