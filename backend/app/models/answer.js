@@ -1,13 +1,15 @@
 const Sequelize = require("sequelize");
 const sequelize = require('../database');
 
-class Guest extends Sequelize.Model {}
+class Answer extends Sequelize.Model {}
 
-Guest.init(
+Answer.init(
   {
     sub: Sequelize.STRING,
     firstname: Sequelize.STRING,
     lastname: Sequelize.STRING,
+    google_sheet_range: Sequelize.STRING,
+    email: Sequelize.STRING,
     present: Sequelize.BOOLEAN,
     accompanied: Sequelize.BOOLEAN,
     firstname_partner: Sequelize.STRING,
@@ -16,8 +18,8 @@ Guest.init(
   },
   {
     sequelize,
-    tableName: 'guest',
+    tableName: 'answer',
   },
 );
 
-module.exports = Guest;
+module.exports = Answer;

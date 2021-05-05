@@ -2,22 +2,25 @@ import React, { useEffect } from 'react';
 import img from 'src/assets/img/rsvp.jpg';
 import './style.scss';
 import PropTypes from 'prop-types';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Rsvp = ({
   onChangeAccompanied,
   onChangePresence,
   onChangeName,
-  firstname,
-  lastname,
   firstnamePartner,
   childrenNumber,
   onSubmitRsvp,
   fetchLastAnswer,
   allergy,
   message,
+  getUserInfos,
 }) => {
+  const { user } = useAuth0();
+  // console.log('user', user);
   useEffect(() => {
     fetchLastAnswer();
+    getUserInfos();
   }, []);
 
   const handleOnChangePresence = (e) => {
@@ -44,8 +47,8 @@ const Rsvp = ({
           <div className="rsvp__container-big">
             <div className="rsvp__container-presence">
               <p>
-                Je confirme ma présence si les conditions sanitaires le
-                permettent :
+                {user.given_name} {user.family_name}, je confirme ma présence si
+                les conditions sanitaires le permettent :
               </p>
               <label className="container" htmlFor="oui">
                 Oui
@@ -97,7 +100,7 @@ const Rsvp = ({
         </label> */}
             </div>
 
-            <div className="rsvp__name-container">
+            {/* <div className="rsvp__name-container">
               <input
                 className="rsvp__firstname"
                 type="text"
@@ -120,7 +123,7 @@ const Rsvp = ({
                 onChange={handleOnChangeName}
                 // defaultValue="true"
               />
-            </div>
+            </div> */}
 
             <div className="rsvp__container-presence">
               <p>Si oui, je viens avec mon +1: </p>
@@ -214,13 +217,12 @@ Rsvp.propTypes = {
   onChangePresence: PropTypes.func.isRequired,
   onChangeName: PropTypes.func.isRequired,
   onChangeAccompanied: PropTypes.func.isRequired,
-  firstname: PropTypes.string.isRequired,
   firstnamePartner: PropTypes.string.isRequired,
-  lastname: PropTypes.string.isRequired,
   childrenNumber: PropTypes.string.isRequired,
   onSubmitRsvp: PropTypes.func.isRequired,
   fetchLastAnswer: PropTypes.func.isRequired,
   message: PropTypes.string.isRequired,
   allergy: PropTypes.string.isRequired,
+  getUserInfos: PropTypes.func.isRequired,
 };
 export default Rsvp;

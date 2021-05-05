@@ -1,10 +1,15 @@
 import { connect } from 'react-redux';
 import Rsvp from 'src/components/Rsvp';
-import { changeInputValuePresence, changeInputValueName, changeInputValueAccompanied, onSubmitRsvp, fetchLastAnswer } from 'src/actions/rsvp';
+import {
+  changeInputValuePresence,
+  changeInputValueName,
+  changeInputValueAccompanied,
+  onSubmitRsvp,
+  fetchLastAnswer,
+  getUserInfos,
+} from 'src/actions/rsvp';
 
 const mapStateToProps = (state) => ({
-  firstname: state.rsvp.firstname,
-  lastname: state.rsvp.lastname,
   firstnamePartner: state.rsvp.firstnamePartner,
   childrenNumber: state.rsvp.childrenNumber,
   message: state.rsvp.message,
@@ -25,8 +30,11 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(onSubmitRsvp());
   },
   fetchLastAnswer: () => {
-// console.log('fetchLastAnswer')
+    // console.log('fetchLastAnswer')
     dispatch(fetchLastAnswer());
+  },
+  getUserInfos: () => {
+    dispatch(getUserInfos());
   },
 });
 

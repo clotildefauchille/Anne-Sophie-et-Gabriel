@@ -5,19 +5,19 @@ import {
   FETCH_LAST_ANSWER,
   saveGuestAnswers,
   sendMessage,
+  GET_USER_INFO,
 } from 'src/actions/rsvp';
+import { saveUserInfos } from 'src/actions/permissions';
 
 const rsvp = (store) => (next) => (action) => {
-  const { userId } = store.getState().permissions;
-
+  const { userId, email } = store.getState().permissions;
+console.log('email', email);
   switch (action.type) {
     case ON_SUBMIT_RSVP:
       // console.log('hello middleware')
       const {
         presence,
         accompanied,
-        firstname,
-        lastname,
         firstnamePartner,
         childrenNumber,
         allergy,
@@ -31,11 +31,10 @@ const rsvp = (store) => (next) => (action) => {
             userId,
             presence,
             accompanied,
-            firstname,
-            lastname,
             firstnamePartner,
             childrenNumber,
             allergy,
+            email,
           },
           // {
           //   headers: {
@@ -45,11 +44,7 @@ const rsvp = (store) => (next) => (action) => {
         )
         .then((response) => {
           console.log('réponse bien envoyée!');
-          store.dispatch(
-            sendMessage(
-              'Votre réponse a été envoyée!',
-            ),
-          );
+          store.dispatch(sendMessage('Votre réponse a été envoyée!'));
         });
       break;
     case FETCH_LAST_ANSWER:
@@ -58,11 +53,19 @@ const rsvp = (store) => (next) => (action) => {
       axios
         .get(`http://localhost:3000/api/guestAnswer/${userId}`)
         .then((response) => {
-          console.log('response.data', response.data);
+          // console.log('response.data', response.data);
           store.dispatch(saveGuestAnswers(response.data));
         });
       break;
-
+    case GET_USER_INFO:
+      console.log('getuserinfo middleware');
+      axios
+        .get(`http://localhost:3000/api/v2/users/${userId}`)
+        .then((response) => {
+          console.log('response.data getUserInfo', response.data);
+          store.dispatch(saveUserInfos(response.data));
+        });
+      break;
     default:
       next(action);
   }

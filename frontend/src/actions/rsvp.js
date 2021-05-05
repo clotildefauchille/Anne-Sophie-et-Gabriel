@@ -5,6 +5,7 @@ export const ON_SUBMIT_RSVP = 'ON_SUBMIT_RSVP';
 export const FETCH_LAST_ANSWER = 'FETCH_LAST_ANSWER';
 export const SAVE_GUEST_ANSWER = 'SAVE_GUEST_ANSWER';
 export const SEND_MESSAGE = 'SEND_MESSAGE';
+export const GET_USER_INFO = 'GET_USER_INFO';
 
 export const changeInputValuePresence = (value) => ({
   type: CHANGE_INPUT_VALUE_PRESENCE,
@@ -36,4 +37,8 @@ export const saveGuestAnswers = (data) => ({
 export const sendMessage = (message) => ({
   type: SEND_MESSAGE,
   message,
+});
+
+export const getUserInfos = () => ({
+  type: GET_USER_INFO,
 });

@@ -14,7 +14,6 @@ const permissions = (store) => (next) => (action) => {
           },
         })
         .then((response) => {
-          // console.log(response.data);
           store.dispatch(setPermissions(response.data.permissions, response.data.userId));
         });
 

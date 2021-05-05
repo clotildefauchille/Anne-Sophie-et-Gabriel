@@ -15,7 +15,7 @@ import Brunch from 'src/components/Brunch';
 import './style.scss';
 
 const Agenda = ({ permissions }) => {
-  console.log('permissions', permissions);
+  console.log('permissions', permissions[0]);
 
   return (
     <div className="page">

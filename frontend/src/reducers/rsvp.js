@@ -9,10 +9,8 @@ import {
 const initialState = {
   presence: 'true',
   accompanied: 'true',
-  firstname: '',
-  lastname: '',
   firstnamePartner: '',
-  childrenNumber: '',
+  childrenNumber: 0,
   message: '',
   allergy: '',
 };

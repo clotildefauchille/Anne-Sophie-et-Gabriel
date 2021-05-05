@@ -1,12 +1,23 @@
 BEGIN;
 
-DROP TABLE IF EXISTS "guest", "place";
+DROP TABLE IF EXISTS "range", "answer", "place";
 
-CREATE TABLE "guest" (
+
+-- CREATE TABLE "range" (
+--     "id" SERIAL PRIMARY KEY,
+--     "google_sheet_range" TEXT NOT NULL DEFAULT '',
+--     "email" TEXT NOT NULL DEFAULT '',
+--     "range_id" INTEGER NOT NULL REFERENCES "range"("id"),
+--     "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+--     "updated_at" TIMESTAMPTZ);
+
+CREATE TABLE "answer" (
     "id" SERIAL PRIMARY KEY,
     "sub" TEXT NOT NULL DEFAULT '',
     "firstname" TEXT NOT NULL DEFAULT '',
     "lastname" TEXT NOT NULL DEFAULT '',
+    "google_sheet_range" TEXT DEFAULT '',
+    "email" TEXT NOT NULL DEFAULT '',
     "present" BOOLEAN DEFAULT 'false',
     "accompanied" BOOLEAN DEFAULT 'false',
     "firstname_partner" TEXT NOT NULL DEFAULT '',
@@ -16,19 +27,20 @@ CREATE TABLE "guest" (
     "updated_at" TIMESTAMPTZ
 );
 
+
 CREATE TABLE "place" (
-"id" SERIAL PRIMARY KEY,
-"name" TEXT NOT NULL DEFAULT '',
-"street" TEXT NOT NULL DEFAULT '',
-"city" TEXT NOT NULL DEFAULT '',
-"image" TEXT NOT NULL DEFAULT '',
-"latitude" DOUBLE PRECISION,
-"longitude" DOUBLE PRECISION,
-"contact" TEXT NOT NULL DEFAULT '',
-"type" TEXT NOT NULL DEFAULT '',
-"google_map_link" TEXT NOT NULL DEFAULT '',
-"created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-"updated_at" TIMESTAMPTZ
+    "id" SERIAL PRIMARY KEY,
+    "name" TEXT NOT NULL DEFAULT '',
+    "street" TEXT NOT NULL DEFAULT '',
+    "city" TEXT NOT NULL DEFAULT '',
+    "image" TEXT NOT NULL DEFAULT '',
+    "latitude" DOUBLE PRECISION,
+    "longitude" DOUBLE PRECISION,
+    "contact" TEXT NOT NULL DEFAULT '',
+    "type" TEXT NOT NULL DEFAULT '',
+    "google_map_link" TEXT NOT NULL DEFAULT '',
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ
 );
 
 INSERT INTO "place" ("name", "street", "city", "image", "latitude", "longitude", "contact", "type", "google_map_link") 
@@ -43,5 +55,6 @@ VALUES
 ('Le Logis hôtel des Oliviers', '1 Rue du Four Banal', '57100 Thionville', 'https://lh5.googleusercontent.com/p/AF1QipMj6tm-HUiuEX7EMWYm4KUIYD04O0jAJaiFUJ0G=w408-h271-k-no', 49.35792587599282, 6.165711924849858, '+33382537027', 'accomodation', 'https://goo.gl/maps/mwEMYoXqFartzpz5A'),
 ('le mercure', '2 Rue Georges Ditsch', '57100 Thionville', 'https://lh5.googleusercontent.com/proxy/86aqZtqbVRN2AGhuItSdgnvXg-1LbzS_n0EPQTWY5erfm_miKdbiHZw5WmgIrZ0p9lQImum6gofA2hNxrLGKu96eeVrVlV-bgeEBZPeM91aqr7UnLIQ3svOzEPugwRbM1q7hTEkahWq20fVscYN7pmF_JiRaYQ=w408-h306-k-no', 49.357267072493634, 6.167970597861821, '+33382518422', 'accomodation', 'https://g.page/mercurethionvillecentregare?share'),
 ('Le B&B', '7 Place de la Gare', '57100 Thionville',  'https://lh4.googleusercontent.com/proxy/orPLgUZS7RqkevAtft3Dp1f5ds4JEGwh_sckYJzhwy1CW8ph_WuE1e0XrcAE3OdE-1TztkPVtzxBIDO3bCHrQA_P6DdUZMeqVTaPI0CP2z3LIa2zzF6k7wuR42QgmzLE3Va_yUoqJN1EP_vqo2JMkRkAmlcL4Q8=w408-h306-k-no', 49.35610453226837, 6.169219515032501, '+33892233664', 'accomodation', 'https://g.page/b-b-hotel-thionville?share');
+
 
 COMMIT;

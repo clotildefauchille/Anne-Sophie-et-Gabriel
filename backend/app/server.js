@@ -7,14 +7,12 @@ const practicalInfosController = require('./controllers/practicalInfosController
 const newUserController = require('./controllers/newUserController');
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
-var request = require("request");
+var request = require('request');
 
 const { auth } = require('express-openid-connect');
 
 app.use(cors());
 // to get acces token for Auth0 Management API
-
-
 
 /**
  * jwtCheck:
@@ -37,8 +35,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.get('/permissions', jwtCheck, (req, res) => {
-  res.send({ permissions: req.user.permissions, userId: req.user.sub });
+  res.send({
+    permissions: req.user.permissions,
+    userId: req.user.sub,
+  });
 });
+
+app.get('/api/v2/users/:id', newUserController.getUserInfos);
 
 app.get('/api/infos', practicalInfosController.getPracticalInfos);
 
@@ -52,10 +55,12 @@ app.post('/api/userAnswer', newGuestAnswerController.newGuestAnswer);
 
 app.get('/api/guestAnswer/:id', newGuestAnswerController.getGuestAnswer);
 
-//to send to google api sheet 
+//to send to google api sheet
 app.get('/api/allUserAnswer', newGuestAnswerController.getAllGuestAnswer);
 
 app.post('/api/users', newUserController.createNewUser);
+
+app.post('/api/range', newUserController.createRangeUser);
 
 const start = () => {
   app.listen(PORT, () => {
