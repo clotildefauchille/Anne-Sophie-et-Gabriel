@@ -60,7 +60,7 @@ app.get('/api/allUserAnswer', newGuestAnswerController.getAllGuestAnswer);
 
 app.post('/api/users', newUserController.createNewUser);
 
-app.post('/api/range', newUserController.createRangeUser);
+app.get('/api/bulk-import', newUserController.bulkImportUser);
 
 const start = () => {
   app.listen(PORT, () => {
