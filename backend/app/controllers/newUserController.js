@@ -1,6 +1,8 @@
 const sequelize = require('../database.js');
 var request = require('request');
 const Answer = require('../models/answer.js');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
 
 const axios = require('axios').default;
 var getTokenOptions = {
@@ -18,121 +20,140 @@ var getTokenOptions = {
   json: true,
 };
 const newUserController = {
-  bulkImportUser: async (req, res) =>{
+  bulkImportUser: async (req, res) => {
     const responseToken = await axios(getTokenOptions);
     const token = responseToken.data.access_token;
-    const data = [{ "email": "clo1@gmail.com" }, { "email": "clo2@gmail.com" }, { "email": "clo3@gmail.com" }, { "email": "clo4@gmail.com" }, { "email": "clo5@gmail.com" }, { "email": "clo6@gmail.com" }]
-    
+    const data = [
+      { email: 'clo1@gmail.com' },
+      { email: 'clo2@gmail.com' },
+      { email: 'clo3@gmail.com' },
+      { email: 'clo4@gmail.com' },
+      { email: 'clo5@gmail.com' },
+      { email: 'clo6@gmail.com' },
+    ];
+
     // requêtes POST multipart/form-data pour la creation d'utilisateur sans limitation de requete d'auth0;
-    //multipart/form-data est un type de requête HTTP qui permet d'envoyer un fichier en plus des données. 
+    //multipart/form-data est un type de requête HTTP qui permet d'envoyer un fichier en plus des données.
     //boundary est un separateur; https://mathieu-lemoine.developpez.com/articles/web/browsers/?page=construction_requete
-    
+
     var options = {
       method: 'POST',
       url: 'https://dev-ljslmul5.eu.auth0.com/api/v2/jobs/users-imports',
       headers: {
         authorization: `Bearer ${token}`,
         'Content-Type': 'multipart/form-data; boundary=AaB03x',
-
       },
-      data: `--AaB03x\r\nContent-Disposition: form-data; name="connection_id"\r\n\r\ncon_armfGjb5J3GJCj5G\r\n--AaB03x\r\nContent-Disposition: form-data; name="external_id"\r\n\r\ncloclo\r\n--AaB03x\r\nContent-Disposition: form-data; name="users"; filename="googleUsers.json"\r\nContent-Type: text/plain\r\n\r\n{"email":"clo@gmail.com"}\r\n--AaB03x--`
+      data: `--AaB03x\r\nContent-Disposition: form-data; name="connection_id"\r\n\r\ncon_armfGjb5J3GJCj5G\r\n--AaB03x\r\nContent-Disposition: form-data; name="external_id"\r\n\r\ncloclo\r\n--AaB03x\r\nContent-Disposition: form-data; name="users"; filename="googleUsers.json"\r\nContent-Type: text/plain\r\n\r\n[{"email":"clo@gmail.com"}]\r\n--AaB03x--`,
     };
-      
 
-    axios.request(options).then(function (response) {
-      console.log(response.data);
-    }).catch(function (error) {
-      console.error(error);
-    });
-
+    axios
+      .request(options)
+      .then(function (response) {
+        console.log(response.data);
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   },
   createNewUser: async (req, res) => {
     // console.log("req.body", req.body);
-    const guests = req.body;
+    let guests = req.body;
     const permissions = guests[0].permissions.toString();
 
-    console.log('--------------->guests', guests);
+    // console.log('--------------->guests', guests);
     const responseToken = await axios(getTokenOptions);
     const token = responseToken.data.access_token;
-   
+    //on vire les guests avec email undefined
+    guests = guests.filter((elem) => elem.email != null);
     
+    // console.log('============passwords', passwords);
+    // Pour pouvoir map il faut utiliser Promise.All qui attend que toutes les promesses s'exécutent avt de return l'array
+    guests = await Promise.all(
+      guests.map(async (guest) => {
+        return {...guest, password: await bcrypt.hash(guest.password, saltRounds)};
+      }),
+    );
+   
+    console.log('============guests.length', guests.length);
+   
+    const dataGoogleSheetUsers = JSON.stringify(guests.map(guest => {
+      return { "email": guest.email, 
+        "given_name": guest.firstname,
+        "name": `${guest.firstname} ${guest.lastname}`,
+        "family_name": guest.lastname,
+        "password_hash": guest.password,
+    }}));
+    // console.log('=================>>>>>>>>>>>>>>>><dataGoogleSheetUsers', dataGoogleSheetUsers)
+  
     var createUserOptions = {
       method: 'POST',
-      url: 'https://dev-ljslmul5.eu.auth0.com/api/v2/users',
-      // url: 'https://dev-ljslmul5.eu.auth0.com/api/v2/jobs/users-imports',
+      url: 'https://dev-ljslmul5.eu.auth0.com/api/v2/jobs/users-imports',
       headers: {
         authorization: `Bearer ${token}`,
+        'Content-Type': 'multipart/form-data; boundary=AaB03x',
       },
       json: true,
-      data: {
-        name: `${guests[0].firstname.toString()} ${guests[0].lastname.toString()}`,
-        email: guests[0].email.toString(),
-        given_name: guests[0].firstname.toString(),
-        family_name: guests[0].lastname.toString(),
-        password: 'Loise2015#',
-        connection: 'Username-Password-Authentication',
-      },
+      data: `--AaB03x\r\nContent-Disposition: form-data; name="connection_id"\r\n\r\ncon_armfGjb5J3GJCj5G\r\n--AaB03x\r\nContent-Disposition: form-data; name="external_id"\r\n\r\ncloclo\r\n--AaB03x\r\nContent-Disposition: form-data; name="users"; filename="googleUsers.json"\r\nContent-Type: text/plain\r\n\r\n${dataGoogleSheetUsers}\r\n--AaB03x--`,
     };
     try {
-      
       //creation d'un range dans BDD wedding.sql
       const ranges = req.body;
-      console.log('ranges', ranges);
+      // console.log('ranges', ranges);
 
       ranges.map((oneRange) => {
-        console.log('rangeUseful', oneRange.range, oneRange.email);
-        Answer.create(
-          { google_sheet_range: oneRange.range,
-            sub: '',
-            firstname: '',
-            lastname: '',
-            present: false,
-            accompanied: false,
-            firstname_partner: '',
-            children_number: 0,
-            allergy: '',
-            email: oneRange.email, },
-        );
+        // console.log('rangeUseful', oneRange.range, oneRange.email);
+        Answer.create({
+          google_sheet_range: oneRange.range,
+          sub: '',
+          firstname: '',
+          lastname: '',
+          present: false,
+          accompanied: false,
+          firstname_partner: '',
+          children_number: 0,
+          allergy: '',
+          email: oneRange.email,
+        });
       });
 
       try {
         //creation d'un user dans la BDD de Auth0Provider
 
         const responseCreatedUser = await axios(createUserOptions);
-        
+
         //creation de la permission pour le user créée
-       const userId = responseCreatedUser.data.user_id;
-        console.log('responsecreated user', responseCreatedUser.data.user_id);
-        var createPermissionsUserOptions = {
-          method: 'POST',
-          url: `https://dev-ljslmul5.eu.auth0.com/api/v2/users/${userId}/permissions`,
-          headers: {
-            'content-type': 'application/json',
-            authorization: `Bearer ${token}`,
-            'cache-control': 'no-cache',
-          },
-          data: {
-            permissions: [
-              {
-                resource_server_identifier: 'https://api.annesophiegabriel.fr',
-                permission_name: `${permissions}`,
-              },
-            ],
-          },
-        };
-        try {
-          const givePermissionsUser = axios.request(
-            createPermissionsUserOptions,
-          );
-          console.log('givePermissionsUser', givePermissionsUser);
-        } catch (err) {
-          console.log(
-            'err',
-            err.response.data.statusCode,
-            err.response.data.message,
-            err.response.statusText,
-          );
-        }
+        //  const userId = responseCreatedUser.data.user_id;
+       console.log('responsecreated user', responseCreatedUser.data);
+        //   var createPermissionsUserOptions = {
+        //     method: 'POST',
+        //     url: `https://dev-ljslmul5.eu.auth0.com/api/v2/users/${userId}/permissions`,
+        //     headers: {
+        //       'content-type': 'application/json',
+        //       authorization: `Bearer ${token}`,
+        //       'cache-control': 'no-cache',
+        //     },
+        //     data: {
+        //       permissions: [
+        //         {
+        //           resource_server_identifier: 'https://api.annesophiegabriel.fr',
+        //           permission_name: `${permissions}`,
+        //         },
+        //       ],
+        //     },
+        //   };
+        //   try {
+        //     const givePermissionsUser = axios.request(
+        //       createPermissionsUserOptions,
+        //     );
+        //     console.log('givePermissionsUser', givePermissionsUser);
+        //   } catch (err) {
+        //     console.log(
+        //       'err',
+        //       err.response.data.statusCode,
+        //       err.response.data.message,
+        //       err.response.statusText,
+        //     );
+        //   }
       } catch (err) {
         console.log(
           'err',
@@ -202,11 +223,9 @@ const newUserController = {
         console.error(error);
       });
   },
-  
 };
 
 module.exports = newUserController;
-
 
 // function sleep(ms) {
 //   return new Promise((resolve) => {
