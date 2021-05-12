@@ -40,6 +40,8 @@ app.get('/permissions', jwtCheck, (req, res) => {
   });
 });
 
+
+
 app.get('/api/v2/users/:id', newUserController.getUserInfos);
 
 app.get('/api/infos', practicalInfosController.getPracticalInfos);

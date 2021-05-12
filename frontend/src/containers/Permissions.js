@@ -1,16 +1,18 @@
 import { connect } from 'react-redux';
 import Permissions from 'src/components/Permissions';
-import { fetchPermission } from 'src/actions/permissions';
+import { fetchPermission, getPermission } from 'src/actions/permissions';
 
 const mapStateToProps = (state) => ({
-  permissions: state.permissions.type,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   fetchPermission: (token) => {
     dispatch(fetchPermission(token));
   },
+  getPermission: () => {
+    dispatch(getPermission());
+  },
 
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Permissions);
+export default connect(null, mapDispatchToProps)(Permissions);

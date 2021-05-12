@@ -1,7 +1,7 @@
-import { SET_PERMISSIONS, SAVE_USER_INFOS } from 'src/actions/permissions';
+import { SET_PERMISSIONS, SAVE_USER_INFOS, SET_THE_PERMISSIONS } from 'src/actions/permissions';
 
 const initialState = {
-  type: [''],
+  type: '',
   userId: '',
   lastname: '',
   firstname: '',
@@ -13,8 +13,12 @@ const permissions = (state = initialState, action = {}) => {
     case SET_PERMISSIONS:
       return {
         ...state,
-        type: action.permissions,
         userId: action.userId,
+      };
+    case SET_THE_PERMISSIONS:
+      return {
+        ...state,
+        type: action.permission,
       };
     case SAVE_USER_INFOS:
       return {

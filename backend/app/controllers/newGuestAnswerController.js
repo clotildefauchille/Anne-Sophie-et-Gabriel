@@ -2,21 +2,6 @@
 const sequelize = require('../database.js');
 
 const Answer = require('../models/answer.js');
-// const axios = require('axios').default;
-// var getTokenOptions = {
-//   method: 'POST',
-//   url: 'https://dev-ljslmul5.eu.auth0.com/oauth/token',
-//   headers: { 'content-type': 'application/json' },
-//   data: {
-//     client_id: 'RfIYAohidWmz0w1yL4MCig3UmGgw8ltR',
-//     client_secret:
-//       'o9fBfZH6H67Ywhyeqiev_cLNQGiG7jf_FzgsLMyegNcVtv1jyC74l8onZd2vd-5a',
-//     audience: 'https://dev-ljslmul5.eu.auth0.com/api/v2/',
-//     grant_type: 'client_credentials',
-//     // scope: 'create:users',
-//   },
-//   json: true,
-// };
 
 const newGuestAnswerController = {
   newGuestAnswer: async (req, res) => {
@@ -136,4 +121,4 @@ const newGuestAnswerController = {
 
 module.exports = newGuestAnswerController;
 
-// [{ "id": 1, "sub": "google-oauth2|101666571097616652218", "firstname": "clotilde", "lastname": "fauchille", "present": true, "accompanied": true, "firstname_partner": "rodolphe", "children_number": 2, "allergy": "non" }]
+

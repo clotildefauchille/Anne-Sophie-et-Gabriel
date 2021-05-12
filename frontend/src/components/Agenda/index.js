@@ -1,7 +1,5 @@
 /* eslint-disable arrow-body-style */
-import React, { useState, useEffect } from 'react';
-import Header from 'src/components/Header';
-import Footer from 'src/components/Footer';
+import React from 'react';
 import img from 'src/assets/svg/agenda.svg';
 import separation from 'src/assets/svg/separation.svg';
 import star from 'src/assets/svg/star.svg';
@@ -13,9 +11,10 @@ import Cocktail from 'src/components/Cocktail';
 import Diner from 'src/components/Diner';
 import Brunch from 'src/components/Brunch';
 import './style.scss';
+// import permissions from '../../middlewares/permissions';
 
-const Agenda = ({ permissions }) => {
-  console.log('permissions', permissions[0]);
+const Agenda = ({ permission }) => {
+  console.log('permissions', permission);
 
   return (
     <div className="page">
@@ -24,19 +23,19 @@ const Agenda = ({ permissions }) => {
         <div className="agenda__container">
           <div className="agenda__container-multiple-event">
             <h3 className="agenda__day-title">Samedi 11</h3>
-            {permissions[0] === 'guest:cocktail' && (
+            {permission === 'guest:cocktail' && (
               <>
                 <Mairie />
                 <Eglise />
               </>
             )}
-            {permissions[0] === 'guest:diner' && (
+            {permission === 'guest:diner' && (
               <>
               <Mairie />
               <Eglise />
               </>
             )}
-            {permissions[0] === 'guest:brunch' && (
+            {permission === 'guest:brunch' && (
               <>
                 <Mairie />
                 <Eglise />
@@ -61,25 +60,25 @@ const Agenda = ({ permissions }) => {
           <div className="agenda__container-multiple-event">
             <h3 className="agenda__day-title">Samedi Soir</h3>
 
-            {permissions[0] === 'guest:cocktail' && (
+            {permission === 'guest:cocktail' && (
               <>
                 <Cocktail />
               </>
             )}
 
-            {permissions[0] === 'guest:diner' && (
+            {permission === 'guest:diner' && (
               <>
                 <Cocktail />
                 <Diner />
               </>
             )}
-            {permissions[0] === 'guest:brunch' && (
+            {permission === 'guest:brunch' && (
               <>
                 <Diner />
               </>
             )}
 
-            {permissions[0] === 'guest:brunch' && (
+            {permission === 'guest:brunch' && (
               <>
                 <h3 className="agenda__day-title">Dimanche 12</h3>
                 <Brunch />
@@ -93,7 +92,7 @@ const Agenda = ({ permissions }) => {
 };
 
 Agenda.propTypes = {
-  permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
+  permission: PropTypes.string.isRequired,
 };
 
 export default Agenda;

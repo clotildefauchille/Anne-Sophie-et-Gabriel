@@ -20,6 +20,9 @@ var getTokenOptions = {
   },
   json: true,
 };
+
+
+
 const newUserController = {
   bulkImportUser: async (req, res) => {
     const responseToken = await axios(getTokenOptions);
@@ -108,53 +111,28 @@ const newUserController = {
       //creation d'un range et d'une permission dans la table answers dans la BDD wedding.sql
       // TODO ne pas ecrire de reponse lors de l'update des user auth0
       const guests = req.body;
-      // const answerCreated = await Promise.all(
-      //   guests.map(async (guest) => {
-      //     const userPermission = await Permission.findAll({
-      //       where: { type: guest.permissions },
-      //     });
-      //     if (userPermission) {
-      //       await Answer.bulkCreate([
-      //         {
-      //           google_sheet_range: guest.range,
-      //           sub: '',
-      //           firstname: '',
-      //           lastname: '',
-      //           present: false,
-      //           accompanied: false,
-      //           firstname_partner: '',
-      //           children_number: 0,
-      //           allergy: '',
-      //           email: guest.email,
-      //           permission_id: userPermission.dataValues.id,
-      //         },
-      //       ]);
-      //     }
-      //   }),
-      // );
-      const answerCreated = guests.map((guest) => {
-        Permission.findAll({
-          where: { type: guest.permissions },
-        }).then((usersPermission) =>
-          Answer.bulkCreate([
-            {
-              google_sheet_range: guest.range,
-              sub: '',
-              firstname: '',
-              lastname: '',
-              present: false,
-              accompanied: false,
-              firstname_partner: '',
-              children_number: 0,
-              allergy: '',
-              email: guest.email,
-              permission_id: usersPermission.map((userPermission) => {
-                return userPermission.dataValues.id;
-              }),
-            },
-          ]),
-        );
-      });
+      
+      const answers = await Promise.all(guests.map(async (guest) => {
+        const permissions = await Permission.findAll({
+          where: { type: guest.permissions }
+        });
+        return {
+          google_sheet_range: guest.range,
+          sub: '',
+          firstname: guest.firstname,
+          lastname: guest.lastname,
+          present: false,
+          accompanied: false,
+          firstname_partner: '',
+          children_number: 0,
+          allergy: '',
+          email: guest.email,
+          permission_id: permissions.map(({dataValues: {id}}) => id)
+          
+        }
+      }))
+
+      const answerCreated = await Answer.bulkCreate(answers);
       console.log('answerCreated', answerCreated);
       try {
         //creation d'un user dans la BDD de Auth0Provider

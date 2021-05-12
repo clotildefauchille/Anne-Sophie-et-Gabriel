@@ -1,6 +1,11 @@
 import axios from 'axios';
 
-import { FETCH_PERMISSIONS, setPermissions } from 'src/actions/permissions';
+import {
+  FETCH_PERMISSIONS,
+  setPermissions,
+  GET_PERMISSIONS,
+  setThePermissions
+} from 'src/actions/permissions';
 
 const permissions = (store) => (next) => (action) => {
   switch (action.type) {
@@ -14,13 +19,20 @@ const permissions = (store) => (next) => (action) => {
           },
         })
         .then((response) => {
-          console.log("response.data.userId", response.data.userId)
+          console.log('response.data.userId', response.data.userId);
           store.dispatch(setPermissions(response.data.userId));
         });
 
       // store.dispatch(getPermissions(getPermissions.data.permissions));
       break;
-
+    case GET_PERMISSIONS:
+      const userId = store.getState().permissions
+      axios
+        .get(`http://localhost:3000/api/guestAnswer/${userId}`)
+        .then((response) => {
+          console.log('middleware getPermissions', response.data);
+          store.dispatch(setThePermissions(response.data));
+        });
     default:
       next(action);
   }
