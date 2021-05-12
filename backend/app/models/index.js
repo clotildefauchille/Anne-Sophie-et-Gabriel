@@ -1,17 +1,27 @@
 const Answer = require("./answer");
-const Range = require("./range");
+const Permission = require("./permission");
 
-// Range.belongsTo(Answer, {
-//     foreignKey: "range_id",
-//     as: "range_id",
-// })
+// Permission.belongsTo(Answer, {
+//     foreignKey: "permission_id",
+//     as: "permission",
+// });
 
-// Answer.belongsTo(Range, {
-//     foreignKey: "range_id",
-//     as: "range_id",
-// })
+// Answer.hasMany(Permission, {
+//     foreignKey: "permission_id",
+//     as: "permissions",
+// });
+
+Answer.belongsTo(Permission, {
+    foreignKey: "permission_id",
+    as: "permission",
+});
+
+Permission.hasMany(Answer, {
+    foreignKey: "permission_id",
+    as: "answers",
+});
 
 module.exports = {
-    Range,
+    Permission,
     Answer,
 };

@@ -1,17 +1,17 @@
 BEGIN;
 
-DROP TABLE IF EXISTS "range", "answer", "place";
+DROP TABLE IF EXISTS "answers", "permissions", "places";
 
 
--- CREATE TABLE "range" (
---     "id" SERIAL PRIMARY KEY,
---     "google_sheet_range" TEXT NOT NULL DEFAULT '',
---     "email" TEXT NOT NULL DEFAULT '',
---     "range_id" INTEGER NOT NULL REFERENCES "range"("id"),
---     "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
---     "updated_at" TIMESTAMPTZ);
 
-CREATE TABLE "answer" (
+CREATE TABLE "permissions" (
+    "id" SERIAL PRIMARY KEY,
+    "type" TEXT NOT NULL DEFAULT '',
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ
+);
+
+CREATE TABLE "answers" (
     "id" SERIAL PRIMARY KEY,
     "sub" TEXT NOT NULL DEFAULT '',
     "firstname" TEXT NOT NULL DEFAULT '',
@@ -23,12 +23,12 @@ CREATE TABLE "answer" (
     "firstname_partner" TEXT NOT NULL DEFAULT '',
     "children_number" INTEGER DEFAULT 0,
     "allergy" TEXT NOT NULL DEFAULT '',
+    "permission_id" INTEGER NOT NULL REFERENCES permissions("id"),
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMPTZ
 );
 
-
-CREATE TABLE "place" (
+CREATE TABLE "places" (
     "id" SERIAL PRIMARY KEY,
     "name" TEXT NOT NULL DEFAULT '',
     "street" TEXT NOT NULL DEFAULT '',
@@ -43,7 +43,7 @@ CREATE TABLE "place" (
     "updated_at" TIMESTAMPTZ
 );
 
-INSERT INTO "place" ("name", "street", "city", "image", "latitude", "longitude", "contact", "type", "google_map_link") 
+INSERT INTO "places" ("name", "street", "city", "image", "latitude", "longitude", "contact", "type", "google_map_link") 
 VALUES
 ('Abbaye des Prémontrés', '9 Rue Saint-Martin', '54700 Pont-à-Mousson', 'https://lh5.googleusercontent.com/p/AF1QipMiiHo0K7yYfHpVipLXx7RbfJzzIPzJ95LnQrId=w426-h240-k-no', 48.90801751045616, 6.055990925673508, '', 'wedding', 'https://goo.gl/maps/qDfQhdk6DhFuMH2d9'),
 ('Église Saint-Maximim de Thionville', '3 Place de l’Eglise', '57100 Thionville', 'https://lh5.googleusercontent.com/p/AF1QipPThqkctiywCJtxNGVPL6tb-JnYV-rHeG_kOuo9=w408-h282-k-no', 49.35687607852845,6.167122811463277,'', 'wedding', 'https://goo.gl/maps/B8sCZf3yKLEFzj8r8'),
@@ -56,5 +56,14 @@ VALUES
 ('le mercure', '2 Rue Georges Ditsch', '57100 Thionville', 'https://lh5.googleusercontent.com/proxy/86aqZtqbVRN2AGhuItSdgnvXg-1LbzS_n0EPQTWY5erfm_miKdbiHZw5WmgIrZ0p9lQImum6gofA2hNxrLGKu96eeVrVlV-bgeEBZPeM91aqr7UnLIQ3svOzEPugwRbM1q7hTEkahWq20fVscYN7pmF_JiRaYQ=w408-h306-k-no', 49.357267072493634, 6.167970597861821, '+33382518422', 'accomodation', 'https://g.page/mercurethionvillecentregare?share'),
 ('Le B&B', '7 Place de la Gare', '57100 Thionville',  'https://lh4.googleusercontent.com/proxy/orPLgUZS7RqkevAtft3Dp1f5ds4JEGwh_sckYJzhwy1CW8ph_WuE1e0XrcAE3OdE-1TztkPVtzxBIDO3bCHrQA_P6DdUZMeqVTaPI0CP2z3LIa2zzF6k7wuR42QgmzLE3Va_yUoqJN1EP_vqo2JMkRkAmlcL4Q8=w408-h306-k-no', 49.35610453226837, 6.169219515032501, '+33892233664', 'accomodation', 'https://g.page/b-b-hotel-thionville?share');
 
+INSERT INTO "permissions" ("type") 
+VALUES
+('guest:cocktail'), ('guest:diner'), ('guest:brunch');
+
+
+-- INSERT INTO "answers" ("sub", "firstname", "lastname", "google_sheet_range", "email", "present", "accompanied", "firstname_partner", "children_number", "allergy", "permission_id")
+-- VALUES
+-- ('123', 'clo', 'fauchille', 'guest!E2:I3', 'clo@gmail.com', 'true', 'true', 'rod', '2', 'non', 3),
+-- ('143', 'gab', 'fauchille', 'guest!E2:I3', 'gab@gmail.com', 'false', 'true', 'ann', '0', 'non', 2);
 
 COMMIT;

@@ -8,18 +8,20 @@ const Permissions = ({ children, fetchPermission }) => {
   const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
-    async function fetchToken() {
-      try {
-        const token = await getAccessTokenSilently();
-        fetchPermission(token);
-        console.log(token);
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    }
-    fetchToken();
+    fetchPermission();
+    setLoading(false);
+    // async function fetchToken() {
+    //   try {
+    //     const token = await getAccessTokenSilently();
+    //     fetchPermission(token);
+    //     console.log(token);
+    //   } catch (err) {
+    //     console.error(err);
+    //   } finally {
+    //     setLoading(false);
+    //   }
+    // }
+    // fetchToken();
   }, []);
   //permet d'attendre de recuperer toutes les infos de l'utilisateur et ses permissions avt de aire quoique ce soit ds l'app
   return loading ? <span>loading</span> : <div>{children}</div>;

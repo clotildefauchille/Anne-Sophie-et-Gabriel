@@ -15,10 +15,11 @@ Answer.init(
     firstname_partner: Sequelize.STRING,
     children_number: Sequelize.INTEGER,
     allergy: Sequelize.STRING,
+    permission_id: Sequelize.INTEGER,
   },
   {
     sequelize,
-    tableName: 'answer',
+    modelName: 'answer',
   },
 );
 

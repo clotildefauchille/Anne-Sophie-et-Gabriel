@@ -1,6 +1,7 @@
 const sequelize = require('../database.js');
 var request = require('request');
 const Answer = require('../models/answer.js');
+const Permission = require('../models/permission.js');
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
@@ -58,33 +59,40 @@ const newUserController = {
   createNewUser: async (req, res) => {
     // console.log("req.body", req.body);
     let guests = req.body;
-    const permissions = guests[0].permissions.toString();
+    // const permissions = guests[0].permissions.toString();
 
     // console.log('--------------->guests', guests);
     const responseToken = await axios(getTokenOptions);
     const token = responseToken.data.access_token;
     //on vire les guests avec email undefined
     guests = guests.filter((elem) => elem.email != null);
-    
+
     // console.log('============passwords', passwords);
     // Pour pouvoir map il faut utiliser Promise.All qui attend que toutes les promesses s'exécutent avt de return l'array
     guests = await Promise.all(
       guests.map(async (guest) => {
-        return {...guest, password: await bcrypt.hash(guest.password, saltRounds)};
+        return {
+          ...guest,
+          password: await bcrypt.hash(guest.password, saltRounds),
+        };
       }),
     );
-   
+
     console.log('============guests.length', guests.length);
-   
-    const dataGoogleSheetUsers = JSON.stringify(guests.map(guest => {
-      return { "email": guest.email, 
-        "given_name": guest.firstname,
-        "name": `${guest.firstname} ${guest.lastname}`,
-        "family_name": guest.lastname,
-        "password_hash": guest.password,
-    }}));
+
+    const dataGoogleSheetUsers = JSON.stringify(
+      guests.map((guest) => {
+        return {
+          email: guest.email,
+          given_name: guest.firstname,
+          name: `${guest.firstname} ${guest.lastname}`,
+          family_name: guest.lastname,
+          password_hash: guest.password,
+        };
+      }),
+    );
     // console.log('=================>>>>>>>>>>>>>>>><dataGoogleSheetUsers', dataGoogleSheetUsers)
-  
+    //bulk import dans auth0
     var createUserOptions = {
       method: 'POST',
       url: 'https://dev-ljslmul5.eu.auth0.com/api/v2/jobs/users-imports',
@@ -95,106 +103,77 @@ const newUserController = {
       json: true,
       data: `--AaB03x\r\nContent-Disposition: form-data; name="connection_id"\r\n\r\ncon_armfGjb5J3GJCj5G\r\n--AaB03x\r\nContent-Disposition: form-data; name="external_id"\r\n\r\ncloclo\r\n--AaB03x\r\nContent-Disposition: form-data; name="users"; filename="googleUsers.json"\r\nContent-Type: text/plain\r\n\r\n${dataGoogleSheetUsers}\r\n--AaB03x--`,
     };
+
     try {
-      //creation d'un range dans BDD wedding.sql
-      const ranges = req.body;
-      // console.log('ranges', ranges);
-
-      ranges.map((oneRange) => {
-        // console.log('rangeUseful', oneRange.range, oneRange.email);
-        Answer.create({
-          google_sheet_range: oneRange.range,
-          sub: '',
-          firstname: '',
-          lastname: '',
-          present: false,
-          accompanied: false,
-          firstname_partner: '',
-          children_number: 0,
-          allergy: '',
-          email: oneRange.email,
-        });
+      //creation d'un range et d'une permission dans la table answers dans la BDD wedding.sql
+      // TODO ne pas ecrire de reponse lors de l'update des user auth0
+      const guests = req.body;
+      // const answerCreated = await Promise.all(
+      //   guests.map(async (guest) => {
+      //     const userPermission = await Permission.findAll({
+      //       where: { type: guest.permissions },
+      //     });
+      //     if (userPermission) {
+      //       await Answer.bulkCreate([
+      //         {
+      //           google_sheet_range: guest.range,
+      //           sub: '',
+      //           firstname: '',
+      //           lastname: '',
+      //           present: false,
+      //           accompanied: false,
+      //           firstname_partner: '',
+      //           children_number: 0,
+      //           allergy: '',
+      //           email: guest.email,
+      //           permission_id: userPermission.dataValues.id,
+      //         },
+      //       ]);
+      //     }
+      //   }),
+      // );
+      const answerCreated = guests.map((guest) => {
+        Permission.findAll({
+          where: { type: guest.permissions },
+        }).then((usersPermission) =>
+          Answer.bulkCreate([
+            {
+              google_sheet_range: guest.range,
+              sub: '',
+              firstname: '',
+              lastname: '',
+              present: false,
+              accompanied: false,
+              firstname_partner: '',
+              children_number: 0,
+              allergy: '',
+              email: guest.email,
+              permission_id: usersPermission.map((userPermission) => {
+                return userPermission.dataValues.id;
+              }),
+            },
+          ]),
+        );
       });
-
+      console.log('answerCreated', answerCreated);
       try {
         //creation d'un user dans la BDD de Auth0Provider
 
         const responseCreatedUser = await axios(createUserOptions);
+        console.log('responsecreated user', responseCreatedUser.data);
 
-        //creation de la permission pour le user créée
-        //  const userId = responseCreatedUser.data.user_id;
-       console.log('responsecreated user', responseCreatedUser.data);
-        //   var createPermissionsUserOptions = {
-        //     method: 'POST',
-        //     url: `https://dev-ljslmul5.eu.auth0.com/api/v2/users/${userId}/permissions`,
-        //     headers: {
-        //       'content-type': 'application/json',
-        //       authorization: `Bearer ${token}`,
-        //       'cache-control': 'no-cache',
-        //     },
-        //     data: {
-        //       permissions: [
-        //         {
-        //           resource_server_identifier: 'https://api.annesophiegabriel.fr',
-        //           permission_name: `${permissions}`,
-        //         },
-        //       ],
-        //     },
-        //   };
-        //   try {
-        //     const givePermissionsUser = axios.request(
-        //       createPermissionsUserOptions,
-        //     );
-        //     console.log('givePermissionsUser', givePermissionsUser);
-        //   } catch (err) {
-        //     console.log(
-        //       'err',
-        //       err.response.data.statusCode,
-        //       err.response.data.message,
-        //       err.response.statusText,
-        //     );
-        //   }
       } catch (err) {
         console.log(
-          'err',
+          'err creating user auth0',
           err.response.data.statusCode,
           err.response.data.message,
           err.response.statusText,
         );
       }
-    } catch (err) {
-      console.log('err');
+    } catch (e) {
+      console.log('error on range creation', e);
     }
 
-    //   request(options, function (error, response, body) {
-    //     if (error) throw new Error(error);
-    //     console.log('body', body);
-    //     console.log('body.user_id', body.user_id);
-    //     if (body.statusCode === 409) {
-    //       console.log('already exist');
-    //       var options = {
-    //         method: 'PATCH',
-    //         url: `https://dev-ljslmul5.eu.auth0.com/PATCH/api/v2/users/${body.user_id}`,
-    //         headers: {
-    //           authorization: `Bearer ${body.access_token}`,
-    //         },
-    //         json: true,
-    //         body: {
-    //           email: guest.toString(),
-    //           password: 'marriageA&G',
-    //           connection: 'Username-Password-Authentication',
-    //         },
-    //       };
-    //       request(options, function (error, response, body) {
-    //         if (error) throw new Error(error);
-    //         console.log('body updated', body);
-    //       });
-    //     }
-    //   });
-
-    // } else {console.log('guest dejà existant')}
-    // }),
-    // );
     res.send('hello clotte');
   },
   getUserInfos: async (req, res) => {
