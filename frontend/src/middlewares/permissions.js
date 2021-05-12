@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 import {
-  FETCH_PERMISSIONS,
+  FETCH_USER_ID,
   setPermissions,
   GET_PERMISSIONS,
-  setThePermissions
+  setThePermissions,
 } from 'src/actions/permissions';
 
 const permissions = (store) => (next) => (action) => {
   switch (action.type) {
-    case FETCH_PERMISSIONS:
+    case FETCH_USER_ID:
       const { token } = action;
       // console.log('token', token);
       axios

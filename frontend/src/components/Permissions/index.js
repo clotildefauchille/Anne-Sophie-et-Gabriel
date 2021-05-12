@@ -2,18 +2,18 @@ import React, { useEffect, useState } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 import PropTypes from 'prop-types';
 
-const Permissions = ({ children, fetchPermission, getPermission }) => {
+const Permissions = ({ children, fetchUserId, getPermission }) => {
   const [loading, setLoading] = useState(true);
 
   const { getAccessTokenSilently } = useAuth0();
 
   useEffect(() => {
-    // fetchPermission();
+    // fetchUserId();
     // setLoading(false);
     async function fetchToken() {
       try {
         const token = await getAccessTokenSilently();
-        fetchPermission(token);
+        fetchUserId(token);
         getPermission();
         console.log(token);
       }
@@ -31,7 +31,7 @@ const Permissions = ({ children, fetchPermission, getPermission }) => {
 };
 
 Permissions.propTypes = {
-  fetchPermission: PropTypes.func.isRequired,
+  fetchUserId: PropTypes.func.isRequired,
   getPermission: PropTypes.func.isRequired,
   // permissions: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

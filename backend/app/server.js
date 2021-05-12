@@ -61,8 +61,6 @@ app.get('/api/allUserAnswer', newGuestAnswerController.getAllGuestAnswer);
 
 app.post('/api/users', newUserController.createNewUser);
 
-app.get('/api/bulk-import', newUserController.bulkImportUser);
-
 const start = () => {
   app.listen(PORT, () => {
     console.log('Running on localhost :' + PORT);

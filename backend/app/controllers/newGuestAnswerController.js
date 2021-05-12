@@ -84,21 +84,7 @@ const newGuestAnswerController = {
     // res.json (guestAnswer || {});
   },
   getAllGuestAnswer: async (req, res) => {
-    // const responseToken = await axios(getTokenOptions);
-    // const token = responseToken.data.access_token;
-    // const getRangeUserOptions = {
-    //   method: 'GET',
-    //   url: 'https://dev-ljslmul5.eu.auth0.com/api/v2/users',
-    //   headers: { authorization: `Bearer ${token}` },
-    // };
-
     try {
-      // const getRangesUsers = await axios.request(getRangeUserOptions);
-      // console.log('-------->getAllUsers', getRangesUsers.data);
-      // const allRangesUsers = getRangesUsers.data.map((user) =>
-      //    user.user_metadata );
-
-      // console.log('allRangesUsers', allRangesUsers);
       const allAnswers = await Answer.findAll();
       const allAnswerUsefull = allAnswers.map((allAnswer) => {
         return {
