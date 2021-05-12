@@ -36,7 +36,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.get('/permissions', jwtCheck, (req, res) => {
   res.send({
-    permissions: req.user.permissions,
     userId: req.user.sub,
   });
 });
