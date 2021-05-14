@@ -28,7 +28,7 @@ const getAccessToken = async () => {
 // Pour pouvoir map il faut utiliser Promise.All
 // ..qui attend que toutes les promesses s'exécutent
 // ..avt de return l'array
-const hashGuestsPasswords = async (guests, token) =>
+const hashGuestsPasswords = async (guests) =>
   await Promise.all(
     guests.map(async (guest) => ({
       ...guest,
@@ -50,7 +50,7 @@ const createAuth0Users = async (guests, token) => {
   );
   // console.log('=================>>>>>>>>>>>>>>>><dataGoogleSheetUsers', dataGoogleSheetUsers)
   //bulk import dans auth0
-  var createUserOptions = {
+  const createUserOptions = {
     method: 'POST',
     url: 'https://dev-ljslmul5.eu.auth0.com/api/v2/jobs/users-imports',
     headers: {
@@ -127,7 +127,6 @@ const newUserController = {
     var options = {
       method: 'GET',
       url: `https://dev-ljslmul5.eu.auth0.com/api/v2/users/${userId}`,
-      // params: { q: 'email:"jane@exampleco.com"', search_engine: 'v3' },
       headers: { authorization: `Bearer ${token}` },
     };
 

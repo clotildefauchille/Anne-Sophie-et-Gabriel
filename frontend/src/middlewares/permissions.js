@@ -6,14 +6,13 @@ import {
   GET_PERMISSION,
   setThePermissions,
   setUserEmail,
+  FETCH_USER_EMAIL,
 } from 'src/actions/permissions';
 
 const permissions = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_USER_ID:
-      // console.log('middleware fetchuserId');
       const { token } = action;
-      // console.log('token', token);
       axios
         .get('http://localhost:3000/userId', {
           headers: {
@@ -21,21 +20,16 @@ const permissions = (store) => (next) => (action) => {
           },
         })
         .then((response) => {
-          // console.log(
-          //   'response.data.userId middlware fetchuserId',
-          //   response.data.userId,
-          // );
           store.dispatch(setUserId(response.data.userId));
-          let userId = response.data.userId;
-          const getEmail = axios.get(
-            `http://localhost:3000/api/v2/users/${userId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            },
-          );
-          return getEmail;
+        });
+      break;
+    case FETCH_USER_EMAIL:
+      const { userId } = store.getState().permissions;
+      axios
+        .get(`http://localhost:3000/api/v2/users/${userId}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         })
         .then((response) => {
           // console.log('response', response);
@@ -43,8 +37,9 @@ const permissions = (store) => (next) => (action) => {
         });
       break;
     case GET_PERMISSION:
+      console.log('je veux getpermissions');
       const { email } = store.getState().permissions;
-// console.log ("email in getpermissions middleware", email);
+       console.log ("email in getpermissions middleware", email);
       axios
         .get(`http://localhost:3000/api/permission/${email}`)
         .then((response) => {
