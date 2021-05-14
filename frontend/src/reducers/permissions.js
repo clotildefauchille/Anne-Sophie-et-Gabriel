@@ -1,4 +1,9 @@
-import { SET_PERMISSIONS, SAVE_USER_INFOS, SET_THE_PERMISSIONS } from 'src/actions/permissions';
+import {
+  SET_USER_ID,
+  SAVE_USER_INFOS,
+  SET_THE_PERMISSIONS,
+  SET_USER_EMAIL,
+} from 'src/actions/permissions';
 
 const initialState = {
   type: '',
@@ -10,10 +15,16 @@ const initialState = {
 
 const permissions = (state = initialState, action = {}) => {
   switch (action.type) {
-    case SET_PERMISSIONS:
+    case SET_USER_ID:
+      // console.log('action.userId in reducer', action.userId);
       return {
         ...state,
         userId: action.userId,
+      };
+    case SET_USER_EMAIL:
+      return {
+        ...state,
+        email: action.userInfos.email,
       };
     case SET_THE_PERMISSIONS:
       return {

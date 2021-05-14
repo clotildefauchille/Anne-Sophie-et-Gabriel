@@ -18,23 +18,23 @@ const getAccessToken = async () => {
         'o9fBfZH6H67Ywhyeqiev_cLNQGiG7jf_FzgsLMyegNcVtv1jyC74l8onZd2vd-5a',
       audience: 'https://dev-ljslmul5.eu.auth0.com/api/v2/',
       grant_type: 'client_credentials',
-      // scope: 'create:users',
     },
     json: true,
   };
   const responseToken = await axios(getTokenOptions);
   return responseToken.data.access_token;
-}
+};
 
 // Pour pouvoir map il faut utiliser Promise.All
-// ..qui attend que toutes les promesses s'exécutent 
+// ..qui attend que toutes les promesses s'exécutent
 // ..avt de return l'array
-const hashGuestsPasswords = async (guests, token) => await Promise.all(
-  guests.map(async (guest) => ({
-    ...guest,
-    password: await bcrypt.hash(guest.password, saltRounds),
-  })),
-);
+const hashGuestsPasswords = async (guests, token) =>
+  await Promise.all(
+    guests.map(async (guest) => ({
+      ...guest,
+      password: await bcrypt.hash(guest.password, saltRounds),
+    })),
+  );
 
 const createAuth0Users = async (guests, token) => {
   const dataGoogleSheetUsers = JSON.stringify(
@@ -62,7 +62,7 @@ const createAuth0Users = async (guests, token) => {
   };
 
   return await axios(createUserOptions);
-}
+};
 
 const createAnswers = async (guests) => {
   const answers = await Promise.all(
@@ -86,7 +86,7 @@ const createAnswers = async (guests) => {
     }),
   );
   return await Answer.bulkCreate(answers);
-}
+};
 
 const newUserController = {
   createNewUser: async (req, res) => {
@@ -120,8 +120,9 @@ const newUserController = {
   getUserInfos: async (req, res) => {
     let userId = req.params.id;
     console.log('-------->userId', userId);
-    const responseToken = await axios(getTokenOptions);
-    const token = responseToken.data.access_token;
+    // const responseToken = await axios(getTokenOptions);
+    // const token = responseToken.data.access_token;
+    const token = await getAccessToken();
 
     var options = {
       method: 'GET',

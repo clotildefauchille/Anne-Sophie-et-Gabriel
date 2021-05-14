@@ -34,7 +34,7 @@ var jwtCheck = jwt({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/permissions', jwtCheck, (req, res) => {
+app.get('/userId', jwtCheck, (req, res) => {
   res.send({
     userId: req.user.sub,
   });
@@ -58,6 +58,8 @@ app.get('/api/guestAnswer/:id', newGuestAnswerController.getGuestAnswer);
 
 //to send to google api sheet
 app.get('/api/allUserAnswer', newGuestAnswerController.getAllGuestAnswer);
+
+app.get('/api/permission/:email', newGuestAnswerController.getGuestPermissionByEmail);
 
 app.post('/api/users', newUserController.createNewUser);
 

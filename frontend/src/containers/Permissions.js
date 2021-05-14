@@ -3,6 +3,7 @@ import Permissions from 'src/components/Permissions';
 import { fetchUserId, getPermission } from 'src/actions/permissions';
 
 const mapStateToProps = (state) => ({
+  email: state.permissions.email,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -12,7 +13,6 @@ const mapDispatchToProps = (dispatch) => ({
   getPermission: () => {
     dispatch(getPermission());
   },
-
 });
 
-export default connect(null, mapDispatchToProps)(Permissions);
+export default connect(mapStateToProps, mapDispatchToProps)(Permissions);

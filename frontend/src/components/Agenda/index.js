@@ -14,7 +14,7 @@ import './style.scss';
 // import permissions from '../../middlewares/permissions';
 
 const Agenda = ({ permission }) => {
-  console.log('permissions', permission);
+  // console.log('permissions', permission);
 
   return (
     <div className="page">

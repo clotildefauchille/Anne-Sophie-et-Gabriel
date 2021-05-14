@@ -2,6 +2,7 @@
 const sequelize = require('../database.js');
 
 const Answer = require('../models/answer.js');
+const Permission = require('../models/permission.js');
 
 const newGuestAnswerController = {
   newGuestAnswer: async (req, res) => {
@@ -16,31 +17,9 @@ const newGuestAnswerController = {
       allergy,
       email,
     } = req.body;
-    console.log('------->userId', userId);
+   
+    // console.log('------->userId', userId);
 
-    // const answer = await Answer.findOne({
-    //   where: {
-    //     sub: userId,
-    //   },
-    // });
-    console.log('------->userId', userId);
-
-    // console.log('----------->', userId)
-    // if (!answer) {
-    //   console.log('existe pas');
-    //   const newGuestResponse = await Answer.create({
-    //     sub: userId,
-    //     firstname: firstname,
-    //     lastname: lastname,
-    //     present: presence,
-    //     accompanied: accompanied,
-    //     firstname_partner: firstnamePartner,
-    //     children_number: childrenNumber,
-    //     allergy: allergy,
-    //     email: email,
-    //   });
-    //   console.log('newGuestResponse', newGuestResponse);
-    // } else {
     console.log('existe deja');
    
       const updateGuestResponse = await Answer.update(
@@ -82,6 +61,19 @@ const newGuestAnswerController = {
     // res.send('hello getanswer')
 
     // res.json (guestAnswer || {});
+  },
+  getGuestPermissionByEmail: async (req, res) => {
+const {email} = req.params;
+console.log('email', email);
+    const responsePermissionId = await Answer.findOne({
+      where: {
+        email: email,
+      }
+    });
+    console.log('permission', responsePermissionId.dataValues.permission_id);
+    const permissionId = responsePermissionId.dataValues.permission_id;
+    const responsePermission = await Permission.findByPk(permissionId);
+    res.send (responsePermission.dataValues.type);
   },
   getAllGuestAnswer: async (req, res) => {
     try {

@@ -11,7 +11,7 @@ import { saveUserInfos } from 'src/actions/permissions';
 
 const rsvp = (store) => (next) => (action) => {
   const { userId, email } = store.getState().permissions;
-console.log('email', email);
+// console.log('email', email);
   switch (action.type) {
     case ON_SUBMIT_RSVP:
       // console.log('hello middleware')
