@@ -24,7 +24,19 @@ const getAccessToken = async () => {
   const responseToken = await axios(getTokenOptions);
   return responseToken.data.access_token;
 };
-
+const getAuth0UserInfos = async (userId, token) => {
+  const options = {
+    method: 'GET',
+    url: `https://dev-ljslmul5.eu.auth0.com/api/v2/users/${userId}`,
+    headers: { authorization: `Bearer ${token}` },
+  };
+  const responseGetUserInfos = await axios(options);
+  return {
+    lastname: responseGetUserInfos.data.family_name,
+    firstname: responseGetUserInfos.data.given_name,
+    email: responseGetUserInfos.data.email,
+  };
+};
 // Pour pouvoir map il faut utiliser Promise.All
 // ..qui attend que toutes les promesses s'exécutent
 // ..avt de return l'array
@@ -120,28 +132,13 @@ const newUserController = {
   getUserInfos: async (req, res) => {
     let userId = req.params.id;
     console.log('-------->userId', userId);
-    // const responseToken = await axios(getTokenOptions);
-    // const token = responseToken.data.access_token;
     const token = await getAccessToken();
-
-    var options = {
-      method: 'GET',
-      url: `https://dev-ljslmul5.eu.auth0.com/api/v2/users/${userId}`,
-      headers: { authorization: `Bearer ${token}` },
-    };
-
-    axios
-      .request(options)
-      .then(function (response) {
-        res.send({
-          lastname: response.data.family_name,
-          firstname: response.data.given_name,
-          email: response.data.email,
-        });
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    try {
+      const reponseInfos = await getAuth0UserInfos(userId, token);
+      res.send(reponseInfos);
+    } catch (e) {
+      console.log('erreur de getUsersInfos', e);
+    }
   },
 };
 
