@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import img from 'src/assets/img/rsvp.jpg';
 import './style.scss';
 import PropTypes from 'prop-types';
@@ -15,17 +15,19 @@ const Rsvp = ({
   allergy,
   message,
   getUserInfos,
+  presence,
 }) => {
   const { user } = useAuth0();
   // console.log('user', user);
   useEffect(() => {
     fetchLastAnswer();
-    getUserInfos();
+    // getUserInfos();
   }, []);
-
+  // si j'ai pas toutes mes info rsvp => je retourne <div>loading</div>
+  // if (allergy || )
   const handleOnChangePresence = (e) => {
-    // console.log('handleOnChange', e.target.value);
-    onChangePresence(e.target.value);
+    console.log('handleOnChange', e.target.checked);
+    onChangePresence(e.target.checked); 
   };
   const handleOnChangeName = (e) => {
     // console.log('handleOnChangeName', e.target.value, e.target.name);
@@ -54,13 +56,11 @@ const Rsvp = ({
                 Oui
                 <input
                   className="checkbox"
-                  type="radio"
+                  type="checkbox"
                   id="presence"
                   name="presence"
-                  value="true"
+                  checked={presence}
                   onChange={handleOnChangePresence}
-                  // defaultValue="false"
-                  defaultChecked
                 />
                 <span className="checkmark" />
               </label>
@@ -68,63 +68,15 @@ const Rsvp = ({
                 Non
                 <input
                   className="checkbox"
-                  type="radio"
+                  type="checkbox"
                   id="presence"
                   name="presence"
-                  value="false"
+                  checked={presence === false}
                   onChange={handleOnChangePresence}
-                  // defaultValue="true"
                 />
                 <span className="checkmark" />
               </label>
-              {/* <input
-          className="rsvp__radio-button"
-          type="radio"
-          id="oui"
-          name="presence"
-          value="oui"
-          checked
-        />
-        <label className="rsvp__label" for="oui">
-          Oui
-        </label>
-        <input
-          className="rsvp__radio-button"
-          type="radio"
-          id="non"
-          name="presence"
-          value="non"
-        />
-        <label className="rsvp__label" for="non">
-          Non
-        </label> */}
             </div>
-
-            {/* <div className="rsvp__name-container">
-              <input
-                className="rsvp__firstname"
-                type="text"
-                id="firstname"
-                name="firstname"
-                required
-                value={firstname}
-                placeholder="Prénom"
-                onChange={handleOnChangeName}
-                // defaultValue={firstname}
-              />
-              <input
-                className="rsvp__lastname"
-                type="text"
-                id="lastname"
-                name="lastname"
-                value={lastname}
-                required
-                placeholder="Nom"
-                onChange={handleOnChangeName}
-                // defaultValue="true"
-              />
-            </div> */}
-
             <div className="rsvp__container-presence">
               <p>Si oui, je viens avec mon +1: </p>
 
@@ -167,7 +119,6 @@ const Rsvp = ({
                 id="firstnamePartner"
                 name="firstnamePartner"
                 value={firstnamePartner}
-                required
                 placeholder="Prénom"
                 onChange={handleOnChangeName}
                 // defaultValue="true"
@@ -185,7 +136,7 @@ const Rsvp = ({
                   min="0"
                   max="10"
                   placeholder="0"
-                  value={childrenNumber}
+                  value={`${childrenNumber}`}
                   onChange={handleOnChangeName}
                 />{' '}
                 enfant(s)
@@ -218,11 +169,12 @@ Rsvp.propTypes = {
   onChangeName: PropTypes.func.isRequired,
   onChangeAccompanied: PropTypes.func.isRequired,
   firstnamePartner: PropTypes.string.isRequired,
-  childrenNumber: PropTypes.string.isRequired,
+  childrenNumber: PropTypes.number.isRequired,
   onSubmitRsvp: PropTypes.func.isRequired,
   fetchLastAnswer: PropTypes.func.isRequired,
   message: PropTypes.string.isRequired,
   allergy: PropTypes.string.isRequired,
   getUserInfos: PropTypes.func.isRequired,
+  presence: PropTypes.bool.isRequired,
 };
 export default Rsvp;

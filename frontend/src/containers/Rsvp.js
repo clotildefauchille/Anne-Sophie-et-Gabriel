@@ -10,6 +10,7 @@ import {
 } from 'src/actions/rsvp';
 
 const mapStateToProps = (state) => ({
+  presence: state.rsvp.presence,
   firstnamePartner: state.rsvp.firstnamePartner,
   childrenNumber: state.rsvp.childrenNumber,
   message: state.rsvp.message,
@@ -18,6 +19,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onChangePresence: (value) => {
+
     dispatch(changeInputValuePresence(value));
   },
   onChangeName: (value, name) => {

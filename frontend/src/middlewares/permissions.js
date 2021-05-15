@@ -37,9 +37,8 @@ const permissions = (store) => (next) => (action) => {
         });
       break;
     case GET_PERMISSION:
-      console.log('je veux getpermissions');
       const { email } = store.getState().permissions;
-       console.log ("email in getpermissions middleware", email);
+      //  console.log ("email in getpermissions middleware", email);
       axios
         .get(`http://localhost:3000/api/permission/${email}`)
         .then((response) => {

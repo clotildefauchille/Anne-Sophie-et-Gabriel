@@ -12,7 +12,7 @@ const Permissions = ({
 }) => {
   // console.log('userId in components prommesse', userId);
   const { getAccessTokenSilently } = useAuth0();
-  console.log(email);
+  // console.log(email);
   useEffect(() => {
     async function fetchToken() {
       try {

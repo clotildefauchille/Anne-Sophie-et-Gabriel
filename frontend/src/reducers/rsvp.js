@@ -7,8 +7,8 @@ import {
 } from 'src/actions/rsvp';
 
 const initialState = {
-  presence: 'true',
-  accompanied: 'true',
+  presence: true,
+  accompanied: true,
   firstnamePartner: '',
   childrenNumber: 0,
   message: '',

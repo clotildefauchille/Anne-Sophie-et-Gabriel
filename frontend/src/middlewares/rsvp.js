@@ -49,11 +49,11 @@ const rsvp = (store) => (next) => (action) => {
       break;
     case FETCH_LAST_ANSWER:
       // console.log('fetchlastanswer middleware');
-      // const { userId } = store.getState().permissions;
+      const { email } = store.getState().permissions;
       axios
-        .get(`http://localhost:3000/api/guestAnswer/${userId}`)
+        .get(`http://localhost:3000/api/guestAnswer/${email}`)
         .then((response) => {
-          // console.log('response.data', response.data);
+          console.log('response.data middleware', response.data);
           store.dispatch(saveGuestAnswers(response.data));
         });
       break;
