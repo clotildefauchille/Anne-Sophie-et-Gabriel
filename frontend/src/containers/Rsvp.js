@@ -11,6 +11,7 @@ import {
 
 const mapStateToProps = (state) => ({
   presence: state.rsvp.presence,
+  accompanied: state.rsvp.accompanied,
   firstnamePartner: state.rsvp.firstnamePartner,
   childrenNumber: state.rsvp.childrenNumber,
   message: state.rsvp.message,

@@ -84,6 +84,12 @@
   &__name-container{
     padding-bottom: 2rem;
   }
+  &__firstname {
+    visibility: hidden;
+    &.show-firstname {
+      visibility: visible;
+    } 
+  }
   &__firstname, &__lastname, &__child {
     border:none;
     padding: 1rem;
@@ -103,13 +109,17 @@
   &__submit-btn{
     border: none;
     padding: 0.6rem;
-  background-color: v.$secondaryColor;
-  color: white;
-  border-radius: 0.3rem;
-  &:hover{
-  background-color: #ccc;
-  color: white;
+    background-color: v.$secondaryColor;
+    color: white;
+    border-radius: 0.3rem;
+    &:hover{
+    background-color: #ccc;
+    color: white;
   }
+    &:disabled{
+    background-color: #ccc;
+    color: white;
+    }
   }
 }
 

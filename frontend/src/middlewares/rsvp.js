@@ -10,7 +10,7 @@ import {
 import { saveUserInfos } from 'src/actions/permissions';
 
 const rsvp = (store) => (next) => (action) => {
-  const { userId, email } = store.getState().permissions;
+  
 // console.log('email', email);
   switch (action.type) {
     case ON_SUBMIT_RSVP:
@@ -23,6 +23,7 @@ const rsvp = (store) => (next) => (action) => {
         allergy,
       } = store.getState().rsvp;
       // console.log("userId, presence", userId, presence);
+      let { userId, email } = store.getState().permissions;
 
       axios
         .post(
@@ -49,9 +50,9 @@ const rsvp = (store) => (next) => (action) => {
       break;
     case FETCH_LAST_ANSWER:
       // console.log('fetchlastanswer middleware');
-      const { email } = store.getState().permissions;
+      let { email: emailLastAnswer } = store.getState().permissions;
       axios
-        .get(`http://localhost:3000/api/guestAnswer/${email}`)
+        .get(`http://localhost:3000/api/guestAnswer/${emailLastAnswer}`)
         .then((response) => {
           console.log('response.data middleware', response.data);
           store.dispatch(saveGuestAnswers(response.data));

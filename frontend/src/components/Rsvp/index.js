@@ -14,10 +14,12 @@ const Rsvp = ({
   fetchLastAnswer,
   allergy,
   message,
-  getUserInfos,
+  accompanied,
   presence,
 }) => {
   const { user } = useAuth0();
+  const firstNameVisibility = accompanied ? 'show-firstname' : '';
+  const buttonIsDisabled = accompanied && !firstnamePartner;
   // console.log('user', user);
   useEffect(() => {
     fetchLastAnswer();
@@ -40,7 +42,10 @@ const Rsvp = ({
     onChangeName(e.target.value, e.target.name);
   };
   const handleOnChangeAccompanied = (e) => {
-    onChangeAccompanied(e.target.value);
+    onChangeAccompanied(e.target.checked);
+  };
+  const handleOnChangeNotAccompanied = (e) => {
+    onChangeAccompanied(e.target.checked ? false : true);
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -90,13 +95,10 @@ const Rsvp = ({
                 Oui
                 <input
                   className="checkbox"
-                  type="radio"
-                  id="plusOne"
+                  type="checkbox"
                   name="plusOne"
-                  value="true"
-                  defaultChecked
+                  checked={accompanied}
                   onChange={handleOnChangeAccompanied}
-                // defaultValue="true"
                 />
                 <span className="checkmark"></span>
               </label>
@@ -104,12 +106,10 @@ const Rsvp = ({
                 Non
                 <input
                   className="checkbox"
-                  type="radio"
-                  id="plusOne"
+                  type="checkbox"
                   name="plusOne"
-                  value="false"
-                  onChange={handleOnChangeAccompanied}
-                // defaultValue="true"
+                  checked={accompanied === false}
+                  onChange={handleOnChangeNotAccompanied}
                 />
                 <span className="checkmark" />
               </label>
@@ -120,7 +120,7 @@ const Rsvp = ({
             </div>
             <div className="rsvp__name-container">
               <input
-                className="rsvp__firstname"
+                className={`rsvp__firstname ${firstNameVisibility}`}
                 type="text"
                 id="firstnamePartner"
                 name="firstnamePartner"
@@ -159,7 +159,7 @@ const Rsvp = ({
                 />{' '}
               </p>
             </div>
-            <button type="submit" className="rsvp__submit-btn">
+            <button type="submit" className="rsvp__submit-btn" disabled={buttonIsDisabled}>
               J'envoie ma réponse
             </button>
           </div>
@@ -180,7 +180,7 @@ Rsvp.propTypes = {
   fetchLastAnswer: PropTypes.func.isRequired,
   message: PropTypes.string.isRequired,
   allergy: PropTypes.string.isRequired,
-  getUserInfos: PropTypes.func.isRequired,
   presence: PropTypes.bool.isRequired,
+  accompanied : PropTypes.bool.isRequired,
 };
 export default Rsvp;

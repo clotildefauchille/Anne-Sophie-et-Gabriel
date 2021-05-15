@@ -43,6 +43,7 @@ const rsvp = (state = initialState, action = {}) => {
         lastname: action.data.lastname,
         firstnamePartner: action.data.firstname_partner,
         childrenNumber: action.data.children_number,
+        allergy: action.data.allergy,
       };
     case SEND_MESSAGE:
       return {
