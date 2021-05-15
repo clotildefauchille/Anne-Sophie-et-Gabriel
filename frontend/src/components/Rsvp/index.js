@@ -27,8 +27,14 @@ const Rsvp = ({
   // if (allergy || )
   const handleOnChangePresence = (e) => {
     console.log('handleOnChange', e.target.checked);
-    onChangePresence(e.target.checked); 
+    onChangePresence(e.target.checked);
   };
+
+  const handleOnCheckNotPresent = (e) => {
+    console.log('handleOnCheckNotPresent: e.target.checked?', e.target.checked);
+    onChangePresence(e.target.checked ? false : true);
+  };
+
   const handleOnChangeName = (e) => {
     // console.log('handleOnChangeName', e.target.value, e.target.name);
     onChangeName(e.target.value, e.target.name);
@@ -57,22 +63,22 @@ const Rsvp = ({
                 <input
                   className="checkbox"
                   type="checkbox"
-                  id="presence"
-                  name="presence"
+                  id="oui"
+                  name="oui"
                   checked={presence}
                   onChange={handleOnChangePresence}
                 />
                 <span className="checkmark" />
               </label>
-              <label className="container" htmlFor="Non">
+              <label className="container" htmlFor="non">
                 Non
                 <input
                   className="checkbox"
                   type="checkbox"
-                  id="presence"
-                  name="presence"
+                  id="non"
+                  name="non"
                   checked={presence === false}
-                  onChange={handleOnChangePresence}
+                  onChange={handleOnCheckNotPresent}
                 />
                 <span className="checkmark" />
               </label>
@@ -90,7 +96,7 @@ const Rsvp = ({
                   value="true"
                   defaultChecked
                   onChange={handleOnChangeAccompanied}
-                  // defaultValue="true"
+                // defaultValue="true"
                 />
                 <span className="checkmark"></span>
               </label>
@@ -103,7 +109,7 @@ const Rsvp = ({
                   name="plusOne"
                   value="false"
                   onChange={handleOnChangeAccompanied}
-                  // defaultValue="true"
+                // defaultValue="true"
                 />
                 <span className="checkmark" />
               </label>
@@ -121,7 +127,7 @@ const Rsvp = ({
                 value={firstnamePartner}
                 placeholder="Prénom"
                 onChange={handleOnChangeName}
-                // defaultValue="true"
+              // defaultValue="true"
               />
             </div>
 

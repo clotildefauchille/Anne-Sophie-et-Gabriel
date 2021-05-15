@@ -19,7 +19,6 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onChangePresence: (value) => {
-
     dispatch(changeInputValuePresence(value));
   },
   onChangeName: (value, name) => {
