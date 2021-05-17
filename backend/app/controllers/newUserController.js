@@ -1,5 +1,6 @@
 const sequelize = require('../database.js');
 var request = require('request');
+// const { Events } = require('../models');
 const Answer = require('../models/answer.js');
 const Permission = require('../models/permission.js');
 const bcrypt = require('bcrypt');
@@ -97,7 +98,7 @@ const createAnswers = async (guests) => {
       };
     }),
   );
-  return await Answer.bulkCreate(answers);
+  return await Answer.bulkCreate(answers, {ignoreDuplicates: true });
 };
 
 const newUserController = {
@@ -113,6 +114,7 @@ const newUserController = {
       //creation d'un range et d'une permission dans la table answers dans la BDD wedding.sql
       // TODO ne pas ecrire de reponse lors de l'update des user auth0
       const answersCreated = await createAnswers(guests);
+      
       try {
         //creation d'un user dans la BDD de Auth0Provider
         const authUserCreated = await createAuth0Users(guests, token);

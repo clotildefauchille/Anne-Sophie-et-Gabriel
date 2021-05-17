@@ -5,6 +5,8 @@ var cors = require('cors');
 const newGuestAnswerController = require('./controllers/newGuestAnswerController');
 const practicalInfosController = require('./controllers/practicalInfosController');
 const newUserController = require('./controllers/newUserController');
+const eventsController = require('./controllers/eventsController');
+
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
 var request = require('request');
@@ -52,7 +54,7 @@ app.get('/authorized', function (req, res) {
 
 app.post('/api/userAnswer', newGuestAnswerController.newGuestAnswer);
 
-app.get('/api/guestAnswer/:id', newGuestAnswerController.getGuestAnswer);
+app.get('/api/guestAnswer/:email', newGuestAnswerController.getGuestAnswer);
 
 //to send to google api sheet
 app.get('/api/allUserAnswer', newGuestAnswerController.getAllGuestAnswer);
@@ -60,6 +62,8 @@ app.get('/api/allUserAnswer', newGuestAnswerController.getAllGuestAnswer);
 app.get('/api/permission/:email', newGuestAnswerController.getGuestPermissionByEmail);
 
 app.post('/api/users', newUserController.createNewUser);
+
+app.get('/api/events', eventsController.getEventsInfos);
 
 const start = () => {
   app.listen(PORT, () => {

@@ -1,23 +1,23 @@
-const Sequelize = require("sequelize");
+const { DataTypes, Model } = require("sequelize");
 const sequelize = require('../database');
 
-class Place extends Sequelize.Model { }
+class Place extends Model {}
 
 Place.init(
     {
-        name: Sequelize.STRING,
-        street: Sequelize.STRING,
-        city: Sequelize.STRING,
-        image: Sequelize.STRING,
-        latitude: Sequelize.DOUBLE,
-        longitude: Sequelize.DOUBLE,
-        contact: Sequelize.STRING,
-        type: Sequelize.STRING,
-        google_map_link: Sequelize.STRING,
+        name: DataTypes.STRING,
+        street: DataTypes.STRING,
+        city: DataTypes.STRING,
+        image: DataTypes.STRING,
+        latitude: DataTypes.DOUBLE,
+        longitude: DataTypes.DOUBLE,
+        contact: DataTypes.STRING,
+        type: DataTypes.STRING,
+        google_map_link: DataTypes.STRING,
     },
     {
         sequelize,
-        tableName: 'place',
+        tableName: 'places',
     },
 );
 

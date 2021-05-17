@@ -10,7 +10,7 @@ Permission.init(
     },
     {
         sequelize,
-        modelName: 'permission',
+        tableName: 'permissions',
     },
 );
 

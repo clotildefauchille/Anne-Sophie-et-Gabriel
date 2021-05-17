@@ -1,8 +1,8 @@
 // const dataMapper= require('../dataMapper.js')
 const sequelize = require('../database.js');
-
-const Answer = require('../models/answer.js');
-const Permission = require('../models/permission.js');
+// const { Events } = require('../models');
+const {Answer} = require('../models');
+const {Permission} = require('../models');
 
 const newGuestAnswerController = {
   newGuestAnswer: async (req, res) => {
@@ -21,37 +21,40 @@ const newGuestAnswerController = {
     // console.log('------->userId', userId);
 
     console.log('existe deja');
-
-    const updateGuestResponse = await Answer.update(
-      {
-        sub: userId,
-        firstname: firstname,
-        lastname: lastname,
-        present: presence,
-        accompanied: accompanied,
-        firstname_partner: firstnamePartner,
-        children_number: childrenNumber,
-        allergy: allergy,
-        email: email,
-      },
-      {
-        where: {
+    try {
+      const updateGuestResponse = await Answer.update(
+        {
+          sub: userId,
+          firstname: firstname,
+          lastname: lastname,
+          present: presence,
+          accompanied: accompanied,
+          firstname_partner: firstnamePartner,
+          children_number: childrenNumber,
+          allergy: allergy,
           email: email,
         },
-      },
-    );
-    // console.log('response already gave');
-    console.log('updateGuestResponse', updateGuestResponse);
-    // }
+        {
+          where: {
+            email: email,
+          },
+        },
+      );
+      // console.log('response already gave');
+      console.log('updateGuestResponse', updateGuestResponse);
+      // }
 
-    res.send('hello');
+      res.send('hello');
+    } catch (e) {
+      console.log("erreur dans l'update de la reponse utilisateur", e);
+    }
   },
   getGuestAnswer: async (req, res) => {
-    const userId = req.params.id;
+    const { email } = req.params;
 
     const guestAnswer = await Answer.findOne({
       where: {
-        sub: userId,
+        email,
       },
     });
     res.json(guestAnswer ? guestAnswer : {});
@@ -69,15 +72,11 @@ const newGuestAnswerController = {
         where: {
           email: email,
         },
+        include: ['permission']
       });
-      // console.log('permission', responsePermissionId.dataValues.permission_id);
-      const permissionId = responsePermissionId.dataValues.permission_id;
-      try {
-        const responsePermission = await Permission.findByPk(permissionId);
-        res.send(responsePermission.dataValues.type);
-      } catch (e) {
-        console.log('erreur', e);
-      }
+      //  console.log('permission', responsePermissionId.dataValues.permission.dataValues.type);
+      const permissionId = responsePermissionId.dataValues.permission.dataValues.type;
+      res.send(permissionId);
     } catch (e) {
       console.log('erreur', e);
     }

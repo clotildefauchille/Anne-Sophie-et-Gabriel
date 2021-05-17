@@ -19,7 +19,7 @@ Answer.init(
   },
   {
     sequelize,
-    modelName: 'answer',
+    tableName: 'answers',
   },
 );
 

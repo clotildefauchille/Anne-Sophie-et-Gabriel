@@ -1,16 +1,18 @@
 const Answer = require("./answer");
 const Permission = require("./permission");
+const Events = require("./events");
+const Place = require("./place");
 
-// Permission.belongsTo(Answer, {
-//     foreignKey: "permission_id",
-//     as: "permission",
-// });
+Events.belongsTo(Place, {
+    foreignKey: "places_id",
+    as: "place",
+})
 
-// Answer.hasMany(Permission, {
-//     foreignKey: "permission_id",
-//     as: "permissions",
-// });
-
+Place.hasMany(Events, {
+    foreignKey: "places_id",
+    as: "events",
+})
+ 
 Answer.belongsTo(Permission, {
     foreignKey: "permission_id",
     as: "permission",
@@ -24,4 +26,6 @@ Permission.hasMany(Answer, {
 module.exports = {
     Permission,
     Answer,
+    Events,
+    Place,
 };
