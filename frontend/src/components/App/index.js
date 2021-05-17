@@ -1,15 +1,11 @@
 // == Import npm
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 // == Import
-import Wait from 'src/components/Wait';
 import Agenda from 'src/containers/Agenda';
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
-// import LoginButton from 'src/components/LoginButton';
-// import LogoutButton from 'src/components/LogoutButton';
-// import Profile from 'src/components/Profile';
 import Rsvp from 'src/containers/Rsvp';
 import Map from 'src/containers/Map';
 import Questions from 'src/components/Questions';
