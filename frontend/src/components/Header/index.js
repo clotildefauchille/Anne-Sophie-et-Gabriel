@@ -16,8 +16,8 @@ import LogoutButton from 'src/components/LogoutButton';
 const Header = () => {
   return (
     <div className="header">
-      <div className="header__navbar">
-        <div className="header__navbar-element">
+      {/* <div className="header__navbar"> */}
+        <div className="header__navbar">
           <NavLink to="/" exact activeClassName="header__selected">
             <img className="header__icon" alt="agenda" src={agendaNav} />
             <img className="header__highlight" src={activeMenu} />
@@ -45,7 +45,7 @@ const Header = () => {
         </div>
         <h1 className="header__title">Anne-Sophie & Gabriel</h1>
         <LogoutButton />
-      </div>
+      {/* </div> */}
 
       {/* <h2>Bonjour {user.name}!</h2> */}
     </div>
