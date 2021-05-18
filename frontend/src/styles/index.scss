@@ -1,12 +1,25 @@
 @use 'reset';
 @use 'vars' as v;
 
-.app {
-  font-family: 'Roboto', sans-serif;
-  background-color: v.$primaryColor;
-  line-height: 24px;
-}
+// html {
+//   height: 100%;
+//   margin: 0; 
+//   padding: 0;
+// }
 
+body {
+  font-family: 'Roboto', sans-serif;
+  min-height: 100vh;
+  line-height: 24px;
+  // display : table;
+	width: 100%;
+  // position: relative;
+  // display: flex;
+  // flex-direction: column;
+  background-color: v.$primaryColor;
+  box-sizing: border-box;
+  // padding-bottom: 5rem;
+}
 
 h1, h2, h3 {
   font-family: v.$fontHeading;

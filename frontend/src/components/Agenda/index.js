@@ -16,7 +16,9 @@ const Agenda = ({ permission, events, fetchEventsInfos }) => {
   return (
     <div className="page">
       <div className="agenda">
-        <h2 className="agenda__title">Agenda</h2>
+        <div className="agenda__img--title">
+          <h2 className="agenda__title">Agenda</h2>
+        </div>
         <div className="agenda__container">
           <div className="agenda__container-multiple-event">
             <h3 className="agenda__day-title">Samedi 11</h3>
@@ -33,13 +35,16 @@ const Agenda = ({ permission, events, fetchEventsInfos }) => {
                 <Event {...events[1]} />
               </>
             )}
-            {permission === 'guest:brunch' && events[0] && events[1] && events[2] && (
-              <>
-                <Event {...events[0]} />
-                <Event {...events[1]} />
-                <Event {...events[2]} />
-              </>
-            )}
+            {permission === 'guest:brunch' &&
+              events[0] &&
+              events[1] &&
+              events[2] && (
+                <>
+                  <Event {...events[0]} />
+                  <Event {...events[1]} />
+                  <Event {...events[2]} />
+                </>
+              )}
           </div>
 
           <div className="agenda__container-img">

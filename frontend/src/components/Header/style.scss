@@ -7,8 +7,9 @@
     flex-direction: row;
     justify-content: space-between;
     padding-top: 1.5rem;
-   box-shadow: rgba(0, 0, 0, 0.03) 0px 3px 5px;
-    width:100%
+    box-shadow: rgba(0, 0, 0, 0.03) 0px 3px 5px;
+    width:100%;
+    padding-bottom: 0.6rem;
     }
     &__navbar-element {
     display: flex;
@@ -40,17 +41,15 @@
     &:hover{
       filter: v.$filter;
     }
-  
   }
   
   &__title {
-  font-size: 3.2rem;
-  margin-top:-1.5rem;
+  font-size: 3rem;
+  // margin-top:-1.5rem;
   line-height:3rem;
   text-align: center;
   // padding-right: 3rem;
 }
-
 }
 
 .dropdown {
@@ -63,6 +62,7 @@
   }
   &__content {
   // visibility:hidden;
+  transition: transform ease-out 0.2s;
   position: absolute;
   // background-color: white;
   width: 10rem;
@@ -72,10 +72,10 @@
   border-radius: 70% 70% 70% 70%;
 }
 &:hover ~ .dropdown__content{
-  visibility: visible;
+  // visibility: visible;
   // display: block;
   margin-left: 0px;
-  // transform: translateY(10px);
+  transform: translateY(10px);
 }
 
 &__deconnect-btn {
@@ -101,7 +101,6 @@ background-color: v.$primaryColor;
     flex-direction: column;
     justify-content: space-between;
     width:100%
-
    }
     &__navbar-element {
     display: flex;
@@ -117,8 +116,8 @@ background-color: v.$primaryColor;
     }
   }
   &__title {
-  font-size:2.2rem;  
-  padding-top: 2rem;
+  font-size:2rem;  
+  padding-top: 1rem;
   line-height: 2.2rem
   // justify-content: space-between;
   }

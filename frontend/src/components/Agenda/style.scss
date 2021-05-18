@@ -3,7 +3,8 @@
 .agenda {
   &__title {
     font-size: 2.4rem;
-    padding: 1rem;
+    padding-bottom: 2rem;
+    padding-top:2rem;
   }
   &__container {
     display: flex;
@@ -26,18 +27,20 @@
     //  border: solid 1px red;
     position: relative;
     //  float: left;
-    padding-left: 0rem;
+    padding-bottom: 1rem;
+
   }
-&__event-side-separator {
-      display: flex;
-      // flex-direction: column;
-      align-items: center;
-      padding-top: 10px;
-      // flex-grow: 1;
-    }
-    &__event-separator {
-      padding-left: 10px;
-    }
+  &__event-side-separator {
+    display: flex;
+    // flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    // flex-grow: 1;
+  }
+  &__event-separator {
+    padding-left: 0.6rem;
+    padding-top: 1.4rem;
+  }
   &__event-icon {
     padding-right: 1rem;
     position: absolute;
@@ -59,8 +62,8 @@
     font-size: 1.1rem;
     text-decoration: none;
     padding-bottom: 1.7rem;
-    a{
-text-decoration: underline;
+    a {
+      text-decoration: underline;
     }
 
     // &:before {
@@ -121,34 +124,83 @@ text-decoration: underline;
     padding-bottom: 0.8rem;
   }
   .agenda {
+    &__img--title {
+      // z-index: 100;
+      &::before {
+        content: '';
+        position: absolute;
+        top: 10rem;
+        left: 0;
+        width: 100%;
+        height: 39%;
+      //  height: min(100vh, 240px);
+        background-image: url('src/assets/img/agendaMainPicture.jpg');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right top;
+        box-shadow: 0 -86px 51px -23px v.$primaryColor inset;
+        // z-index: 1;
+      }
+      & > * {
+      position: relative;
+      z-index: 2;
+    }
+    }
     &__title {
       font-size: 2rem;
-      padding: 1rem;
+      padding-bottom: 12.7rem;
+      padding-left: 1rem;
+      & > * {
+      z-index: 3;
+    }
     }
     &__container {
       flex-direction: column;
     }
+    &__container-event {
+    padding-left: 0.6rem;
+    padding-right:0.6rem;
+  }
+  &__event-separator {
+    padding-left: 1.6rem;
+}
     &__event-icon {
       display: flex;
       flex-grow: 0;
       padding-left: 1rem;
     }
-    
+
     &__stars {
       display: none;
     }
+    &__star{
+      position: absolute;
+      left: 17rem;
+      top: 16rem;
+    }
+    &__star2 {
+    position: absolute;
+    left: 2rem;
+    top: 0;
+}
+    &__star3 {
+      position: absolute;
+      left: 18rem;
+      bottom: 34rem;
+    }
     &__star4 {
       position: absolute;
-      left: 1rem;
-      bottom: 3rem;
+      left: 18rem;
+      bottom: 27rem;
     }
 
     &__img {
-      display: block;
-      margin: auto;
-      display: block;
-      margin: auto;
-      margin-top: -2rem;
+      display: none;
+      // display: block;
+      // margin: auto;
+      // display: block;
+      // margin: auto;
+      // margin-top: -2rem;
     }
   }
 }
