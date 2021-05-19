@@ -1,8 +1,11 @@
 @use 'src/styles/_vars.scss' as v;
 
 .rsvp {
-  &__container-big-big{
+  display: flex;
+  min-height: 100vh;
+  &__container-imgAndForm{
     display: flex;
+    flex-direction:row;
   }
   &__title {
     font-size: 2rem;
@@ -12,7 +15,7 @@
     font-style: italic;
     padding: 2rem;
   }
-  &__container-big {
+  &__container-form {
   margin-left: 2rem;  
   }
   &__container-presence{
@@ -22,10 +25,12 @@
 
   &__name-container{
     padding-bottom: 2rem;
+    position:absolute
   }
   &__firstname {
     visibility: hidden;
     &.show-firstname {
+      position: absolute;
       visibility: visible;
     } 
   }
@@ -127,7 +132,7 @@
   margin-top:-1rem;
   margin-left:6rem;
   width: 34%;
-  border-radius: 3rem;
+  border-radius: 14rem;
 }
 
 @media only screen and (max-width : 768px) {

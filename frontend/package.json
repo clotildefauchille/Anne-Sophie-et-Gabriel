@@ -52,6 +52,7 @@
     "mapbox-gl": "^2.2.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",
+    "react-device-detect": "^1.17.0",
     "react-dom": "^17.0.1",
     "react-map-gl": "^6.1.11",
     "react-native-video": "^5.1.1",

@@ -10,8 +10,13 @@ import Rsvp from 'src/containers/Rsvp';
 import Map from 'src/containers/Map';
 import Questions from 'src/components/Questions';
 import Gift from 'src/components/Gift';
+import Menu from 'src/components/Menu';
+
 import './styles.css';
 import LogoutModal from 'src/containers/LogoutModal';
+import {
+  isMobile,
+} from 'react-device-detect';
 
 // == Composant
 const App = () => (
@@ -35,7 +40,10 @@ const App = () => (
         <Gift />
       </Route>
     </Switch>
-    <Footer />
+    {isMobile
+      ? <Menu />
+      : <Footer />
+    }
     <LogoutModal />
   </div>
 );

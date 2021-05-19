@@ -38,7 +38,6 @@ const Rsvp = ({
   };
 
   const handleOnChangeName = (e) => {
-    // console.log('handleOnChangeName', e.target.value, e.target.name);
     onChangeName(e.target.value, e.target.name);
   };
   const handleOnChangeAccompanied = (e) => {
@@ -56,8 +55,8 @@ const Rsvp = ({
       <form onSubmit={handleOnSubmit}>
         <h2 className="rsvp__title">RSVP</h2>
         <div className="rsvp__message">{message}</div>
-        <div className="rsvp__container-big-big">
-          <div className="rsvp__container-big">
+        <div className="rsvp__container-imgAndForm">
+          <div className="rsvp__container-form">
             <div className="rsvp__container-presence">
               <p>
                 {user.given_name} {user.family_name}, je confirme ma présence si
@@ -89,8 +88,7 @@ const Rsvp = ({
               </label>
             </div>
             <div className="rsvp__container-presence">
-              <p>Si oui, je viens avec mon +1: </p>
-
+              <p>Je confirme la présence de mon +1 :</p>
               <label className="container" htmlFor="oui">
                 Oui
                 <input
@@ -133,7 +131,7 @@ const Rsvp = ({
 
             <div className="rsvp__container-children">
               <p>
-                Et avec{' '}
+                Je viens avec{' '}
                 <input
                   className="rsvp__child"
                   type="number"
@@ -148,7 +146,7 @@ const Rsvp = ({
                 enfant(s)
               </p>
               <p>
-                Regimes particuliers:
+                J'ai de régimes ou des allergies :
                 <input
                   className="rsvp__child"
                   type="text"
