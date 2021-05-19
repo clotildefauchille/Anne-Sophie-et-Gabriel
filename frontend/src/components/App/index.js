@@ -4,13 +4,14 @@ import { Route, Switch } from 'react-router-dom';
 
 // == Import
 import Agenda from 'src/containers/Agenda';
-import Header from 'src/components/Header';
+import Header from 'src/containers/Header';
 import Footer from 'src/components/Footer';
 import Rsvp from 'src/containers/Rsvp';
 import Map from 'src/containers/Map';
 import Questions from 'src/components/Questions';
 import Gift from 'src/components/Gift';
 import './styles.css';
+import LogoutModal from 'src/containers/LogoutModal';
 
 // == Composant
 const App = () => (
@@ -35,6 +36,7 @@ const App = () => (
       </Route>
     </Switch>
     <Footer />
+    <LogoutModal />
   </div>
 );
 

@@ -7,49 +7,50 @@ import question from 'src/assets/svg/question.svg';
 import map from 'src/assets/svg/map.svg';
 import response from 'src/assets/svg/response.svg';
 import { NavLink } from 'react-router-dom';
-
-// import ActiveMenu from 'src/components/ActiveMenu';
+import profile from 'src/assets/svg/profile.svg';
+import PropTypes from 'prop-types';
 import activeMenu from 'src/assets/svg/activeMenu.svg';
-import LogoutButton from 'src/components/LogoutButton';
-// import { useAuth0 } from '@auth0/auth0-react';
 
-const Header = () => {
+const Header = ({ showLoginModal }) => {
+  const handleClickCreateActivity = (e) => {
+    e.preventDefault();
+    showLoginModal();
+  };
   return (
     <div className="header">
       {/* <div className="header__navbar"> */}
-        <div className="header__navbar">
-          <NavLink to="/" exact activeClassName="header__selected">
-            <img className="header__icon" alt="agenda" src={agendaNav} />
-            <img className="header__highlight" src={activeMenu} />
-          </NavLink>
-          <NavLink to="/confirmation" exact activeClassName="header__selected">
-            <img
-              className="header__icon"
-              src={response}
-              alt="confirmation"
-            />
-            <img className="header__highlight" src={activeMenu} />
-          </NavLink>
-          <NavLink to="/infos" exact activeClassName="header__selected">
-            <img className="header__icon" src={map} alt="info pratique" />
-            <img className="header__highlight" src={activeMenu} />
-          </NavLink>
-          <NavLink to="/questions" exact activeClassName="header__selected">
-            <img className="header__icon" src={question} alt="info pratique" />
-            <img className="header__highlight" src={activeMenu} />
-          </NavLink>
-          <NavLink to="/cadeau" exact activeClassName="header__selected">
-            <img className="header__icon" src={gift} alt="cadeaux" />
-            <img className="header__highlight" src={activeMenu} />
-          </NavLink>
-        </div>
-        <h1 className="header__title">Anne-Sophie & Gabriel</h1>
-        <LogoutButton />
-      {/* </div> */}
-
-      {/* <h2>Bonjour {user.name}!</h2> */}
+      <div className="header__navbar">
+        <NavLink to="/" exact activeClassName="header__selected">
+          <img className="header__icon" alt="agenda" src={agendaNav} />
+          <img className="header__highlight" src={activeMenu} />
+        </NavLink>
+        <NavLink to="/confirmation" exact activeClassName="header__selected">
+          <img className="header__icon" src={response} alt="confirmation" />
+          <img className="header__highlight" src={activeMenu} />
+        </NavLink>
+        <NavLink to="/infos" exact activeClassName="header__selected">
+          <img className="header__icon" src={map} alt="info pratique" />
+          <img className="header__highlight" src={activeMenu} />
+        </NavLink>
+        <NavLink to="/questions" exact activeClassName="header__selected">
+          <img className="header__icon" src={question} alt="info pratique" />
+          <img className="header__highlight" src={activeMenu} />
+        </NavLink>
+        <NavLink to="/cadeau" exact activeClassName="header__selected">
+          <img className="header__icon" src={gift} alt="cadeaux" />
+          <img className="header__highlight" src={activeMenu} />
+        </NavLink>
+        <button onClick={handleClickCreateActivity} type="button" alt="profil" className="header__profile">
+          <img className="header__icon" alt="disconnect" src={profile} />
+        </button>
+      </div>
+      <h1 className="header__title">Anne-Sophie & Gabriel</h1>
     </div>
   );
+};
+
+Header.propTypes = {
+  showLoginModal: PropTypes.func.isRequired,
 };
 
 export default Header;
