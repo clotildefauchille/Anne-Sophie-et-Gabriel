@@ -42,9 +42,11 @@ const Header = ({ showLoginModal }) => {
         </NavLink>
         <button onClick={handleClickCreateActivity} type="button" alt="profil" className="header__profile">
           <img className="header__icon" alt="disconnect" src={profile} />
+          <img className="header__highlight" src={activeMenu} />
         </button>
       </div>
       <h1 className="header__title">Anne-Sophie & Gabriel</h1>
+      <div className="header__date">11 Septembre 2021</div>
     </div>
   );
 };

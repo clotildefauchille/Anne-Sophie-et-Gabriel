@@ -57,10 +57,14 @@
   }
 }
 
-// @media (min-width: 640px) {  
-//   .modal {
-//     &__container {
-//       padding: 3rem 5rem;
-//     }
-//   }
-// }
+@media only screen and (max-width: 767px) {
+  .modal{&__container {
+    padding: 4rem 4rem;
+  }
+  &__text{
+    font-size: 1.3rem;
+  }
+}
+  
+}
+
