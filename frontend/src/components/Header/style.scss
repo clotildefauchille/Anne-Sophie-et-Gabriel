@@ -30,10 +30,43 @@
   &__highlight {
     visibility: hidden;
   }
-  &__profile{
+  &__dropdown{
+    position: relative;
+    display: inline-block;
+    
+    &:hover .header__dropdown-content{
+      opacity: 1;
+      height: auto;
+      display: block;
+      transform: translateX(1rem);
+    }
+  }
+  &__profile-btn{
     border:none;
     background-color:v.$primaryColor;
+    cursor: pointer;
+    }
+  &__dropdown-content{
+    // display: none;
+    position: absolute;
+    transition: opacity 0.2s ease-in;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    color: black;
+    // padding: 1rem 2rem;
+  } 
+  
+  &__logout {
+  background-color:v.$thirdColor;
+  border: none;
+  padding: 0.6rem 4rem;
+  &:hover{
+    background-color:v.$secondaryColor;
   }
+}
   &__icon {
     width: 1.85rem;
     height: 3rem;
@@ -55,6 +88,7 @@
     padding-right: 6rem;
     padding-top: 0.7rem;
   }
+  
 }
 
 @media (max-width:1250px) and (min-width:767px) {

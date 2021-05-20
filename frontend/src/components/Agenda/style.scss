@@ -158,7 +158,8 @@
       flex-direction: column;
     }
     &__container-multiple-event {
-      padding-top: 2rem;
+      padding-top: 1rem;
+      z-index: 50;
     }
     &__container-event {
     padding-left: 0.6rem;
