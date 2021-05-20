@@ -150,6 +150,15 @@
     padding-top: 0rem;
     text-align: center;
   }
+  &__dropdown{
+    position: relative;
+    
+    
+    &:hover .header__dropdown-content{
+      position: sticky;
+      transform: translateY(-6rem);
+    }
+  }
   }
   
 }

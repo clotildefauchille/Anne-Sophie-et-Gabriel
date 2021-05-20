@@ -3,10 +3,10 @@ import permissions from './permissions';
 import rsvp from './rsvp';
 import infos from './infos';
 import events from './events';
-import logoutModal from './logoutModal';
+import confirmationModal from './confirmationModal';
 
 const globalReducer = combineReducers({
-  permissions, rsvp, infos, events, logoutModal,
+  permissions, rsvp, infos, events, confirmationModal,
 });
 
 export default globalReducer;

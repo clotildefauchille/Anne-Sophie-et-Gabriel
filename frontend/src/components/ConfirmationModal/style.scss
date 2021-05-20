@@ -33,20 +33,21 @@
   
   &__text{
     font-size: 1.5rem;
+    line-height: 2rem;
   }
-  &__logout {
-    margin-top:1.5rem;
-    border: none;
-    background-color: v.$thirdColor;
-    padding: 1rem 5rem;
-    border-radius: 0.5rem;
-    color: white;
-    font-weight: 500;
-    transition: all 0.3s;
-    &:hover{
-      background-color:v.$secondaryColor;
-    }
-  }
+  // &__logout {
+  //   margin-top:1.5rem;
+  //   border: none;
+  //   background-color: v.$thirdColor;
+  //   padding: 1rem 5rem;
+  //   border-radius: 0.5rem;
+  //   color: white;
+  //   font-weight: 500;
+  //   transition: all 0.3s;
+  //   &:hover{
+  //     background-color:v.$secondaryColor;
+  //   }
+  // }
 
   &__bt-close {
     align-self: flex-end;
@@ -63,6 +64,7 @@
   }
   &__text{
     font-size: 1.3rem;
+  
   }
 }
   

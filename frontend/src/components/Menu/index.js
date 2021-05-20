@@ -9,7 +9,6 @@ import response from 'src/assets/svg/response.svg';
 import { NavLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
 
-// import './style.scss';
 
 const Menu = () => {
   const { user, logout } = useAuth0();
@@ -36,9 +35,8 @@ const Menu = () => {
         <img className="header__icon" src={gift} alt="cadeaux" />
         <img className="header__highlight" src={activeMenu} />
       </NavLink>
-      <div class="header__dropdown">
+      <div className="header__dropdown">
         <button
-          // onClick={handleClickCreateActivity}
           type="button"
           alt="profil"
           className="header__profile-btn"

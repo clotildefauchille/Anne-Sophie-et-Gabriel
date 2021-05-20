@@ -16,6 +16,7 @@ const Rsvp = ({
   message,
   accompanied,
   presence,
+  showAnswerModal,
 }) => {
   const { user } = useAuth0();
   const firstNameVisibility = accompanied ? 'show-firstname' : '';
@@ -54,7 +55,7 @@ const Rsvp = ({
     <div className="rsvp">
       <form onSubmit={handleOnSubmit}>
         <h2 className="rsvp__title">RSVP</h2>
-        <div className="rsvp__message">{message}</div>
+        {/* <div className="rsvp__message">{message}</div> */}
         <div className="rsvp__container-imgAndForm">
           <div className="rsvp__container-form">
             <div className="rsvp__container-presence">
@@ -157,7 +158,7 @@ const Rsvp = ({
                 />{' '}
               </p>
             </div>
-            <button type="submit" className="rsvp__submit-btn" disabled={buttonIsDisabled}>
+            <button onClick={showAnswerModal} type="submit" className="rsvp__submit-btn" disabled={buttonIsDisabled}>
               J'envoie ma réponse
             </button>
           </div>
@@ -179,6 +180,7 @@ Rsvp.propTypes = {
   message: PropTypes.string.isRequired,
   allergy: PropTypes.string.isRequired,
   presence: PropTypes.bool.isRequired,
-  accompanied : PropTypes.bool.isRequired,
+  accompanied: PropTypes.bool.isRequired,
+  showAnswerModal: PropTypes.func.isRequired,
 };
 export default Rsvp;

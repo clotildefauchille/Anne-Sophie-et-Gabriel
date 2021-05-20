@@ -4,7 +4,7 @@ import { Route, Switch } from 'react-router-dom';
 
 // == Import
 import Agenda from 'src/containers/Agenda';
-import Header from 'src/containers/Header';
+import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import Rsvp from 'src/containers/Rsvp';
 import Map from 'src/containers/Map';
@@ -13,7 +13,7 @@ import Gift from 'src/components/Gift';
 import Menu from 'src/components/Menu';
 
 import './styles.css';
-import LogoutModal from 'src/containers/LogoutModal';
+import ConfirmationModal from 'src/containers/ConfirmationModal';
 import {
   isMobile,
 } from 'react-device-detect';
@@ -44,7 +44,7 @@ const App = () => (
       ? <Menu />
       : <Footer />
     }
-    <LogoutModal />
+    <ConfirmationModal />
   </div>
 );
 

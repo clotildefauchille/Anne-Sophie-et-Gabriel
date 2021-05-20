@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import Rsvp from 'src/components/Rsvp';
+import { showAnswerModal } from 'src/actions/confirmationModal';
 import {
   changeInputValuePresence,
   changeInputValueName,
@@ -37,6 +38,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   getUserInfos: () => {
     dispatch(getUserInfos());
+  },
+  showAnswerModal: () => {
+    dispatch(showAnswerModal());
   },
 });
 
