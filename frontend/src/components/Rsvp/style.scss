@@ -3,38 +3,53 @@
 .rsvp {
   display: flex;
   min-height: 100vh;
-  &__container-imgAndForm{
-    display: flex;
-    flex-direction:row;
-  }
-  &__title {
+&__title {
     font-size: 2rem;
     padding: 2rem;
   }
-  &__message {
-    font-style: italic;
-    padding: 2rem;
+  &__container-imgAndForm{
+    display: flex;
+    flex-direction:row;
+    margin: 0rem 2rem 0rem 2rem; 
   }
+  
+  // &__message {
+  //   font-style: italic;
+  //   padding: 2rem;
+  // }
   &__container-form {
-  margin-left: 2rem;  
+   display: flex;
+   flex-direction: column;
+   max-width: 60%;
+  }
+  &__container-img{
+    max-width: 40%;
   }
   &__container-presence{
     display: flex;
     padding-bottom: 0.5rem;
+    flex-direction: column;
   }
-
+    &__strong{
+      font-weight: bold;
+    }
+    &__container-accompanied{
+    }
   &__name-container{
-    padding-bottom: 2rem;
-    position:absolute
+    // padding-bottom: 2rem;
+      // position: relative;
+    
   }
   &__firstname {
     visibility: hidden;
+    position:absolute;
     &.show-firstname {
-      position: absolute;
+      position: relative;
       visibility: visible;
+      
     } 
   }
-  &__firstname, &__lastname, &__child {
+  &__firstname, &__child {
     border:none;
     padding: 1rem;
     border-bottom: solid grey 0.5px;
@@ -46,11 +61,14 @@
   }
   &__container-children{
     padding-bottom: 2rem;
+    
   }
-  &__lastname{
-    margin-left: 1rem;
-  }
+ &__container-submit{
+   padding-top: 5rem;
+   
+ }
   &__submit-btn{
+    
     border: none;
     padding: 0.6rem;
     background-color: v.$secondaryColor;
@@ -65,6 +83,12 @@
     color: white;
     }
   }
+  
+  &__img{
+    width:100%;
+    margin-top: 2rem;
+    border-radius: 18rem;
+  }
 }
 
 /*checkbox css*/
@@ -74,6 +98,8 @@
   position: relative;
   margin-left: 1rem;
   padding-left: 2.5rem;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;

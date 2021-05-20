@@ -60,8 +60,11 @@ const Rsvp = ({
           <div className="rsvp__container-form">
             <div className="rsvp__container-presence">
               <p>
-                {user.given_name} {user.family_name}, je confirme ma présence si
-                les conditions sanitaires le permettent :
+                <strong className="rsvp__strong">
+                  {user.given_name} {user.family_name}
+                </strong>
+                , je confirme ma présence si les conditions sanitaires le
+                permettent :
               </p>
               <label className="container" htmlFor="oui">
                 Oui
@@ -88,7 +91,7 @@ const Rsvp = ({
                 <span className="checkmark" />
               </label>
             </div>
-            <div className="rsvp__container-presence">
+            <div className="rsvp__container-accompanied">
               <p>Je confirme la présence de mon +1 :</p>
               <label className="container" htmlFor="oui">
                 Oui
@@ -112,24 +115,19 @@ const Rsvp = ({
                 />
                 <span className="checkmark" />
               </label>
-
-              {/* <input className="rsvp__radio-button" 
-              type="radio" id="plusOne" name="plusOne" value="non" />
-        <label className="rsvp__label" for="non">Non</label> */}
+              <div className="rsvp__name-container">
+                <input
+                  className={`rsvp__firstname ${firstNameVisibility}`}
+                  type="text"
+                  id="firstnamePartner"
+                  name="firstnamePartner"
+                  value={firstnamePartner}
+                  placeholder="Prénom"
+                  onChange={handleOnChangeName}
+                  // defaultValue="true"
+                />
+              </div>
             </div>
-            <div className="rsvp__name-container">
-              <input
-                className={`rsvp__firstname ${firstNameVisibility}`}
-                type="text"
-                id="firstnamePartner"
-                name="firstnamePartner"
-                value={firstnamePartner}
-                placeholder="Prénom"
-                onChange={handleOnChangeName}
-              // defaultValue="true"
-              />
-            </div>
-
             <div className="rsvp__container-children">
               <p>
                 Je viens avec{' '}
@@ -146,6 +144,8 @@ const Rsvp = ({
                 />{' '}
                 enfant(s)
               </p>
+            </div>
+            <div className="rsvp__container-vegan">
               <p>
                 J'ai de régimes ou des allergies :
                 <input
@@ -158,11 +158,20 @@ const Rsvp = ({
                 />{' '}
               </p>
             </div>
-            <button onClick={showAnswerModal} type="submit" className="rsvp__submit-btn" disabled={buttonIsDisabled}>
-              J'envoie ma réponse
-            </button>
+            <div className="rsvp__container-submit">
+              <button
+                onClick={showAnswerModal}
+                type="submit"
+                className="rsvp__submit-btn"
+                disabled={buttonIsDisabled}
+              >
+                J'envoie ma réponse
+              </button>
+            </div>
           </div>
-          <img className="img" src={img} alt="A&G" />
+          <div className="rsvp__container-img">
+            <img className="rsvp__img" src={img} alt="A&G" />
+          </div>
         </div>
       </form>
     </div>
