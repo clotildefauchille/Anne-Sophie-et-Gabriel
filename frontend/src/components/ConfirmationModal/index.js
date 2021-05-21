@@ -23,6 +23,7 @@ const ConfirmationModal = ({ displayed, closeModal }) => {
               Merci {user.name}, 
               <br/>nous avons reçu votre réponse!
             </div>
+            <button className="modal__button" type="button" onClick={closeModal}>OK</button>
           </div>
         </div>
       )}

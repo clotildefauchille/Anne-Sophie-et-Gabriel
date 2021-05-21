@@ -8,7 +8,7 @@ import map from 'src/assets/svg/map.svg';
 import response from 'src/assets/svg/response.svg';
 import { NavLink } from 'react-router-dom';
 import { useAuth0 } from '@auth0/auth0-react';
-
+import { MobileView } from 'react-device-detect';
 
 const Menu = () => {
   const { user, logout } = useAuth0();
@@ -35,26 +35,25 @@ const Menu = () => {
         <img className="header__icon" src={gift} alt="cadeaux" />
         <img className="header__highlight" src={activeMenu} />
       </NavLink>
-      <div className="header__dropdown">
-        <button
-          type="button"
-          alt="profil"
-          className="header__profile-btn"
-        >
-          <img className="header__icon" alt="disconnect" src={profile} />
-          <img className="header__highlight" src={activeMenu} />
-        </button>
-        <div className="header__dropdown-content">
-          <button
-            className="header__logout"
-            type="button"
-            alt="logout Button"
-            onClick={() => logout({ returnTo: window.location.origin })}
-          >
-            Déconnexion
+      <MobileView>
+        <div className="header__dropdown">
+          <button type="button" alt="profil" className="header__profile-btn">
+            <img className="header__icon-profile" alt="disconnect" src={profile} />
+            <img className="header__highlight" src={activeMenu} />
           </button>
+          <div className="header__dropdown-content">
+            <div className="header__name">{user.name}</div>
+            <button
+              className="header__logout"
+              type="button"
+              alt="logout Button"
+              onClick={() => logout({ returnTo: window.location.origin })}
+            >
+              Déconnexion
+            </button>
+          </div>
         </div>
-      </div>
+      </MobileView>
     </div>
   );
 };

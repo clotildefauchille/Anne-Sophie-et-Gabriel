@@ -5,7 +5,7 @@ import travel from 'src/assets/svg/travel.svg';
 const Questions = () => (
   <>
     <div className="questions__container-header">
-      <h2 className="questions__title">Foires aux questions</h2>
+      <h2 className="questions__title">Foire aux questions ...</h2>
       <img className="questions__illustration" src={travel} alt="travelling" />
     </div>
 

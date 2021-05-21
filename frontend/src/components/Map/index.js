@@ -11,7 +11,10 @@ import ReactMapGL, {
 import Pins from 'src/components/Pins';
 import CityInfo from 'src/components/CityInfo';
 import PropTypes from 'prop-types';
-
+import {
+  MobileView,
+  BrowserView
+} from 'react-device-detect';
 // import CITIES from 'src/data/cities.json';
 
 const fullscreenControlStyle = {
@@ -47,14 +50,13 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
   //   scrollZoom: false,
   // });
   const [popupInfo, setPopupInfo] = useState(null);
-
   useEffect(() => {
     fetchPlaceInfos();
   }, []);
 
   return (
     <div className="infos__infos">
-      <h2 className="agenda__title">Infos Pratiques</h2>
+      <h2 className="infos__title">Infos Pratiques</h2>
       <div className="infos__container">
         <div className="infos__pratical">
           <h4 className="infos__h4">Où loger ?</h4>
@@ -104,33 +106,64 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
           de XX chambres à 60€
         </div>
         <div className="infos__map">
-          <ReactMapGL
-            {...viewport}
-            onViewportChange={(nextViewport) => setViewport(nextViewport)}
-            mapboxApiAccessToken="pk.eyJ1IjoiY2xvdGlsZGVmYXVjaGlsbGUiLCJhIjoiY2ttbHNpM3JtMWR5ODJwazU3dmd4ZGt4bCJ9.HORGlrqRn7pZUd9ZWYdy6g"
-            width="40vw"
-            height="60vh"
-            mapStyle="mapbox://styles/mapbox/streets-v11"
-          >
-            <Pins data={placeDetails} onClick={setPopupInfo} />
-            {popupInfo && (
-              <Popup
-                tipSize={5}
-                anchor="top"
-                longitude={popupInfo.longitude}
-                latitude={popupInfo.latitude}
-                closeOnClick={false}
-                onClose={setPopupInfo}
-              >
-                <CityInfo info={popupInfo} />
-              </Popup>
-            )}
+          <BrowserView>
+            <ReactMapGL
+              {...viewport}
+              onViewportChange={(nextViewport) => setViewport(nextViewport)}
+              mapboxApiAccessToken="pk.eyJ1IjoiY2xvdGlsZGVmYXVjaGlsbGUiLCJhIjoiY2ttbHNpM3JtMWR5ODJwazU3dmd4ZGt4bCJ9.HORGlrqRn7pZUd9ZWYdy6g"
+              width="50vw"
+              height="60vh"
+              mapStyle="mapbox://styles/mapbox/streets-v11"
+            >
+              <Pins data={placeDetails} onClick={setPopupInfo} />
+              {popupInfo && (
+                <Popup
+                  tipSize={5}
+                  anchor="top"
+                  longitude={popupInfo.longitude}
+                  latitude={popupInfo.latitude}
+                  closeOnClick={false}
+                  onClose={setPopupInfo}
+                >
+                  <CityInfo info={popupInfo} />
+                </Popup>
+              )}
 
-            {/* <GeolocateControl style={geolocateStyle} /> */}
-            <FullscreenControl style={fullscreenControlStyle} />
-            <NavigationControl style={navStyle} />
-            <ScaleControl style={scaleControlStyle} />
-          </ReactMapGL>
+              {/* <GeolocateControl style={geolocateStyle} /> */}
+              <FullscreenControl style={fullscreenControlStyle} />
+              <NavigationControl style={navStyle} />
+              <ScaleControl style={scaleControlStyle} />
+            </ReactMapGL>
+          </BrowserView>
+          <MobileView>
+            <ReactMapGL
+              {...viewport}
+              onViewportChange={(nextViewport) => setViewport(nextViewport)}
+              mapboxApiAccessToken="pk.eyJ1IjoiY2xvdGlsZGVmYXVjaGlsbGUiLCJhIjoiY2ttbHNpM3JtMWR5ODJwazU3dmd4ZGt4bCJ9.HORGlrqRn7pZUd9ZWYdy6g"
+              width="82vw"
+              height="50vh"
+              mapStyle="mapbox://styles/mapbox/streets-v11"
+            >
+              <Pins data={placeDetails} onClick={setPopupInfo} />
+              {popupInfo && (
+                <Popup
+                  tipSize={5}
+                  anchor="top"
+                  longitude={popupInfo.longitude}
+                  latitude={popupInfo.latitude}
+                  closeOnClick={false}
+                  onClose={setPopupInfo}
+                >
+                  <CityInfo info={popupInfo} />
+                </Popup>
+              )}
+
+              {/* <GeolocateControl style={geolocateStyle} /> */}
+              <FullscreenControl style={fullscreenControlStyle} />
+              <NavigationControl style={navStyle} />
+              <ScaleControl style={scaleControlStyle} />
+            </ReactMapGL>
+          </MobileView>
         </div>
       </div>
     </div>

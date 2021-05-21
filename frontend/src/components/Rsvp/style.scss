@@ -1,29 +1,28 @@
 @use 'src/styles/_vars.scss' as v;
 
 .rsvp {
-  display: flex;
-  min-height: 100vh;
+  // display: flex;
+  // min-height: 100vh;
 &__title {
     font-size: 2rem;
-    padding: 2rem;
+    padding: 3rem; 
+
   }
   &__container-imgAndForm{
     display: flex;
     flex-direction:row;
-    margin: 0rem 2rem 0rem 2rem; 
+    margin: 0rem 5rem 0rem 5rem; 
   }
-  
-  // &__message {
-  //   font-style: italic;
-  //   padding: 2rem;
-  // }
+ 
   &__container-form {
    display: flex;
    flex-direction: column;
    max-width: 60%;
+    width:100%;
+
   }
   &__container-img{
-    max-width: 40%;
+    max-width: 41%;
   }
   &__container-presence{
     display: flex;
@@ -34,19 +33,17 @@
       font-weight: bold;
     }
     &__container-accompanied{
+      display: flex;
+      flex-direction: column;
     }
-  &__name-container{
-    // padding-bottom: 2rem;
-      // position: relative;
-    
-  }
+
   &__firstname {
     visibility: hidden;
     position:absolute;
     &.show-firstname {
       position: relative;
       visibility: visible;
-      
+      margin-bottom: 1rem;
     } 
   }
   &__firstname, &__child {
@@ -64,18 +61,16 @@
     
   }
  &__container-submit{
-   padding-top: 5rem;
-   
+   padding: 3rem 0 3rem 0;
  }
   &__submit-btn{
-    
     border: none;
     padding: 0.6rem;
-    background-color: v.$secondaryColor;
+    background-color: v.$thirdColor;
     color: white;
     border-radius: 0.3rem;
     &:hover{
-    background-color: #ccc;
+    background-color: v.$secondaryColor;
     color: white;
   }
     &:disabled{
@@ -86,7 +81,7 @@
   
   &__img{
     width:100%;
-    margin-top: 2rem;
+    margin-top: 2rem 0 2rem 0;
     border-radius: 18rem;
   }
 }
@@ -154,24 +149,38 @@
 .container input:checked ~ .checkmark:after {
   display: block;
 }
-.img{
-  margin-top:-1rem;
-  margin-left:6rem;
-  width: 34%;
-  border-radius: 14rem;
-}
+
 
 @media only screen and (max-width : 768px) {
   .rsvp{
+    
     &__title{
       font-size: 1.7rem;
       padding: 2rem;
     }
+    &__container-imgAndForm{
+    display: flex;
+    flex-direction:row;
+    // margin: 0rem 4rem 2rem 2rem; 
+    margin: 0rem 1.7rem; 
+  }
     p {
-      min-width:40vh;;
+      min-width:19rem;
+    }
+    &__img{
+    display: none;
+  }
+
+    &__container-submit{
+    display: flex;
+    flex-direction:row;
+    max-width: 100%;
+    
+    }
+    &__img-mobile {
+    max-width: 60%;
+    max-height: 60%;
     }
   }
-  .img{
-    display:none;
-  }
+  
 }

@@ -3,12 +3,12 @@
 .agenda {
   &__title {
     font-size: 2.4rem;
-    padding-bottom: 1.5rem;
-    padding-top:1.5rem;
+    padding: 2rem 1.5rem;
   }
   &__container {
     display: flex;
     justify-content: space-evenly;
+    padding: 0 2rem;
   }
   &__day-title {
     font-size: 1.8rem;
@@ -62,28 +62,17 @@
     font-size: 1.1rem;
     text-decoration: none;
     padding-bottom: 1.7rem;
-    a {
-      text-decoration: underline;
-    }
-
-    // &:before {
-    //   content:'';
-    //   position: absolute;
-    //   background: url('src/assets/svg/separation.svg');
-    //   width: 50px;
-    //   height: 50px;
-    // }
   }
   &__address {
     font-style: italic;
     font-weight: 300;
     &:hover {
       filter: v.$filter;
+      text-decoration: underline;
     }
   }
   &__container-img {
     position: relative;
-    // border: 1px solid black;
     width: 39%;
   }
   &__star {
@@ -124,6 +113,7 @@
     padding-bottom: 0.8rem;
   }
   .agenda {
+    z-index: 0;
     &__img--title {
       // z-index: 100;
       &::before {
@@ -133,13 +123,11 @@
         left: 0;
         width: 100%;
         height: 39%;
-      //  height: min(100vh, 240px);
         background-image: url('src/assets/img/agendaMainPicture.jpg');
         background-size: contain;
         background-repeat: no-repeat;
         background-position: right top;
-        box-shadow: 0 -86px 51px -23px v.$primaryColor inset;
-        // z-index: 1;
+        box-shadow: inset 0 -80px 44px -19px v.$primaryColor;
       }
       & > * {
       position: relative;
@@ -156,6 +144,7 @@
     }
     &__container {
       flex-direction: column;
+      padding: 0 0rem;
     }
     &__container-multiple-event {
       padding-top: 1rem;

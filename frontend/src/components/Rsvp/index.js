@@ -3,6 +3,9 @@ import img from 'src/assets/img/rsvp.jpg';
 import './style.scss';
 import PropTypes from 'prop-types';
 import { useAuth0 } from '@auth0/auth0-react';
+import {
+  isMobile,
+} from 'react-device-detect';
 
 const Rsvp = ({
   onChangeAccompanied,
@@ -13,7 +16,6 @@ const Rsvp = ({
   onSubmitRsvp,
   fetchLastAnswer,
   allergy,
-  message,
   accompanied,
   presence,
   showAnswerModal,
@@ -54,7 +56,9 @@ const Rsvp = ({
   return (
     <div className="rsvp">
       <form onSubmit={handleOnSubmit}>
-        <h2 className="rsvp__title">RSVP</h2>
+        <div className="rsvp__img--title">
+          <h2 className="rsvp__title">RSVP</h2>
+        </div>
         {/* <div className="rsvp__message">{message}</div> */}
         <div className="rsvp__container-imgAndForm">
           <div className="rsvp__container-form">
@@ -122,7 +126,7 @@ const Rsvp = ({
                   id="firstnamePartner"
                   name="firstnamePartner"
                   value={firstnamePartner}
-                  placeholder="Prénom"
+                  placeholder="Prénom Nom"
                   onChange={handleOnChangeName}
                   // defaultValue="true"
                 />
@@ -147,12 +151,12 @@ const Rsvp = ({
             </div>
             <div className="rsvp__container-vegan">
               <p>
-                J'ai de régimes ou des allergies :
+                J'ai des régimes particuliers ou des allergies :
                 <input
                   className="rsvp__child"
                   type="text"
                   name="allergy"
-                  placeholder="allergies ou végétalisme"
+                  placeholder="Commentaires"
                   value={allergy}
                   onChange={handleOnChangeName}
                 />{' '}
@@ -167,6 +171,8 @@ const Rsvp = ({
               >
                 J'envoie ma réponse
               </button>
+              {/* {isMobile ? <img className="rsvp__img-mobile" src={img} alt="A&G" />
+              : <></>} */}
             </div>
           </div>
           <div className="rsvp__container-img">
@@ -186,7 +192,6 @@ Rsvp.propTypes = {
   childrenNumber: PropTypes.number.isRequired,
   onSubmitRsvp: PropTypes.func.isRequired,
   fetchLastAnswer: PropTypes.func.isRequired,
-  message: PropTypes.string.isRequired,
   allergy: PropTypes.string.isRequired,
   presence: PropTypes.bool.isRequired,
   accompanied: PropTypes.bool.isRequired,

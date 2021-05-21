@@ -1,6 +1,25 @@
 .gift{
+  &__container{
+    height:100vh;
+  }
   &__title {
     font-size: 2.4rem;
+    padding: 3rem;
+  }
+  &__illustration{
+    padding: 8rem 20rem;
+  }
+}
+
+@media only screen and (max-width : 768px) {
+  .gift{
+   
+  &__title {
     padding: 1.8rem;
   }
+  &__illustration{
+    padding: 1rem;
+    
+  }
+}
 }

@@ -6,17 +6,15 @@
   justify-content: space-between;
   padding-top: 1.5rem;
   box-shadow: rgba(0, 0, 0, 0.03) 0px 3px 5px;
-  // // width:100%;
   padding-bottom: 0.6rem;
 
   &__navbar {
     display: flex;
     flex-direction: row;
-    // justify-content: flex-start;
     a , button {
       display: flex;
-      max-width: 4.5rem;
-      max-height: 4.5rem;
+      max-width: 6rem;
+      max-height: 6rem;
       align-items: center;
       flex-direction: column;
     }
@@ -26,6 +24,10 @@
     .header__highlight {
       visibility: visible;
     }
+  }
+  &__container-date-profile{
+    display: flex;
+    padding-right: 1rem;
   }
   &__highlight {
     visibility: hidden;
@@ -38,16 +40,16 @@
       opacity: 1;
       height: auto;
       display: block;
-      transform: translateX(1rem);
+      transform: translateX(-13rem);
     }
   }
   &__profile-btn{
+    padding-right: 1rem;
     border:none;
     background-color:v.$primaryColor;
     cursor: pointer;
     }
   &__dropdown-content{
-    // display: none;
     position: absolute;
     transition: opacity 0.2s ease-in;
     opacity: 0;
@@ -56,13 +58,16 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
     color: black;
-    // padding: 1rem 2rem;
+    padding: 0.6rem 2rem;
   } 
-  
+  &__name{
+    text-align: center;
+    padding-bottom: 0.3rem;
+  }
   &__logout {
   background-color:v.$thirdColor;
   border: none;
-  padding: 0.6rem 4rem;
+  padding: 0.6rem 3rem;
   &:hover{
     background-color:v.$secondaryColor;
   }
@@ -78,24 +83,24 @@
 
   &__title {
     font-size: 3rem;
-    // margin-top:-1.5rem;
     line-height: 3rem;
     text-align: center;
-    padding-right: 11rem;
+    padding-right: 7rem;
     text-align: center;
   }
   &__date {
-    padding-right: 6rem;
-    padding-top: 0.7rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
+    font-size: 2rem;
   }
-  
 }
 
 @media (max-width:1250px) and (min-width:767px) {
   .header{
+     
     &__title{
-      font-size: 2.1rem;
-      padding-right: 2.5rem;
+      font-size: 2.7rem;
+      padding-right: 0rem;
     } 
    &__navbar {
     display: flex;
@@ -119,17 +124,17 @@
     padding-top: 0.3rem;
     display: flex;
     flex-direction: column;
-    box-shadow: none;
     &__navbar {
+      box-shadow: 0 3px 8px rgb(0 0 0 / 29%);
       display: flex;
-      // border-top: rgba(0, 0, 0, 0.03) 0px 3px 5px;
       flex-direction: row;
       justify-content: space-between;
-      position: sticky;
+      width: 100%;
+      position: fixed;
       bottom:0;
       background-color: v.$primaryColor;
       z-index: 1000;
-      a {
+      a, button{
         display: flex;
         max-width: 3rem;
         max-height: 3rem;
@@ -137,27 +142,45 @@
         flex-direction: column;
       }
     }
+    &__icon-profile{
+      width: 1.85rem;
+      height: 3.3rem;
+      padding-bottom: 0.4rem;
+    }
     &__title {
       font-size: 2rem;
       padding-right: 0rem;
       padding-bottom: 0.5rem;
       padding-top: 0.5rem;
       line-height: 2.2rem;
-      // justify-content: space-between;
     }
      &__date{
     padding-right: 0rem;
     padding-top: 0rem;
     text-align: center;
-  }
-  &__dropdown{
-    position: relative;
-    
-    
-    &:hover .header__dropdown-content{
-      position: sticky;
-      transform: translateY(-6rem);
+    font-size: 1.4rem;
     }
+    &__dropdown{
+      position: relative;
+      padding: 0;
+    &:hover .header__dropdown-content{
+      // transform: translateY(-6rem);
+      background-color: rgb(249, 246, 243);
+      position: absolute;
+      top: -7rem;
+      left: -4.5rem;
+      // padding: 0.5rem 5rem;
+       padding: 1rem 4.5rem;
+    }
+  }
+  &__logout{
+    padding: 0.6rem 5rem;
+  }
+  &__name{
+    padding-bottom: 0;
+  }
+  &__profile-btn{
+    padding-right: 0.5rem;
   }
   }
   
