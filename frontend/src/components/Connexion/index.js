@@ -25,6 +25,7 @@ const Connexion = ({ children }) => {
 
   return isLoading || !user ? (
     <span>loading</span>
+    
   ) : (
     <Permissions user={user}>{children}</Permissions>
   );

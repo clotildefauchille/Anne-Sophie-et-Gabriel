@@ -3,9 +3,6 @@ import img from 'src/assets/img/rsvp.jpg';
 import './style.scss';
 import PropTypes from 'prop-types';
 import { useAuth0 } from '@auth0/auth0-react';
-import {
-  isMobile,
-} from 'react-device-detect';
 
 const Rsvp = ({
   onChangeAccompanied,
@@ -19,17 +16,17 @@ const Rsvp = ({
   accompanied,
   presence,
   showAnswerModal,
+  getUserInfos,
+  metadata,
 }) => {
   const { user } = useAuth0();
   const firstNameVisibility = accompanied ? 'show-firstname' : '';
   const buttonIsDisabled = accompanied && !firstnamePartner;
-  // console.log('user', user);
+  // console.log('metadata', metadata);
   useEffect(() => {
     fetchLastAnswer();
-    // getUserInfos();
+    getUserInfos();
   }, []);
-  // si j'ai pas toutes mes info rsvp => je retourne <div>loading</div>
-  // if (allergy || )
   const handleOnChangePresence = (e) => {
     console.log('handleOnChange', e.target.checked);
     onChangePresence(e.target.checked);
@@ -132,23 +129,26 @@ const Rsvp = ({
                 />
               </div>
             </div>
-            <div className="rsvp__container-children">
-              <p>
-                Je viens avec{' '}
-                <input
-                  className="rsvp__child"
-                  type="number"
-                  id="childrenNumber"
-                  name="childrenNumber"
-                  min="0"
-                  max="10"
-                  placeholder="0"
-                  value={`${childrenNumber}`}
-                  onChange={handleOnChangeName}
-                />{' '}
-                enfant(s)
-              </p>
-            </div>
+            {metadata.children === 'oui' && (
+              <div className="rsvp__container-children">
+                <p>
+                  Je viens avec{' '}
+                  <input
+                    className="rsvp__child"
+                    type="number"
+                    id="childrenNumber"
+                    name="childrenNumber"
+                    min="0"
+                    max="10"
+                    placeholder="0"
+                    value={`${childrenNumber}`}
+                    onChange={handleOnChangeName}
+                  />{' '}
+                  enfant(s)
+                </p>
+              </div>
+            )}
+
             <div className="rsvp__container-vegan">
               <p>
                 J'ai des régimes particuliers ou des allergies :
@@ -196,5 +196,7 @@ Rsvp.propTypes = {
   presence: PropTypes.bool.isRequired,
   accompanied: PropTypes.bool.isRequired,
   showAnswerModal: PropTypes.func.isRequired,
+  getUserInfos: PropTypes.func.isRequired,
+  metadata: PropTypes.object.isRequired,
 };
 export default Rsvp;

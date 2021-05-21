@@ -17,6 +17,7 @@ const mapStateToProps = (state) => ({
   childrenNumber: state.rsvp.childrenNumber,
   message: state.rsvp.message,
   allergy: state.rsvp.allergy,
+  metadata: state.permissions.metadata,
 });
 
 const mapDispatchToProps = (dispatch) => ({

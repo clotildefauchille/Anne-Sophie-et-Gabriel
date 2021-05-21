@@ -65,6 +65,7 @@ app.post('/api/users', newUserController.createNewUser);
 
 app.get('/api/events', eventsController.getEventsInfos);
 
+
 const start = () => {
   app.listen(PORT, () => {
     console.log('Running on localhost :' + PORT);

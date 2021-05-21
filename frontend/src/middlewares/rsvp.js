@@ -54,14 +54,16 @@ const rsvp = (store) => (next) => (action) => {
       axios
         .get(`http://localhost:3000/api/guestAnswer/${emailLastAnswer}`)
         .then((response) => {
-          console.log('response.data middleware', response.data);
+          // console.log('response.data middleware', response.data);
           store.dispatch(saveGuestAnswers(response.data));
         });
       break;
     case GET_USER_INFO:
-      console.log('getuserinfo middleware');
+      let { userId: id } = store.getState().permissions;
+
+      console.log('userId', id);
       axios
-        .get(`http://localhost:3000/api/v2/users/${userId}`)
+        .get(`http://localhost:3000/api/v2/users/${id}`)
         .then((response) => {
           console.log('response.data getUserInfo', response.data);
           store.dispatch(saveUserInfos(response.data));

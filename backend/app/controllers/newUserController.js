@@ -32,10 +32,12 @@ const getAuth0UserInfos = async (userId, token) => {
     headers: { authorization: `Bearer ${token}` },
   };
   const responseGetUserInfos = await axios(options);
+  // console.log('responseGetUserInfos',responseGetUserInfos)
   return {
     lastname: responseGetUserInfos.data.family_name,
     firstname: responseGetUserInfos.data.given_name,
     email: responseGetUserInfos.data.email,
+    metadata: responseGetUserInfos.data.user_metadata,
   };
 };
 // Pour pouvoir map il faut utiliser Promise.All
@@ -58,6 +60,7 @@ const createAuth0Users = async (guests, token) => {
         name: `${guest.firstname} ${guest.lastname}`,
         family_name: guest.lastname,
         password_hash: guest.password,
+        user_metadata: guest.metadata,
       };
     }),
   );
@@ -104,6 +107,7 @@ const createAnswers = async (guests) => {
 const newUserController = {
   createNewUser: async (req, res) => {
     let guests = req.body;
+    console.log(guests);
     const token = await getAccessToken();
     //on vire les guests sans email
     guests = guests.filter((elem) => elem.email != null);

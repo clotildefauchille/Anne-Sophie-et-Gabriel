@@ -7,7 +7,7 @@ import profile from 'src/assets/svg/profile.svg';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Header = () => {
-  const { user } = useAuth0();
+  const { user, logout } = useAuth0();
 
   if (isMobile) {
     return (
