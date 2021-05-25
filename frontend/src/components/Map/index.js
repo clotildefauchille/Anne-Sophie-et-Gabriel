@@ -11,10 +11,7 @@ import ReactMapGL, {
 import Pins from 'src/components/Pins';
 import CityInfo from 'src/components/CityInfo';
 import PropTypes from 'prop-types';
-import {
-  MobileView,
-  BrowserView
-} from 'react-device-detect';
+import { MobileView, BrowserView } from 'react-device-detect';
 // import CITIES from 'src/data/cities.json';
 
 const fullscreenControlStyle = {
@@ -37,8 +34,6 @@ const scaleControlStyle = {
 
 const Map = ({ fetchPlaceInfos, placeDetails }) => {
   const [viewport, setViewport] = useState({
-    // width: 800,
-    // height: 400,
     latitude: 49.124831814144976,
     longitude: 6.176491247513364,
     zoom: 7,
@@ -54,7 +49,16 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
     fetchPlaceInfos();
   }, []);
 
-  return (
+  const placeInPontAMousson = placeDetails.filter(
+    (place) => place.is_in_pont_a_mousson === true,
+  );
+  const placeInThionville = placeDetails.filter(
+    (place) => place.is_in_pont_a_mousson === false && place.is_an_hostel === true,
+  );
+
+  return placeInPontAMousson.length === 0 || placeInThionville.length === 0 ? (
+    <span>loading</span>
+  ) : (
     <div className="infos__infos">
       <h2 className="infos__title">Infos Pratiques</h2>
       <div className="infos__container">
@@ -62,27 +66,14 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
           <h4 className="infos__h4">Où loger ?</h4>
           <div className="infos__city">Sur Pont à Mousson :</div>
           <br />
-          <strong className="infos__accomodation">
-            L'Abbaye des Prémontrés
-          </strong>{' '}
-          dispose de 70 chambres à 90€. Cela vous permettra de profiter
-          pleinement des festivités sans risquer de prendre la voiture !
-          {/* <br />Les Hôtels à proximité
-          de l'Abbaye :  */}
-          <br />
-          <strong className="infos__accomodation">
-            Le Bagatelle Hôtel
-          </strong>{' '}
-          dispose de XX chambres à 60€
-          <br />
-          <strong className="infos__accomodation">Le Kyriad Hôtel </strong>
-          dispose de XX chambres à 40€
-          <br />
-          <strong className="infos__accomodation">
-            Le Logis des tuileries
-          </strong>{' '}
-          dispose de XX chambres à 70€ (à 20 min de route de l'Abbaye)
-          <br />
+          {placeInPontAMousson.map((info) => (
+            <div key={info.id}>
+              <strong className="infos__accomodation">{info.name}</strong>{' '}
+              dispose de {info.room_number} chambres à {info.price}€.{' '}
+              {info.comment}
+              <br />
+            </div>
+          ))}
           <strong className="infos__accomodation">AirBnb </strong>propose une
           dizaine d’offres à proximité de l'Abbaye.
           <br />
@@ -91,19 +82,14 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
           Les Hôtels dans le centre ville à proximité de la Mairie et de
           l’Eglise :
           <br />
-          <strong className="infos__accomodation">Le Kyriad Hôtel Prestige </strong>
-          dispose de XX chambres à 90€
-          <br />
-          <strong className="infos__accomodation">Le Mercure </strong>dispose de
-          XX chambres à 70€
-          <br />
-          <strong className="infos__accomodation">
-            Le Logis hôtel des Oliviers
-          </strong>{' '}
-          dispose de XX chambres à 60€
-          <br />
-          <strong className="infos__accomodation">Le B&B Care </strong>dispose
-          de XX chambres à 60€
+          {placeInThionville.map((info) => (
+            <div key={info.id}>
+              <strong className="infos__accomodation">{info.name}</strong>{' '}
+              dispose de {info.room_number} chambres à {info.price}€.{' '}
+              {info.comment}
+              <br />
+            </div>
+          ))}
         </div>
         <div className="infos__map">
           <BrowserView>

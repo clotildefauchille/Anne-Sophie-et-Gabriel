@@ -7,7 +7,7 @@ const infos = (store) => (next) => (action) => {
       axios
         .get('http://localhost:3000/api/infos')
         .then((response) => {
-          console.log(response.data);
+          console.log('response.data', response.data);
           store.dispatch(savePlaceInfos(response.data));
         });
       break;
