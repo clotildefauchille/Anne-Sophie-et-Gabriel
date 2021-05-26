@@ -16,6 +16,7 @@ Answer.init(
     children_number: Sequelize.INTEGER,
     allergy: Sequelize.STRING,
     permission_id: Sequelize.INTEGER,
+    last_login: Sequelize.STRING,
   },
   {
     sequelize,

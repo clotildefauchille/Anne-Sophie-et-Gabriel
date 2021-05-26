@@ -6,6 +6,7 @@ const newGuestAnswerController = require('./controllers/newGuestAnswerController
 const practicalInfosController = require('./controllers/practicalInfosController');
 const newUserController = require('./controllers/newUserController');
 const eventsController = require('./controllers/eventsController');
+const loginController = require('./controllers/loginController');
 
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
@@ -65,6 +66,7 @@ app.post('/api/users', newUserController.createNewUser);
 
 app.get('/api/events', eventsController.getEventsInfos);
 
+app.get('/api/login', loginController.getLoginInfo);
 
 const start = () => {
   app.listen(PORT, () => {

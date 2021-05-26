@@ -22,6 +22,7 @@ CREATE TABLE "answers" (
     "children_number" INTEGER DEFAULT 0,
     "allergy" TEXT NOT NULL DEFAULT '',
     "permission_id" INTEGER NOT NULL REFERENCES permissions("id"),
+    "last_login" TEXT NOT NULL DEFAULT '',
     "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     "updated_at" TIMESTAMPTZ
 );

@@ -92,6 +92,7 @@ const newGuestAnswerController = {
           children_number: allAnswer.dataValues.children_number,
           allergy: allAnswer.dataValues.allergy,
           google_sheet_range: allAnswer.dataValues.google_sheet_range,
+          last_login: allAnswer.dataValues.last_login,
         };
       });
       console.log('allAnswerUsefull', allAnswerUsefull);

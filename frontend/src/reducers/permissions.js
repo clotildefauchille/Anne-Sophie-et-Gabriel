@@ -12,6 +12,7 @@ const initialState = {
   firstname: '',
   email: '',
   metadata: {},
+  last_login: '',
 };
 
 const permissions = (state = initialState, action = {}) => {
@@ -39,6 +40,7 @@ const permissions = (state = initialState, action = {}) => {
         firstname: action.data.firstname,
         email: action.data.email,
         metadata: action.data.metadata,
+        last_login: action.data.last_login,
       };
     default:
       return state;

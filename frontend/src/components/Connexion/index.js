@@ -13,7 +13,7 @@ import Permissions from 'src/containers/permissions';
 
 const Connexion = ({ children }) => {
   const { user, isLoading, isAuthenticated, loginWithRedirect } = useAuth0();
-  
+
   useEffect(() => {
     const redirect = async () => {
       if (!user && !isLoading) {
@@ -25,7 +25,6 @@ const Connexion = ({ children }) => {
 
   return isLoading || !user ? (
     <span>loading</span>
-    
   ) : (
     <Permissions user={user}>{children}</Permissions>
   );

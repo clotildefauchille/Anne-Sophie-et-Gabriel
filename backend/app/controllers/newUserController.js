@@ -1,5 +1,5 @@
 const sequelize = require('../database.js');
-var request = require('request');
+// var request = require('request');
 // const { Events } = require('../models');
 const Answer = require('../models/answer.js');
 const Permission = require('../models/permission.js');
@@ -32,12 +32,13 @@ const getAuth0UserInfos = async (userId, token) => {
     headers: { authorization: `Bearer ${token}` },
   };
   const responseGetUserInfos = await axios(options);
-  // console.log('responseGetUserInfos',responseGetUserInfos)
+  // console.log('responseGetUserInfos',responseGetUserInfos.data)
   return {
     lastname: responseGetUserInfos.data.family_name,
     firstname: responseGetUserInfos.data.given_name,
     email: responseGetUserInfos.data.email,
     metadata: responseGetUserInfos.data.user_metadata,
+    last_login: responseGetUserInfos.data.last_login,
   };
 };
 // Pour pouvoir map il faut utiliser Promise.All
@@ -98,12 +99,25 @@ const createAnswers = async (guests) => {
         allergy: '',
         email: guest.email,
         permission_id: permissions.map(({ dataValues: { id } }) => id),
+        last_login: '',
       };
     }),
   );
   return await Answer.bulkCreate(answers, {ignoreDuplicates: true });
 };
-
+const updateAnswerLoginInfo = async (lastLogin, email) =>{
+  const updateAnswerLogin = await Answer.update(
+    {
+      last_login: `${lastLogin}`,
+    },
+    {
+      where: {
+        email: `${email}`,
+      },
+    },
+  );
+  console.log('updateAnswerLogin', updateAnswerLogin)
+}
 const newUserController = {
   createNewUser: async (req, res) => {
     let guests = req.body;
@@ -141,6 +155,10 @@ const newUserController = {
     const token = await getAccessToken();
     try {
       const reponseInfos = await getAuth0UserInfos(userId, token);
+      console.log('-------->responseInfos', reponseInfos);
+      const lastLogin = reponseInfos.last_login;
+      const email = reponseInfos.email;
+      await updateAnswerLoginInfo(lastLogin, email);
       res.send(reponseInfos);
     } catch (e) {
       console.log('erreur de getUsersInfos', e);
