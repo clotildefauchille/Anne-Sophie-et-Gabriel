@@ -196,4 +196,34 @@
       // margin-top: -2rem;
     }
   }
+  
+}
+@media (max-width:1024px) and (min-width:767px) {
+  .agenda{
+    &__title {
+      font-size:2.5rem;
+      padding-bottom: 0rem;
+    }
+    &__img--title {
+      &::before {
+        content: '';
+        position: inherit;
+        background-image: none;
+        }
+      }
+      &__star {
+    left: 10rem;
+    top: 15rem;
+      }
+      &__star2 {
+    left: 31rem;
+    top: -13rem;
+      }
+      &__star3 {
+    left: 36rem;
+  }
+      &__star4 {
+    left: 29rem;
+      }
+  }
 }

@@ -1,4 +1,6 @@
-const sequelize = require('../database.js');
+// const sequelize = require('../database.js');
+const dayjs = require('dayjs');
+require("dayjs/locale/fr");
 // var request = require('request');
 // const { Events } = require('../models');
 const Answer = require('../models/answer.js');
@@ -25,6 +27,10 @@ const getAccessToken = async () => {
   const responseToken = await axios(getTokenOptions);
   return responseToken.data.access_token;
 };
+const formatDate = (date) => {
+  const newDate = dayjs(date).locale("fr").format("D MMM YYYY");
+  return newDate;
+}
 const getAuth0UserInfos = async (userId, token) => {
   const options = {
     method: 'GET',
@@ -38,12 +44,12 @@ const getAuth0UserInfos = async (userId, token) => {
     firstname: responseGetUserInfos.data.given_name,
     email: responseGetUserInfos.data.email,
     metadata: responseGetUserInfos.data.user_metadata,
-    last_login: responseGetUserInfos.data.last_login,
+    last_login: formatDate(responseGetUserInfos.data.last_login),
   };
 };
-// Pour pouvoir map il faut utiliser Promise.All
-// ..qui attend que toutes les promesses s'exécutent
-// ..avt de return l'array
+// Pour pouvoir map il faut utiliser la méthode Promise.All(iterable) qui renvoie une promesse
+// ..qui est résolue lorsque que toutes les promesses s'exécutent
+//promise.all permet de mener des opérations asynchrones en parallèle.
 const hashGuestsPasswords = async (guests) =>
   await Promise.all(
     guests.map(async (guest) => ({
@@ -67,6 +73,7 @@ const createAuth0Users = async (guests, token) => {
   );
   // console.log('=================>>>>>>>>>>>>>>>><dataGoogleSheetUsers', dataGoogleSheetUsers)
   //bulk import dans auth0
+  //resquest POST multipart/formData; permet d'envoyer des fichiers en plus de données; le boundary sert de séparateur son format et sa valeur sont laissés à la discrétion du navigateur.
   const createUserOptions = {
     method: 'POST',
     url: 'https://dev-ljslmul5.eu.auth0.com/api/v2/jobs/users-imports',

@@ -87,6 +87,7 @@
     text-align: center;
     padding-right: 7rem;
     text-align: center;
+    padding-top: 0rem;
   }
   &__date {
     padding-right: 1rem;
@@ -95,7 +96,7 @@
   }
 }
 
-@media (max-width:1250px) and (min-width:767px) {
+@media (max-width:1250px) and (min-width:1024px) {
   .header{
      
     &__title{
@@ -134,6 +135,7 @@
       bottom:0;
       background-color: v.$primaryColor;
       z-index: 1000;
+      padding-top: 0.5rem;
       a, button{
         display: flex;
         max-width: 3rem;
@@ -184,4 +186,35 @@
   }
   }
   
+}
+@media (max-width:1024px) and (min-width:767px) {
+  .header {
+    width: 100%;
+    &__title{
+      font-size: 2.5rem;
+    padding-right: 0;
+    padding-left: 2rem;
+    }
+    &__date{
+      font-size:2.5rem;
+      padding-right: 2rem;
+    }
+    &__navbar{
+      max-width: 100%;
+      justify-content:space-evenly;
+      // box-shadow: rgba(0, 0, 0, 0.03) 0px 3px 5px;
+      a , button {
+      max-width: 3rem;
+      max-height: 3rem;
+    }
+    }
+    &__icon{
+      width: 3rem;
+      height: 3rem;
+    }
+    &__icon-profile{
+      width: 2.5rem;
+      height: 2.5rem;
+    }
+  }
 }

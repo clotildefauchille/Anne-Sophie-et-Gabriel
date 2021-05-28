@@ -3,6 +3,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 // == Import
+import Wait from 'src/components/Wait';
 import Agenda from 'src/containers/Agenda';
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
@@ -21,7 +22,7 @@ import {
 // == Composant
 const App = () => (
   <div className="app">
-    {/* <Wait /> */}
+    {/* <Wait />  */}
     <Header />
     <Switch>
       <Route path="/" exact>

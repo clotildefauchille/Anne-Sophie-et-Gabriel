@@ -2,7 +2,7 @@
 import React from 'react';
 import './style.scss';
 import Menu from 'src/components/Menu';
-import { isMobile } from 'react-device-detect';
+import { isMobile, isTablet } from 'react-device-detect';
 import profile from 'src/assets/svg/profile.svg';
 import { useAuth0 } from '@auth0/auth0-react';
 

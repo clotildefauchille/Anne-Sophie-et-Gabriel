@@ -1,7 +1,9 @@
 @use 'reset';
 @use 'vars' as v;
 
-
+.app{
+  overflow-x: hidden
+}
 body {
   font-family: 'Roboto', sans-serif;
   max-height: 100vh;
@@ -21,3 +23,9 @@ h1, h2, h3 {
         font-style: italic;
 }
 // @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;1,500&display=swap');
+
+@media only screen and (max-width: 768px) {
+.empty-div{
+    padding:2rem;
+  }
+}

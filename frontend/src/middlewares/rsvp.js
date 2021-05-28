@@ -10,8 +10,7 @@ import {
 import { saveUserInfos } from 'src/actions/permissions';
 
 const rsvp = (store) => (next) => (action) => {
-  
-// console.log('email', email);
+  // console.log('email', email);
   switch (action.type) {
     case ON_SUBMIT_RSVP:
       // console.log('hello middleware')
@@ -62,12 +61,10 @@ const rsvp = (store) => (next) => (action) => {
       let { userId: id } = store.getState().permissions;
 
       console.log('userId', id);
-      axios
-        .get(`http://localhost:3000/api/v2/users/${id}`)
-        .then((response) => {
-          console.log('response.data getUserInfo', response.data);
-          store.dispatch(saveUserInfos(response.data));
-        });
+      axios.get(`http://localhost:3000/api/v2/users/${id}`).then((response) => {
+        console.log('response.data getUserInfo', response.data);
+        store.dispatch(saveUserInfos(response.data));
+      });
       break;
     default:
       next(action);

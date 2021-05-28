@@ -180,6 +180,7 @@ const Rsvp = ({
           </div>
         </div>
       </form>
+      <div className="empty-div"></div>
     </div>
   );
 };

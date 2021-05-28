@@ -49,6 +49,7 @@
   "dependencies": {
     "@auth0/auth0-react": "^1.4.0",
     "axios": "^0.21.1",
+    "dayjs": "^1.10.5",
     "mapbox-gl": "^2.2.0",
     "prop-types": "^15.7.2",
     "react": "^17.0.1",

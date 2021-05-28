@@ -97,7 +97,7 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
               {...viewport}
               onViewportChange={(nextViewport) => setViewport(nextViewport)}
               mapboxApiAccessToken="pk.eyJ1IjoiY2xvdGlsZGVmYXVjaGlsbGUiLCJhIjoiY2ttbHNpM3JtMWR5ODJwazU3dmd4ZGt4bCJ9.HORGlrqRn7pZUd9ZWYdy6g"
-              width="50vw"
+              width="45vw"
               height="60vh"
               mapStyle="mapbox://styles/mapbox/streets-v11"
             >
@@ -152,6 +152,7 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
           </MobileView>
         </div>
       </div>
+      å<div className="empty-div" />
     </div>
   );
 };

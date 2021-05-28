@@ -88,6 +88,7 @@ const Agenda = ({ permission, events, fetchEventsInfos }) => {
               </>
             )}
           </div>
+          <div className="empty-div"></div>
         </div>
       </div>
     </div>
