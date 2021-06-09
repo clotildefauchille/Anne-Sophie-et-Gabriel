@@ -19,6 +19,8 @@ const getAccessToken = async () => {
   };
 
 const getTokenIfAuthorized = async (username, password) => {
+    // TODO: créer un utilisateur admin dans postgres et compare les identifiants
+    // (ne soit pas sale) ;)
     if (username === "appscript@annesophiegabriel.com" && password === "Toto123!") {
         const token = await getAccessToken();
         return {token};
