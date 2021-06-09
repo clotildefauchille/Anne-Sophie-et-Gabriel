@@ -3,6 +3,7 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 var cors = require('cors');
 const newGuestAnswerController = require('./controllers/newGuestAnswerController');
+const googleAppScriptAuthenticate = require('./controllers/googleAppScriptAuthentication');
 const practicalInfosController = require('./controllers/practicalInfosController');
 const newUserController = require('./controllers/newUserController');
 const eventsController = require('./controllers/eventsController');
@@ -65,6 +66,8 @@ app.get('/api/permission/:email', newGuestAnswerController.getGuestPermissionByE
 app.post('/api/users', newUserController.createNewUser);
 
 app.get('/api/events', eventsController.getEventsInfos);
+
+app.post('/appscript/token', googleAppScriptAuthenticate.authenticate);
 
 
 
