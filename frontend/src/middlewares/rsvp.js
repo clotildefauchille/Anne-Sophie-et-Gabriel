@@ -26,7 +26,7 @@ const rsvp = (store) => (next) => (action) => {
 
       axios
         .post(
-          'http://localhost:3000/api/userAnswer',
+          `${process.env.API_URL}/api/userAnswer`,
           {
             userId,
             presence,
@@ -51,7 +51,7 @@ const rsvp = (store) => (next) => (action) => {
       // console.log('fetchlastanswer middleware');
       let { email: emailLastAnswer } = store.getState().permissions;
       axios
-        .get(`http://localhost:3000/api/guestAnswer/${emailLastAnswer}`)
+        .get(`${process.env.API_URL}/api/guestAnswer/${emailLastAnswer}`)
         .then((response) => {
           // console.log('response.data middleware', response.data);
           store.dispatch(saveGuestAnswers(response.data));
@@ -61,7 +61,7 @@ const rsvp = (store) => (next) => (action) => {
       let { userId: id } = store.getState().permissions;
 
       console.log('userId', id);
-      axios.get(`http://localhost:3000/api/v2/users/${id}`).then((response) => {
+      axios.get(`${process.env.API_URL}/api/v2/users/${id}`).then((response) => {
         console.log('response.data getUserInfo', response.data);
         store.dispatch(saveUserInfos(response.data));
       });

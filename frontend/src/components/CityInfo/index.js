@@ -6,26 +6,27 @@ const CityInfo = (props) => {
   const { info } = props;
 
   return (
-    <div>
-      <a href={info.google_map_link} target="_blank" rel="noopener noreferrer">
-        <div>
-          {info.name}
-          {info.type === 'wedding' && (
-            <img className="icon" src={weddingIcon} alt="wedding Icon" />
-          )}
-          {info.type === 'accomodation' && (
-            <img className="icon" src={bed} alt="bed Icon" />
-          )}
-          <br />
-          {info.street}
-          <br />
-          {info.city}
-          <br />
-          {info.contact}
-        </div>
-      </a>
-
-      <img width={240} src={info.image} />
+    <div className="place-infos">
+      <div className="place-infos__text-icon">
+        <a href={info.google_map_link} className="place-infos__icon" target="_blank" rel="noopener noreferrer">
+          <div>
+            {info.name}
+            <br />
+            {info.street}
+            <br />
+            {info.city}
+            <br />
+            {info.contact}
+          </div>
+        </a>
+        {info.type === 'wedding' && (
+          <img className="place-infos__icon" src={weddingIcon} alt="wedding Icon" />
+        )}
+        {info.type === 'accomodation' && (
+          <img className="icon" src={bed} alt="bed Icon" />
+        )}
+      </div>
+      <img width={240} src={info.image} className="place-infos__img" />
     </div>
   );
 };

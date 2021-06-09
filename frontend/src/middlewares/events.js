@@ -6,7 +6,7 @@ const events = (store) => (next) => (action) => {
     case FETCH_EVENTS_INFOS:
       // console.log('hello events middleware');
       axios
-        .get('http://localhost:3000/api/events')
+        .get(`${process.env.API_URL}/api/events`)
         .then((response) => {
           // console.log(response.data);
           store.dispatch(saveEventsInfos(response.data));

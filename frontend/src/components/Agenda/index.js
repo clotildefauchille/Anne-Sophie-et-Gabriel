@@ -1,4 +1,3 @@
-/* eslint-disable arrow-body-style */
 import React, { useEffect } from 'react';
 import img from 'src/assets/svg/agenda.svg';
 import star from 'src/assets/svg/star.svg';
@@ -8,7 +7,6 @@ import Event from 'src/components/event';
 import './style.scss';
 
 const Agenda = ({ permission, events, fetchEventsInfos }) => {
-  // console.log('permissions', permission);
   useEffect(() => {
     fetchEventsInfos();
   }, []);

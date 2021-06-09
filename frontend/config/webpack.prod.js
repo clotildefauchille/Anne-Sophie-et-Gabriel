@@ -5,6 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserJSPlugin = require('terser-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const { BundleStatsWebpackPlugin } = require('bundle-stats-webpack-plugin');
+const webpack = require('webpack');
 
 module.exports = merge(common, {
   mode: 'production',
@@ -15,6 +16,11 @@ module.exports = merge(common, {
     }),
     // Stats bundle
     new BundleStatsWebpackPlugin(),
+    new webpack.DefinePlugin({
+      "process.env.API_URL": JSON.stringify(
+        "https://api.annesophiegabriel.fr"
+      ),
+    }),
   ],
   module: {
     rules: [

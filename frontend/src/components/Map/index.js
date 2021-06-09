@@ -110,6 +110,7 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
                   latitude={popupInfo.latitude}
                   closeOnClick={false}
                   onClose={setPopupInfo}
+                  className="popup"
                 >
                   <CityInfo info={popupInfo} />
                 </Popup>
@@ -139,6 +140,8 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
                   latitude={popupInfo.latitude}
                   closeOnClick={false}
                   onClose={setPopupInfo}
+                  className="popup"
+                  
                 >
                   <CityInfo info={popupInfo} />
                 </Popup>

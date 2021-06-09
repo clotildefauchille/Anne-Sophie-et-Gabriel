@@ -22,7 +22,7 @@ import {
 // == Composant
 const App = () => (
   <div className="app">
-    {/* <Wait />  */}
+     {/* <Wait /> */}
     <Header />
     <Switch>
       <Route path="/" exact>

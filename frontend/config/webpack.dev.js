@@ -7,6 +7,12 @@ const port = 8080;
 
 module.exports = merge(common, {
   mode: 'development',
+  plugins: [
+    // API backend LOCALHOST
+    new webpack.DefinePlugin({
+      'process.env.API_URL': JSON.stringify('http://localhost:3000'),
+    }),
+  ],
   devtool: 'inline-source-map',
   module: {
     rules: [
