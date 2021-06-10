@@ -25,8 +25,9 @@ export const onSubmitRsvp = () => ({
   type: ON_SUBMIT_RSVP,
 });
 
-export const fetchLastAnswer = () => ({
+export const fetchLastAnswer = (token) => ({
   type: FETCH_LAST_ANSWER,
+  token,
 });
 
 export const saveGuestAnswers = (data) => ({
@@ -39,6 +40,7 @@ export const sendMessage = (message) => ({
   message,
 });
 
-export const getUserInfos = () => ({
+export const getUserInfos = (token) => ({
   type: GET_USER_INFO,
+  token,
 });

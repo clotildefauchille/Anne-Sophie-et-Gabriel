@@ -49,19 +49,31 @@ const rsvp = (store) => (next) => (action) => {
       break;
     case FETCH_LAST_ANSWER:
       // console.log('fetchlastanswer middleware');
+      let {token}=action
+      // console.log('token in fetchlastanswer middlware', token)
       let { email: emailLastAnswer } = store.getState().permissions;
       axios
-        .get(`${process.env.API_URL}/api/guestAnswer/${emailLastAnswer}`)
+        .get(`${process.env.API_URL}/api/guestAnswer/${emailLastAnswer}`, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
         .then((response) => {
           // console.log('response.data middleware', response.data);
           store.dispatch(saveGuestAnswers(response.data));
         });
       break;
     case GET_USER_INFO:
+      let {token: userInfoToken}=action;
+      // console.log('token in getuserinfo middleware', userInfoToken);
       let { userId: id } = store.getState().permissions;
 
       console.log('userId', id);
-      axios.get(`${process.env.API_URL}/api/v2/users/${id}`).then((response) => {
+      axios.get(`${process.env.API_URL}/api/v2/users/${id}`, {
+        headers: {
+          Authorization: `Bearer ${userInfoToken}`,
+        },
+      }).then((response) => {
         console.log('response.data getUserInfo', response.data);
         store.dispatch(saveUserInfos(response.data));
       });

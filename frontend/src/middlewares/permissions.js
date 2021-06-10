@@ -12,7 +12,7 @@ import {
 const permissions = (store) => (next) => (action) => {
   switch (action.type) {
     case FETCH_USER_ID:
-      const { token } = action;
+      let { token } = action;
       axios
         .get(`${process.env.API_URL}/userId`, {
           headers: {
@@ -25,10 +25,12 @@ const permissions = (store) => (next) => (action) => {
       break;
     case FETCH_USER_EMAIL:
       const { userId } = store.getState().permissions;
+      let { token: userEmailToken }= action
+      // console.log('token useremail', userEmailToken);
       axios
         .get(`${process.env.API_URL}/api/v2/users/${userId}`, {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${userEmailToken}`,
           },
         })
         .then((response) => {
@@ -38,9 +40,14 @@ const permissions = (store) => (next) => (action) => {
       break;
     case GET_PERMISSION:
       const { email } = store.getState().permissions;
-      //  console.log ("email in getpermissions middleware", email);
+      let { token: permissionToken } = action;
+      // console.log("token in getpermission", permissionToken);
       axios
-        .get(`${process.env.API_URL}/api/permission/${email}`)
+        .get(`${process.env.API_URL}/api/permission/${email}`, {
+          headers: {
+            Authorization: `Bearer ${permissionToken}`,
+          },
+        })
         .then((response) => {
           //  console.log('middleware getPermissions response.data', response);
           store.dispatch(setThePermissions(response.data));

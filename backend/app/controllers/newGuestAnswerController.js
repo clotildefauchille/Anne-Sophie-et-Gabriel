@@ -3,6 +3,7 @@ const sequelize = require('../database.js');
 // const { Events } = require('../models');
 const {Answer} = require('../models');
 const {Permission} = require('../models');
+const sanitizeHtml = require('sanitize-html');
 
 const newGuestAnswerController = {
   newGuestAnswer: async (req, res) => {
@@ -17,7 +18,8 @@ const newGuestAnswerController = {
       allergy,
       email,
     } = req.body;
-
+    const cleanAllergy = sanitizeHtml(allergy);
+    const cleanFirstnamePartner = sanitizeHtml(firstnamePartner);
     // console.log('------->userId', userId);
 
     console.log('existe deja');
@@ -29,9 +31,9 @@ const newGuestAnswerController = {
           lastname: lastname,
           present: presence,
           accompanied: accompanied,
-          firstname_partner: firstnamePartner,
+          firstname_partner: cleanFirstnamePartner,
           children_number: childrenNumber,
-          allergy: allergy,
+          allergy: cleanAllergy,
           email: email,
         },
         {

@@ -14,7 +14,9 @@ var request = require('request');
 
 const { auth } = require('express-openid-connect');
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+}));
 // to get acces token for Auth0 Management API
 
 /**
@@ -43,28 +45,28 @@ app.get('/userId', jwtCheck, (req, res) => {
   });
 });
 
-app.get('/api/v2/users/:id', newUserController.getUserInfos);
+app.get('/api/v2/users/:id', jwtCheck, newUserController.getUserInfos);
 
-app.get('/api/infos', practicalInfosController.getPracticalInfos);
-
-// app.use(jwtCheck);
+app.get('/api/infos', jwtCheck, practicalInfosController.getPracticalInfos);
 
 app.get('/authorized', function (req, res) {
   res.send('Secured Resource');
 });
 
+//from google api sheet
 app.post('/api/userAnswer', newGuestAnswerController.newGuestAnswer);
 
-app.get('/api/guestAnswer/:email', newGuestAnswerController.getGuestAnswer);
+app.get('/api/guestAnswer/:email', jwtCheck, newGuestAnswerController.getGuestAnswer);
 
 //to send to google api sheet
 app.get('/api/allUserAnswer', newGuestAnswerController.getAllGuestAnswer);
 
-app.get('/api/permission/:email', newGuestAnswerController.getGuestPermissionByEmail);
+app.get('/api/permission/:email', jwtCheck, newGuestAnswerController.getGuestPermissionByEmail);
 
+//from google api sheet
 app.post('/api/users', newUserController.createNewUser);
 
-app.get('/api/events', eventsController.getEventsInfos);
+app.get('/api/events', jwtCheck, eventsController.getEventsInfos);
 
 
 

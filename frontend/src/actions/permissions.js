@@ -21,8 +21,9 @@ export const saveUserInfos = (data) => ({
   data,
 });
 
-export const getPermission = () => ({
+export const getPermission = (token) => ({
   type: GET_PERMISSION,
+  token,
 });
 
 export const setThePermissions = (permission) => ({
@@ -35,6 +36,7 @@ export const setUserEmail = (userInfos) => ({
   userInfos,
 });
 
-export const fetchUserEmail = () => ({
+export const fetchUserEmail = (token) => ({
   type: FETCH_USER_EMAIL,
+  token,
 });

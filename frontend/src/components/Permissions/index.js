@@ -18,18 +18,45 @@ const Permissions = ({
       try {
         const token = await getAccessTokenSilently();
         fetchUserId(token);
-        //  console.log(token);
       } catch (err) {
         console.error(err);
       }
     }
     fetchToken();
   }, []);
-  if (email) {
-    getPermission();
-  } else if (userId) {
-    fetchUserEmail();
+  async function fetchNewToken() {
+    const newToken = await getAccessTokenSilently();
+    if (email) {
+      getPermission(newToken);
+    } else if (userId) {
+      fetchUserEmail(newToken);
+    }
   }
+  fetchNewToken();
+
+  // if (email) {
+  //   async function fetchToken() {
+  //     try {
+  //       const token = await getAccessTokenSilently();
+  //       getPermission(token);
+  //       // console.log('token in email', token);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   }
+  //   fetchToken();
+  // } else if (userId) {
+  //   async function fetchToken() {
+  //     try {
+  //       const token = await getAccessTokenSilently();
+  //       fetchUserEmail(token);
+  //     //  console.log(token);
+  //     } catch (err) {
+  //       console.error(err);
+  //     }
+  //   }
+  //   fetchToken();
+  // }
 
   //permet d'attendre de recuperer toutes les infos de l'utilisateur et ses
   //permissions avt de aire quoique ce soit ds l'app

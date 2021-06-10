@@ -5,11 +5,24 @@ import stars from 'src/assets/svg/stars.svg';
 import PropTypes from 'prop-types';
 import Event from 'src/components/event';
 import './style.scss';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const Agenda = ({ permission, events, fetchEventsInfos }) => {
+  const { getAccessTokenSilently } = useAuth0();
+
   useEffect(() => {
-    fetchEventsInfos();
+    async function fetchToken() {
+      try {
+        const token = await getAccessTokenSilently();
+        fetchEventsInfos(token);
+        //  console.log(token);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchToken();
   }, []);
+  // console.log(email);
 
   return (
     <div className="page">

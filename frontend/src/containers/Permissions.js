@@ -11,11 +11,11 @@ const mapDispatchToProps = (dispatch) => ({
   fetchUserId: (token) => {
     dispatch(fetchUserId(token));
   },
-  fetchUserEmail: () => {
-    dispatch(fetchUserEmail());
+  fetchUserEmail: (token) => {
+    dispatch(fetchUserEmail(token));
   },
-  getPermission: () => {
-    dispatch(getPermission());
+  getPermission: (token) => {
+    dispatch(getPermission(token));
   },
 });
 

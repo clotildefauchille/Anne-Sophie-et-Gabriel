@@ -33,12 +33,12 @@ const mapDispatchToProps = (dispatch) => ({
   onSubmitRsvp: () => {
     dispatch(onSubmitRsvp());
   },
-  fetchLastAnswer: () => {
+  fetchLastAnswer: (token) => {
     // console.log('fetchLastAnswer')
-    dispatch(fetchLastAnswer());
+    dispatch(fetchLastAnswer(token));
   },
-  getUserInfos: () => {
-    dispatch(getUserInfos());
+  getUserInfos: (token) => {
+    dispatch(getUserInfos(token));
   },
   showAnswerModal: () => {
     dispatch(showAnswerModal());

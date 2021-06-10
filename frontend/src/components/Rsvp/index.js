@@ -19,13 +19,21 @@ const Rsvp = ({
   getUserInfos,
   metadata,
 }) => {
-  const { user } = useAuth0();
+  const { user, getAccessTokenSilently } = useAuth0();
   const firstNameVisibility = accompanied ? 'show-firstname' : '';
   const buttonIsDisabled = accompanied && !firstnamePartner;
   // console.log('metadata', metadata);
   useEffect(() => {
-    fetchLastAnswer();
-    getUserInfos();
+    async function fetchToken() {
+      try {
+        const token = await getAccessTokenSilently();
+        fetchLastAnswer(token);
+        getUserInfos(token);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchToken();
   }, []);
   const handleOnChangePresence = (e) => {
     console.log('handleOnChange', e.target.checked);

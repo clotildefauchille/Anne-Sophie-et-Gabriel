@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 import './style.scss';
 import ReactMapGL, {
   Popup,
@@ -45,8 +46,18 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
   //   scrollZoom: false,
   // });
   const [popupInfo, setPopupInfo] = useState(null);
+  const { getAccessTokenSilently } = useAuth0();
+
   useEffect(() => {
-    fetchPlaceInfos();
+    async function fetchToken() {
+      try {
+        const token = await getAccessTokenSilently();
+        fetchPlaceInfos(token);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchToken();
   }, []);
 
   const placeInPontAMousson = placeDetails.filter(

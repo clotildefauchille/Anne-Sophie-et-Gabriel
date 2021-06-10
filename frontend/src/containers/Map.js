@@ -7,9 +7,9 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchPlaceInfos: () => {
+  fetchPlaceInfos: (token) => {
     // console.log('hello fetchplace infos controller');
-    dispatch(fetchPlaceInfos());
+    dispatch(fetchPlaceInfos(token));
   },
 });
 

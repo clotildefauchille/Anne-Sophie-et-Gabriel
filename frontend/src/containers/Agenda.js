@@ -10,8 +10,8 @@ const mapStateToProps = (state) => {
 }};
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchEventsInfos: () => {
-    dispatch(fetchEventsInfos());
+  fetchEventsInfos: (token) => {
+    dispatch(fetchEventsInfos(token));
   },
 });
 
