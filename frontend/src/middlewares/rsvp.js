@@ -13,7 +13,8 @@ const rsvp = (store) => (next) => (action) => {
   // console.log('email', email);
   switch (action.type) {
     case ON_SUBMIT_RSVP:
-      // console.log('hello middleware')
+      const {token:submitToken} = action;
+      // console.log('token in rsvp middleware', submitToken);
       const {
         presence,
         accompanied,
@@ -36,11 +37,11 @@ const rsvp = (store) => (next) => (action) => {
             allergy,
             email,
           },
-          // {
-          //   headers: {
-          //     Authorization: `Bearer ${token}`,
-          //   },
-          // },
+          {
+            headers: {
+              Authorization: `Bearer ${submitToken}`,
+            },
+          },
         )
         .then((response) => {
           console.log('réponse bien envoyée!');

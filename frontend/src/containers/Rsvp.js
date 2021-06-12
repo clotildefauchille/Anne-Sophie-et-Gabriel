@@ -30,8 +30,8 @@ const mapDispatchToProps = (dispatch) => ({
   onChangeAccompanied: (value) => {
     dispatch(changeInputValueAccompanied(value));
   },
-  onSubmitRsvp: () => {
-    dispatch(onSubmitRsvp());
+  onSubmitRsvp: (token) => {
+    dispatch(onSubmitRsvp(token));
   },
   fetchLastAnswer: (token) => {
     // console.log('fetchLastAnswer')

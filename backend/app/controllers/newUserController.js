@@ -158,13 +158,15 @@ const newUserController = {
   },
   getUserInfos: async (req, res) => {
     let userId = req.params.id;
-    console.log('-------->userId', userId);
+    //récupération du token d'acces pour pouvoir faire appel à l'API sécurisé d'Auth0 Management
     const token = await getAccessToken();
     try {
+      //appel à l'API Auth0 Management qui détient les données de last-login
       const reponseInfos = await getAuth0UserInfos(userId, token);
       console.log('-------->responseInfos', reponseInfos);
       const lastLogin = reponseInfos.last_login;
       const email = reponseInfos.email;
+      //update de la donnée de last-login dans la table Answer
       await updateAnswerLoginInfo(lastLogin, email);
       res.send(reponseInfos);
     } catch (e) {

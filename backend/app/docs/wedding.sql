@@ -1,6 +1,14 @@
 BEGIN;
 
-DROP TABLE IF EXISTS "events", "answers", "permissions", "places";
+DROP TABLE IF EXISTS "admin", "events", "answers", "permissions", "places";
+
+CREATE TABLE "admin" (
+    "id" SERIAL PRIMARY KEY,
+    "username" TEXT NOT NULL DEFAULT '',
+    "password" TEXT NOT NULL DEFAULT '',
+    "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    "updated_at" TIMESTAMPTZ
+)
 
 CREATE TABLE "permissions" (
     "id" SERIAL PRIMARY KEY,
@@ -57,7 +65,8 @@ CREATE TABLE "events" (
     "updated_at" TIMESTAMPTZ
 );
 
-
+INSERT INTO "admin" ("username", "password")
+VALUES ('appscript@annesophiegabriel.com', 'Toto123!');
 
 INSERT INTO "places" ("name", "street", "city", "image", "latitude", "longitude", "contact", "type", "google_map_link", "room_number", "price", "comment", "is_in_pont_a_mousson", "is_an_hostel") 
 VALUES

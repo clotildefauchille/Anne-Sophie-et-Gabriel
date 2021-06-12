@@ -56,7 +56,15 @@ const Rsvp = ({
   };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    onSubmitRsvp();
+    async function fetchToken() {
+      try {
+        const token = await getAccessTokenSilently();
+        onSubmitRsvp(token);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    fetchToken();
   };
   return (
     <div className="rsvp">

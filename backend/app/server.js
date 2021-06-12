@@ -6,7 +6,7 @@ const newGuestAnswerController = require('./controllers/newGuestAnswerController
 const practicalInfosController = require('./controllers/practicalInfosController');
 const newUserController = require('./controllers/newUserController');
 const eventsController = require('./controllers/eventsController');
-
+const googleAppScriptController = require('./controllers/googleAppScriptController');
 
 var jwt = require('express-jwt');
 var jwks = require('jwks-rsa');
@@ -45,7 +45,7 @@ app.get('/userId', jwtCheck, (req, res) => {
   });
 });
 
-app.get('/api/v2/users/:id', jwtCheck, newUserController.getUserInfos);
+
 
 app.get('/api/infos', jwtCheck, practicalInfosController.getPracticalInfos);
 
@@ -53,10 +53,12 @@ app.get('/authorized', function (req, res) {
   res.send('Secured Resource');
 });
 
-//from google api sheet
-app.post('/api/userAnswer', newGuestAnswerController.newGuestAnswer);
-
+//route qui update la reponse de l'utilisateur qu'il envoi via la page RSVP
+app.post('/api/userAnswer', jwtCheck, newGuestAnswerController.updateGuestAnswer);
+//route qui récupère les données précedement envoyées de la réponse utilisateur
 app.get('/api/guestAnswer/:email', jwtCheck, newGuestAnswerController.getGuestAnswer);
+//route qui récupère le last_login de l'utilisateur
+app.get('/api/v2/users/:id', jwtCheck, newUserController.getUserInfos);
 
 //to send to google api sheet
 app.get('/api/allUserAnswer', newGuestAnswerController.getAllGuestAnswer);
@@ -68,7 +70,7 @@ app.post('/api/users', newUserController.createNewUser);
 
 app.get('/api/events', jwtCheck, eventsController.getEventsInfos);
 
-
+app.post('/api/authenticate', googleAppScriptController.googleAppScriptAuthentication);
 
 const start = () => {
   app.listen(PORT, () => {

@@ -6,7 +6,7 @@ const {Permission} = require('../models');
 const sanitizeHtml = require('sanitize-html');
 
 const newGuestAnswerController = {
-  newGuestAnswer: async (req, res) => {
+  updateGuestAnswer: async (req, res) => {
     const childrenNumber = parseInt(req.body.childrenNumber);
     const {
       userId,
@@ -20,9 +20,6 @@ const newGuestAnswerController = {
     } = req.body;
     const cleanAllergy = sanitizeHtml(allergy);
     const cleanFirstnamePartner = sanitizeHtml(firstnamePartner);
-    // console.log('------->userId', userId);
-
-    console.log('existe deja');
     try {
       const updateGuestResponse = await Answer.update(
         {
@@ -42,10 +39,7 @@ const newGuestAnswerController = {
           },
         },
       );
-      // console.log('response already gave');
       console.log('updateGuestResponse', updateGuestResponse);
-      // }
-
       res.send('hello');
     } catch (e) {
       console.log("erreur dans l'update de la reponse utilisateur", e);
@@ -53,18 +47,12 @@ const newGuestAnswerController = {
   },
   getGuestAnswer: async (req, res) => {
     const { email } = req.params;
-
     const guestAnswer = await Answer.findOne({
       where: {
         email,
       },
     });
     res.json(guestAnswer ? guestAnswer : {});
-
-    // console.log('-------->guestAnswer', guestAnswer.dataValues)
-    // res.send('hello getanswer')
-
-    // res.json (guestAnswer || {});
   },
   getGuestPermissionByEmail: async (req, res) => {
     const { email } = req.params;

@@ -21,8 +21,9 @@ export const changeInputValueAccompanied = (value) => ({
   type: CHANGE_INPUT_VALUE_ACCOMPANIED,
   value,
 });
-export const onSubmitRsvp = () => ({
+export const onSubmitRsvp = (token) => ({
   type: ON_SUBMIT_RSVP,
+  token,
 });
 
 export const fetchLastAnswer = (token) => ({
