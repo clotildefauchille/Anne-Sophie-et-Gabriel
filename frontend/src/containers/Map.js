@@ -4,6 +4,7 @@ import { fetchPlaceInfos } from 'src/actions/infos';
 
 const mapStateToProps = (state) => ({
   placeDetails: state.infos.placeDetails,
+  permissions: state.permissions.type,
 });
 
 const mapDispatchToProps = (dispatch) => ({

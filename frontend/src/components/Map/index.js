@@ -33,7 +33,7 @@ const scaleControlStyle = {
   padding: '10px',
 };
 
-const Map = ({ fetchPlaceInfos, placeDetails }) => {
+const Map = ({ fetchPlaceInfos, placeDetails, permissions }) => {
   const [viewport, setViewport] = useState({
     latitude: 49.124831814144976,
     longitude: 6.176491247513364,
@@ -60,14 +60,30 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
     fetchToken();
   }, []);
 
+  const placeBrunch = placeDetails.filter(
+    (place) => place.place_brunch === true,
+  );
   const placeInPontAMousson = placeDetails.filter(
-    (place) => place.is_in_pont_a_mousson === true,
+    (place) =>
+      place.is_in_pont_a_mousson === true && place.place_brunch === false,
   );
   const placeInThionville = placeDetails.filter(
-    (place) => place.is_in_pont_a_mousson === false && place.is_an_hostel === true,
+    (place) =>
+      place.is_in_pont_a_mousson === false &&
+      place.is_an_hostel === true &&
+      place.place_brunch === false,
   );
-
-  return placeInPontAMousson.length === 0 || placeInThionville.length === 0 ? (
+  const placeInNancy = placeDetails.filter(
+    (place) =>
+      place.is_in_pont_a_mousson === false &&
+      place.is_an_hostel === true &&
+      place.is_in_nancy === true &&
+      place.place_brunch === false,
+  );
+  return placeInPontAMousson.length === 0 ||
+    placeInThionville.length === 0 ||
+    placeInNancy.length === 0 ||
+    placeBrunch.length === 0 ? (
     <span>loading</span>
   ) : (
     <div className="infos__infos">
@@ -77,6 +93,20 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
           <h4 className="infos__h4">Où loger ?</h4>
           <div className="infos__city">Sur Pont à Mousson :</div>
           <br />
+          {permissions === 'guest:brunch' ? (
+            <div>
+              {placeBrunch.map((info) => (
+                <div key={info.id}>
+                  <strong className="infos__accomodation">{info.name}</strong>{' '}
+                  dispose de {info.room_number} chambres à {info.price}€.{' '}
+                  {info.comment}
+                  <br />
+                </div>
+              ))}
+            </div>
+          ) : (
+            <></>
+          )}
           {placeInPontAMousson.map((info) => (
             <div key={info.id}>
               <strong className="infos__accomodation">{info.name}</strong>{' '}
@@ -94,6 +124,15 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
           l’Eglise :
           <br />
           {placeInThionville.map((info) => (
+            <div key={info.id}>
+              <strong className="infos__accomodation">{info.name}</strong>{' '}
+              dispose de {info.room_number} chambres à {info.price}€.{' '}
+              {info.comment}
+              <br />
+            </div>
+          ))}
+          <div className="infos__city-thionville"> Sur Nancy :</div>
+          {placeInNancy.map((info) => (
             <div key={info.id}>
               <strong className="infos__accomodation">{info.name}</strong>{' '}
               dispose de {info.room_number} chambres à {info.price}€.{' '}
@@ -152,7 +191,6 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
                   closeOnClick={false}
                   onClose={setPopupInfo}
                   className="popup"
-                  
                 >
                   <CityInfo info={popupInfo} />
                 </Popup>
@@ -166,7 +204,7 @@ const Map = ({ fetchPlaceInfos, placeDetails }) => {
           </MobileView>
         </div>
       </div>
-      å<div className="empty-div" />
+      <div className="empty-div" />
     </div>
   );
 };
