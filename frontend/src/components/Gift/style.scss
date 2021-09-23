@@ -1,13 +1,42 @@
+@use 'src/styles/_vars.scss' as v;
+
+
 .gift{
   &__container{
     height:100vh;
   }
   &__title {
-    font-size: 2.4rem;
+    font-size: 2.8rem;
     padding: 3rem;
   }
   &__illustration{
     padding: 8rem 20rem;
+  }
+  &__gift-container{
+    display:flex;
+    justify-content: space-between;
+    margin:2rem;
+    box-shadow:  0px 5px 31px rgb(0 0 0 / 16%);
+    background-color: v.$primaryColor;
+    align-items: center;
+  }
+  &__gift-para{
+  font-size:1.7rem;
+  margin: 2rem 0 0rem 3rem;
+  line-height:3rem;
+  }
+  &__gift-link{
+    color:v.$thirdColor;
+    margin-top: 2rem;
+     font-size: 1.3rem;
+     &:hover {
+      color: v.$secondaryColor;
+      cursor: pointer;
+    }
+  }
+  &__gift-photo{
+    width:14rem;
+    height:auto;
   }
 }
 
@@ -15,11 +44,29 @@
   .gift{
    
   &__title {
-    padding: 1.8rem;
+    padding: 1.6rem;
+    font-size: 2.3rem;
+    // text-align: center;
   }
   &__illustration{
-    padding: 1rem;
-    
+    padding: 1rem; 
+  }
+  &__gift-container{
+    flex-direction: row-reverse;
+    margin:1rem;
+  }
+  &__gift-para{
+  // font-family: v.$fontHeading;
+  font-size:1rem;
+  margin: 1rem 0 0rem 1rem;
+  line-height:1.2rem;
+  }
+  &__gift-photo{
+    width: 10rem;
+    height: auto;
+}
+ &__gift-link{
+     font-size: 1rem;
   }
 }
 }

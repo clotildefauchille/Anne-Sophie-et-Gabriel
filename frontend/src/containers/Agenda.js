@@ -3,11 +3,12 @@ import Agenda from 'src/components/Agenda';
 import { fetchEventsInfos } from 'src/actions/events';
 
 const mapStateToProps = (state) => {
-  // console.log('state.events.infos, in container', state.events);
+  console.log('state.events.infos, in container', state.events);
   return {
-  events: state.events,
-  permission: state.permissions.type,
-}};
+    events: state.events,
+    permission: state.permissions.type,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   fetchEventsInfos: (token) => {
